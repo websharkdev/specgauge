@@ -1,6 +1,5 @@
-import { AlertTriangle, BadgeCheck, Bus, ClockPlus, PhoneCall, Radio } from "lucide-react"
-import ChartIcon from "./chart-icon"
-import ChartCustom from "./chart-custom"
+import { AlertTriangle, BadgeCheck, Bus, ClockPlus, PhoneCall, Radio } from "lucide-react";
+import ChartCustom from "./chart-custom";
 
 
 const info_data = [
