@@ -4,8 +4,8 @@ const BChart = () => {
     return (
         <div className="w-full grid grid-cols-2 items-center min-h-dvh justify-end relative">
             <div className="col-span-1 flex flex-col gap-4 relative overflow-hidden h-full pt-32 px-11 border-r border-[#00000050] bg-[#E5E8EF]">
-                <h6 className="uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</h6>
-                <h2 className="text-4xl font-medium text-[#111111] leading-tight max-w-md">Monthly top-ups wasting resources</h2>
+                <h6 className="z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</h6>
+                <h2 className="z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md">Monthly top-ups wasting resources</h2>
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -79,8 +79,8 @@ const BChart = () => {
                 </svg>
             </div>
             <div className="col-span-1 flex flex-col gap-4 relative overflow-hidden h-full pt-32 px-11 bg-white">
-                <h6 className="uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49]">With SpecGauge</h6>
-                <h2 className="text-4xl font-medium text-[#111111] leading-tight max-w-md">Efficient refills only when they’re needed</h2>
+                <h6 className="z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49]">With SpecGauge</h6>
+                <h2 className="z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md">Efficient refills only when they’re needed</h2>
 
                 <svg className="flex-1 absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                     <g filter="url(#filter0_f_1_1182)" opacity="0.15">
