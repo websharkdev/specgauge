@@ -1,0 +1,51 @@
+<svg width="801" height="900" viewBox="0 0 801 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_2001_662)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M-261.683 547.264C-181.565 372.033 -43.9419 172.457 154.032 175.716C348.271 178.914 400.236 458.419 567.462 560.914C730.829 661.045 1012.34 573.88 1087.1 747.607C1160.47 918.12 978.969 1086.9 847.898 1212.64C749.104 1307.42 607.324 1322.87 468.789 1340.8C349.328 1356.26 233.63 1351.97 120.171 1306.81C-23.2838 1249.72 -179.529 1192.03 -248.192 1055.45C-328.582 895.549 -334.202 705.877 -261.683 547.264Z" fill="url(#paint0_linear_2001_662)"/>
+</g>
+<g opacity="0.04">
+<line x1="0.500137" y1="-130" x2="0.50009" y2="957" stroke="white"/>
+<line x1="25.5002" y1="-130" x2="25.5001" y2="957" stroke="white"/>
+<line x1="50.5002" y1="-130" x2="50.5002" y2="957" stroke="white"/>
+<line x1="75.5003" y1="-130" x2="75.5002" y2="957" stroke="white"/>
+<line x1="100.5" y1="-130" x2="100.5" y2="957" stroke="white"/>
+<line x1="125.5" y1="-130" x2="125.5" y2="957" stroke="white"/>
+<line x1="150.5" y1="-130" x2="150.5" y2="957" stroke="white"/>
+<line x1="175.5" y1="-130" x2="175.5" y2="957" stroke="white"/>
+<line x1="200.501" y1="-130" x2="200.5" y2="957" stroke="white"/>
+<line x1="225.501" y1="-130" x2="225.501" y2="957" stroke="white"/>
+<line x1="250.501" y1="-130" x2="250.501" y2="957" stroke="white"/>
+<line x1="275.501" y1="-130" x2="275.501" y2="957" stroke="white"/>
+<line x1="300.501" y1="-130" x2="300.501" y2="957" stroke="white"/>
+<line x1="325.501" y1="-130" x2="325.501" y2="957" stroke="white"/>
+<line x1="350.501" y1="-130" x2="350.501" y2="957" stroke="white"/>
+<line x1="375.501" y1="-130" x2="375.501" y2="957" stroke="white"/>
+<line x1="400.501" y1="-130" x2="400.501" y2="957" stroke="white"/>
+<line x1="425.501" y1="-130" x2="425.501" y2="957" stroke="white"/>
+<line x1="450.501" y1="-130" x2="450.501" y2="957" stroke="white"/>
+<line x1="475.501" y1="-130" x2="475.501" y2="957" stroke="white"/>
+<line x1="500.501" y1="-130" x2="500.501" y2="957" stroke="white"/>
+<line x1="525.501" y1="-130" x2="525.501" y2="957" stroke="white"/>
+<line x1="550.501" y1="-130" x2="550.501" y2="957" stroke="white"/>
+<line x1="575.501" y1="-130" x2="575.501" y2="957" stroke="white"/>
+<line x1="600.502" y1="-130" x2="600.501" y2="957" stroke="white"/>
+<line x1="625.502" y1="-130" x2="625.502" y2="957" stroke="white"/>
+<line x1="650.502" y1="-130" x2="650.502" y2="957" stroke="white"/>
+<line x1="675.502" y1="-130" x2="675.502" y2="957" stroke="white"/>
+<line x1="700.502" y1="-130" x2="700.502" y2="957" stroke="white"/>
+<line x1="725.502" y1="-130" x2="725.502" y2="957" stroke="white"/>
+<line x1="750.502" y1="-130" x2="750.502" y2="957" stroke="white"/>
+<line x1="775.502" y1="-130" x2="775.502" y2="957" stroke="white"/>
+<line x1="800.502" y1="-130" x2="800.502" y2="957" stroke="white"/>
+</g>
+<defs>
+<filter id="filter0_f_2001_662" x="-612.502" y="-124.323" width="2016.49" height="1773.22" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_2001_662"/>
+</filter>
+<linearGradient id="paint0_linear_2001_662" x1="35.4946" y1="751.728" x2="955.389" y2="353.76" gradientUnits="userSpaceOnUse">
+<stop offset="0.206022" stop-color="#374669"/>
+<stop offset="1" stop-color="#C8AEFF"/>
+</linearGradient>
+</defs>
+</svg>
