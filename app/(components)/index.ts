@@ -1,3 +1,6 @@
 import { BChart } from "./chart";
 import { BHero } from "./hero";
-export { BChart, BHero };
+import { BSlider } from "./slider";
+import { BWhyUs } from "./why_us";
+
+export { BChart, BHero, BSlider, BWhyUs };

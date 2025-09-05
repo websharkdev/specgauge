@@ -17,9 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en"
+      suppressHydrationWarning
+      suppressContentEditableWarning>
       <body
         className={`${monaSans.className} antialiased`}
+        suppressHydrationWarning
+        suppressContentEditableWarning
       >
         <GProvider>
           {children}
