@@ -65,25 +65,6 @@ const config: Config = {
                 md: 'calc(var(--radius) - 2px)',
                 sm: 'calc(var(--radius) - 4px)',
             },
-            fontFamily: {
-                sans: ['var(--font-geist-sans)'],
-                mono: ['var(--font-geist-mono)'],
-            },
-            animation: {
-                'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
-                'caret-blink': 'caret-blink 1.25s ease-out infinite',
-            },
-            keyframes: {
-                'border-beam': {
-                    '100%': {
-                        'offset-distance': '100%',
-                    },
-                },
-                'caret-blink': {
-                    '0%,70%,100%': { opacity: '1' },
-                    '20%,50%': { opacity: '0' },
-                },
-            },
         },
     },
     plugins: [require('tailwindcss-animate')],

@@ -1,8 +1,7 @@
 "use client"
 
-
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
-import React from "react";
+import { motion } from "motion/react";
 import { Bar, BarChart, Customized, LabelList } from "recharts";
 import { chartData } from "./chart-data";
 
@@ -23,14 +22,15 @@ const renderCustomizedLabel = (props: unknown) => {
     );
 };
 
-const ChartCustom = ({ data }: {
+const ChartCustom = ({ data, isInView }: {
     data: {
         id: number;
         icon: React.ReactNode;
         index: number;
         text: string[];
         padding_y: number;
-    }[]
+    }[],
+    isInView: boolean;
 }) => {
     // Компонент кастомизации
     const CustomCards = ({ bars }: {
@@ -49,7 +49,7 @@ const ChartCustom = ({ data }: {
 
                     return (
                         <g key={card.index}>
-                            <rect
+                            <motion.rect
                                 x={centerX - .5}
                                 y={topY - card.padding_y - 58}
                                 width={1}
@@ -59,24 +59,45 @@ const ChartCustom = ({ data }: {
                                 stroke="black"
                                 strokeOpacity={0.2}
                                 z={-1}
+                                initial={{ opacity: 0, scaleY: 0 }}
+                                animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
+                                transition={{
+                                    duration: 1,
+                                    delay: 1.5 + card.index * 0.05,
+                                    ease: [0, 0.71, 0.3, 1.01],
+                                }}
                             />
                             {/* Иконка */}
                             {/* Вставка SVG-иконки */}
-                            <g transform={`translate(${centerX + 40}, ${topY - 70 - card.padding_y})`}>
+                            <motion.g transform={`translate(${centerX + 40}, ${topY - 70 - card.padding_y})`}
+                                initial={{ opacity: 0, }}
+                                animate={isInView ? { opacity: 1, } : {}}
+                                transition={{
+                                    duration: 1,
+                                    delay: 1.5 + card.index * 0.05,
+                                    ease: [0, 0.71, 0.3, 1.01],
+                                }}>
                                 <Icon />
-                            </g>
+                            </motion.g>
 
-                            <text
+                            <motion.text
                                 x={centerX}
                                 y={topY - card.padding_y - 20}
                                 className="text-sm leading-snug font-medium"
+                                initial={{ opacity: 0, }}
+                                animate={isInView ? { opacity: 1, } : {}}
+                                transition={{
+                                    duration: 1,
+                                    delay: 1.5 + card.index * 0.05,
+                                    ease: [0, 0.71, 0.3, 1.01],
+                                }}
                             >
                                 {card.text.map((line, index) => (
                                     <tspan key={index} x={centerX + 40} dy={index === 0 ? 0 : '1.2em'} fill="#111111">
                                         {line}
                                     </tspan>
                                 ))}
-                            </text>
+                            </motion.text>
                         </g>
                     );
                 })}
@@ -84,7 +105,7 @@ const ChartCustom = ({ data }: {
         );
     };
 
-    return (<ChartContainer config={{} satisfies ChartConfig} className="h-[750px] w-full relative" >
+    return (<ChartContainer config={{} satisfies ChartConfig} className="h-[750px] w-full relative">
         <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
             <Bar dataKey="point" fill="var(--color-point)" radius={1} barSize={1.5}>
                 <LabelList dataKey="point" content={renderCustomizedLabel} />

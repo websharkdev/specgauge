@@ -1,9 +1,8 @@
-import { BChart, BHero, BSlider, BWhyUs } from "./(components)";
-import { BForm } from "./(components)/form";
+import { BChart, BHero, BSlider, BWhyUs, BForm } from "./(components)";
 
 export default function Home() {
   return (
-    <div className="w-full h-full relative flex flex-col">
+    <div className="w-full h-full relative flex flex-col" id="example" >
       <BHero />
       <BChart />
       <BSlider />

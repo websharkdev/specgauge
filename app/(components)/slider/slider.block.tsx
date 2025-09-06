@@ -5,7 +5,7 @@ import { Slider } from "@/components/general/slider"
 
 const BSlider = () => {
     return (
-        <div className="w-full h-dvh relative max-h-dvh overflow-hidden flex items-end"
+        <div className="snap-start w-full h-dvh relative max-h-dvh overflow-hidden flex items-end"
             style={{
                 background: 'url("/backgrounds/slider-bg.svg") center center / cover no-repeat',
             }}>
@@ -14,11 +14,14 @@ const BSlider = () => {
                     title: "Two parts. \n\One smart solution.",
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
+                    imageMobile: "/slide_1_Mobile.png",
+                    imageSize: '!bg-center',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_2.png",
+                    imageMobile: "/slide_2.png",
                     button: {
                         title: 'Request a demo',
                         link: '#'

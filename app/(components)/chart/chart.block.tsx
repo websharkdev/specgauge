@@ -1,11 +1,38 @@
+'use client'
+
+import { motion, useInView } from "motion/react"
 import ChartBG from "./chart-background"
+import { useRef } from "react"
+import { useMediaQuery } from "usehooks-ts"
+import ChartPointItem from "./chart-point-item"
+import { PhoneCall } from "lucide-react"
 
 const BChart = () => {
+    const ref = useRef(null)
+    const isInView = useInView(ref)
+    const small = useMediaQuery('(max-width: 768px)')
+
     return (
-        <div className="w-full grid grid-cols-2 items-center min-h-dvh justify-end relative">
-            <div className="col-span-1 flex flex-col gap-4 relative overflow-hidden h-full pt-32 px-11 border-r border-[#00000050] bg-[#E5E8EF]">
-                <h6 className="z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</h6>
-                <h2 className="z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md">Monthly top-ups wasting resources</h2>
+        <div className="md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end relative" ref={ref}>
+            <div className="md:snap-none snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">
+                <motion.h6
+                    initial={{ opacity: 0, }}
+                    animate={isInView ? { opacity: 1, } : {}}
+                    transition={{
+                        duration: 1,
+                        delay: 0.5,
+                        ease: [0, 0.71, 0.3, 1.01],
+                    }}
+                    className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</motion.h6>
+                <motion.h2
+                    initial={{ opacity: 0, }}
+                    animate={isInView ? { opacity: 1, } : {}}
+                    transition={{
+                        duration: 1,
+                        delay: 0.8,
+                        ease: [0, 0.3, 0.2, 1.5],
+                    }}
+                    className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md mb-10">Monthly top-ups wasting resources</motion.h2>
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -77,10 +104,46 @@ const BChart = () => {
                         </clipPath>
                     </defs>
                 </svg>
+                <div className="col-span-full md:hidden flex flex-col gap-8 relative z-10">
+                    <ChartPointItem
+                        color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
+                        direction="left"
+                        icon={<PhoneCall size={18} color="#F14616" />}
+                        title="Emergency calls from customers in winter"
+                    />
+                    <ChartPointItem
+                        color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
+                        direction="left"
+                        icon={<PhoneCall size={18} color="#F14616" />}
+                        title="Emergency calls from customers in winter"
+                    />
+                    <ChartPointItem
+                        color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
+                        direction="left"
+                        icon={<PhoneCall size={18} color="#F14616" />}
+                        title="Emergency calls from customers in winter"
+                    />
+                </div>
             </div>
-            <div className="col-span-1 flex flex-col gap-4 relative overflow-hidden h-full pt-32 px-11 bg-white">
-                <h6 className="z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49]">With SpecGauge</h6>
-                <h2 className="z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md">Efficient refills only when they’re needed</h2>
+            <div className="md:snap-none snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 bg-white">
+                <motion.h6
+                    initial={{ opacity: 0, }}
+                    animate={isInView ? { opacity: 1, } : {}}
+                    transition={{
+                        duration: 1,
+                        delay: 1.2,
+                        ease: [0, 0.71, 0.3, 1.01],
+                    }}
+                    className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49] text-sm">With SpecGauge</motion.h6>
+                <motion.h2
+                    initial={{ opacity: 0, }}
+                    animate={isInView ? { opacity: 1, } : {}}
+                    transition={{
+                        duration: 1.2,
+                        delay: 1.5,
+                        ease: [0, 0.71, 0.3, 1.01],
+                    }}
+                    className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md mb-8">Efficient refills only when they’re needed</motion.h2>
 
                 <svg className="flex-1 absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                     <g filter="url(#filter0_f_1_1182)" opacity="0.15">
@@ -114,8 +177,29 @@ const BChart = () => {
                         </filter>
                     </defs>
                 </svg>
+                <div className="col-span-full md:hidden flex flex-col gap-8 relative z-10">
+                    <ChartPointItem
+                        color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                        direction="right"
+                        icon={<PhoneCall size={18} color="#0B9C36" />}
+                        title="Emergency calls from customers in winter"
+                    />
+                    <ChartPointItem
+                        color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                        direction="right"
+                        icon={<PhoneCall size={18} color="#0B9C36" />}
+                        title="Emergency calls from customers in winter"
+                    />
+                    <ChartPointItem
+                        color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                        direction="right"
+                        icon={<PhoneCall size={18} color="#0B9C36" />}
+                        title="Emergency calls from customers in winter"
+                    />
+                </div>
             </div>
-            <ChartBG />
+
+            {small ? null : <ChartBG isInView={isInView} />}
         </div>
     )
 }

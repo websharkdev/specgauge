@@ -52,7 +52,7 @@ export const PhoneNumber = ({
                 withCountryCallingCode
                 country={country.value.toUpperCase() as Country}
                 value={phoneNumber}
-                inputComponent={(props: DefaultInputComponentProps) => <Input className="h-12 rounded-md" {...props} />}
+                inputComponent={Input}
                 onChange={(value) => {
                     setPhoneNumber(value);
                     onChange(value as string);

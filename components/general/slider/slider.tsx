@@ -1,19 +1,24 @@
 'use client';
+
+import { motion, useInView } from 'motion/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { PaginationOptions } from 'swiper/types';
+import { useRef } from 'react';
+import { Magnetic } from '@/components/ui/magnetic-button';
+import Image from 'next/image';
 
 type Props = {
     slides: {
         title: string;
         description: string;
         image: string;
+        imageMobile: string;
         imageSize?: string
         button?: {
             title: string;
@@ -28,6 +33,10 @@ type Props = {
 }
 
 const Slider = ({ slides, scrollers }: Props) => {
+
+    const ref = useRef(null)
+    const isInView = useInView(ref)
+
     const pagination = {
         el: '.swiper-pagination',
         type: 'bullets',
@@ -45,26 +54,49 @@ const Slider = ({ slides, scrollers }: Props) => {
             }}
             className='relative'
             pagination={pagination}
-            modules={[Autoplay, Pagination]}
+            modules={[Pagination, Autoplay]}
         >
             {slides.map((slide, index) => (
                 <SwiperSlide className='w-full h-full overflow-hidden' key={index}>
-                    <div className="grid grid-cols-10 pt-24 pl-11 h-full">
-                        <div className="col-span-4 flex flex-col items-start gap-5">
-                            <h2 className='text-left whitespace-pre-wrap max-w-sm text-4xl leading-snug font-medium text-gray-900'>{slide.title}</h2>
-                            <p className='text-left max-w-sm text-sm leading-normal opacity-50'>{slide.description}</p>
-                            {slide.button && (<Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer'>{slide.button.title}</Button>)}
+                    <div className="grid grid-cols-10 pt-24 lg:pl-11 p-3.5 h-full" ref={ref}>
+                        <div className="lg:col-span-3 col-span-full flex flex-col items-start gap-5">
+                            <motion.h2
+                                initial={{ opacity: 0, }}
+                                animate={isInView ? { opacity: 1, } : {}}
+                                transition={{
+                                    duration: 1.2,
+                                    delay: 0.5,
+                                    ease: [0, 0.71, 0.3, 1.01],
+                                }} className='text-left whitespace-pre-wrap max-w-sm text-4xl leading-snug font-medium text-gray-900'>{slide.title}</motion.h2>
+                            <motion.p
+                                initial={{ opacity: 0, }}
+                                animate={isInView ? { opacity: 1, } : {}}
+                                transition={{
+                                    duration: 1.2,
+                                    delay: 1.2,
+                                    ease: [0, 0.71, 0.3, 1.01],
+                                }}
+                                className='text-left max-w-sm text-sm leading-normal opacity-50'>{slide.description}</motion.p>
+                            {slide.button && (<Magnetic
+                                intensity={0.2}
+                                springOptions={{ bounce: 0.1 }}
+                                actionArea="global"
+                                range={200}
+                            >
+                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer'>{slide.button.title}</Button>                                                </Magnetic>
+                            )}
+                            <Image src={slide.imageMobile} alt="Slide Image" width={900 * 2} height={900 * 2} className={`lg:hidden block mt-5 max-w-8/12 mx-auto`} />
                         </div>
 
-                        <div className="col-span-6 w-full h-full relative overflow-hidden flex justify-center items-center">
-                            <Image src={slide.image} alt={slide.description} width={1920 * 2} height={1080 * 2} className={`absolute left-1/2 bottom-0 -translate-x-1/2 ${slide.imageSize}`} />
-                            {slide.children}
-                        </div>
+                        <div className={`lg:col-span-7 col-span-full w-full h-full relative overflow-hidden lg:flex hidden justify-center items-center ${slide.imageSize}`}
+                            style={{
+                                background: `url(${slide.image}) bottom right / contain no-repeat`,
+                            }} />
                     </div>
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination !h-20 m-11 w-full max-w-xs flex items-end justify-between flex-nowrap gap-5 absolute !bottom-8 z-10"></div>
+            <div className="swiper-pagination !h-20 md:m-11 m-3.5 w-full max-w-xs flex items-end justify-between flex-nowrap gap-5 lg:absolute relative lg:!bottom-8 !bottom-0 z-10"></div>
         </Swiper>
     )
 }

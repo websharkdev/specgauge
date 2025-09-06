@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { PhoneNumber } from "@/components/ui/phone-number"
+import { Magnetic } from "@/components/ui/magnetic-button"
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
@@ -31,8 +32,6 @@ const GForm = () => {
     })
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
         console.log(values)
     }
     return (
@@ -86,7 +85,14 @@ const GForm = () => {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" variant='blue' className="cursor-pointer w-1/2">Request a Demo</Button>
+                <Magnetic
+                    intensity={0.2}
+                    springOptions={{ bounce: 0.1 }}
+                    actionArea="global"
+                    range={200}
+                >
+                    <Button type="submit" variant='blue' className="cursor-pointer w-[240px]">Request a Demo</Button>
+                </Magnetic>
             </form>
         </Form>
     )
