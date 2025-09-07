@@ -6,11 +6,12 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
-import { Magnetic } from "@/components/ui/magnetic-button";
 
 const BHero = () => {
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const isInView = useInView(ref, {
+        once: true,
+    })
 
     return (
         <div ref={ref} className="snap-start w-full h-full min-h-dvh relative flex justify-between items-center max-h-dvh overflow-hidden">
@@ -72,14 +73,7 @@ const BHero = () => {
                             ease: [0, 0.71, 0.3, 1.01],
                         }} className="text-white/50 max-w-xs text-base lg:text-sm xs:text-xs">SpecGauge turns every tank into a connected data source – helping you deliver smarter, faster, and more profitably.</motion.p>
                     <div className="flex justify-between items-center w-full">
-                        <Magnetic
-                            intensity={0.2}
-                            springOptions={{ bounce: 0.1 }}
-                            actionArea="global"
-                            range={200}
-                        >
-                            <Button className="max-w-max cursor-pointer text-[#14416C] px-8" variant='secondary'>Request a Demo</Button>
-                        </Magnetic>
+                        <Button className="max-w-max cursor-pointer text-[#14416C] px-8" variant='secondary'>Request a Demo</Button>
 
                         <Button onClick={() => window.scrollTo({
                             top: document.body.scrollHeight,

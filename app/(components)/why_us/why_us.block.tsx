@@ -34,7 +34,7 @@ const WhyUsItem = ({
             }}>
             {icon}
         </motion.div>
-        <div className="flex flex-col gap-2.5 md:max-w-xl max-w-72">
+        <div className="flex flex-col gap-2.5 flex-1 max-w-xl">
             <motion.h3
                 initial={{ opacity: 0, }}
                 animate={isInView ? { opacity: 1, } : {}}
@@ -45,7 +45,6 @@ const WhyUsItem = ({
                 }}
                 className="text-xl font-medium whitespace-pre">{title}</motion.h3>
             <motion.h6
-
                 initial={{ opacity: 0, }}
                 animate={isInView ? { opacity: 1, } : {}}
                 transition={{
@@ -60,10 +59,12 @@ const WhyUsItem = ({
 
 const BWhyUs = () => {
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const isInView = useInView(ref, {
+        once: true,
+    })
     return (
         <div ref={ref} className="snap-start w-full grid grid-cols-12 items-center min-h-dvh justify-end relative">
-            <div className="md:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between md:pl-20 pl-3.5 gap-6 xl:gap-10 2xl:gap-20">
+            <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between lg:pl-20 pl-3.5 gap-6 xl:gap-10 2xl:gap-20">
                 <div className="flex flex-col gap-4 max-w-lg">
                     <motion.h5
                         initial={{ opacity: 0, }}
@@ -91,8 +92,8 @@ const BWhyUs = () => {
                     <WhyUsItem index={4} isInView={isInView} icon={<ChartNoAxesCombined size={24} color="#111111" />} iconBG="linear-gradient(205.6deg, #F3F9EB 11.6%, #F9F0F0 83.8%)" title={"Predict with confidence,\n\stay ahead always"} subtitle="Move from reactive to proactive planning by knowing tank levels before customers even call, ensuring your business is always one step ahead of demand" />
                 </div>
             </div>
-            <div className="col-span-2 md:flex hidden" />
-            <div className="col-span-5 md:flex hidden flex-col gap-4 relative overflow-hidden h-full"
+            <div className="col-span-2 lg:flex hidden" />
+            <div className="col-span-5 lg:flex hidden flex-col gap-4 relative overflow-hidden h-full"
                 style={{
                     background: 'url("/why_us.png") center center / cover no-repeat',
                 }}

@@ -7,11 +7,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 // import required modules
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { useRef } from 'react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { PaginationOptions } from 'swiper/types';
-import { useRef } from 'react';
-import { Magnetic } from '@/components/ui/magnetic-button';
-import Image from 'next/image';
 
 type Props = {
     slides: {
@@ -35,7 +34,9 @@ type Props = {
 const Slider = ({ slides, scrollers }: Props) => {
 
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const isInView = useInView(ref, {
+        once: true,
+    })
 
     const pagination = {
         el: '.swiper-pagination',
@@ -58,7 +59,7 @@ const Slider = ({ slides, scrollers }: Props) => {
         >
             {slides.map((slide, index) => (
                 <SwiperSlide className='w-full h-full overflow-hidden' key={index}>
-                    <div className="grid grid-cols-10 pt-24 lg:pl-11 p-3.5 h-full" ref={ref}>
+                    <div className="grid grid-cols-10 pt-24 lg:pl-11 p-3.5 pb-0 h-full" ref={ref}>
                         <div className="lg:col-span-3 col-span-full flex flex-col items-start gap-5">
                             <motion.h2
                                 initial={{ opacity: 0, }}
@@ -77,14 +78,8 @@ const Slider = ({ slides, scrollers }: Props) => {
                                     ease: [0, 0.71, 0.3, 1.01],
                                 }}
                                 className='text-left max-w-sm text-sm leading-normal opacity-50'>{slide.description}</motion.p>
-                            {slide.button && (<Magnetic
-                                intensity={0.2}
-                                springOptions={{ bounce: 0.1 }}
-                                actionArea="global"
-                                range={200}
-                            >
-                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer'>{slide.button.title}</Button>                                                </Magnetic>
-                            )}
+                            {slide.button &&
+                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer'>{slide.button.title}</Button>}
                             <Image src={slide.imageMobile} alt="Slide Image" width={900 * 2} height={900 * 2} className={`lg:hidden block mt-5 max-w-8/12 mx-auto`} />
                         </div>
 

@@ -9,7 +9,9 @@ import { PhoneCall } from "lucide-react"
 
 const BChart = () => {
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const isInView = useInView(ref, {
+        once: true,
+    })
     const small = useMediaQuery('(max-width: 768px)')
 
     return (

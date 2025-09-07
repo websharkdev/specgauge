@@ -2,10 +2,9 @@ import { LogoIcon } from "@/components/general/logo";
 import { Button } from "@/components/ui/button";
 import { ChevronUp } from "lucide-react";
 import { useMemo } from "react";
-import ProgressBar from "./progress";
-import { Magnetic } from "@/components/ui/magnetic-button";
-import { useMediaQuery } from 'usehooks-ts'
+import { useMediaQuery } from 'usehooks-ts';
 import MobileHeader from "./mobile-header";
+import ProgressBar from "./progress";
 
 
 const Header = ({ progress }: { progress: number }) => {
@@ -27,14 +26,7 @@ const Header = ({ progress }: { progress: number }) => {
             <div className="flex items-center gap-4">
                 {small ? null : progressBAR}
 
-                {small ? <Button className="cursor-pointer">Contact</Button> : <Magnetic
-                    intensity={0.2}
-                    springOptions={{ bounce: 0.1 }}
-                    actionArea="global"
-                    range={200}
-                >
-                    <Button className="cursor-pointer">Contact</Button>
-                </Magnetic>}
+                <Button className="cursor-pointer">Contact</Button>
 
                 {small ? <MobileHeader /> : null}
             </div>

@@ -9,17 +9,15 @@ import {
     Form,
     FormControl,
     FormField,
-    FormItem,
-    FormMessage
+    FormItem
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { PhoneNumber } from "@/components/ui/phone-number"
-import { Magnetic } from "@/components/ui/magnetic-button"
 
 const formSchema = z.object({
     name: z.string().min(2).max(50),
     email: z.email(),
-    phone: z.string().min(2).max(50),
+    phone: z.number().min(3).max(15),
     company_name: z.string().min(2).max(50),
 })
 
@@ -28,12 +26,18 @@ const GForm = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
+            email: "",
+            phone: undefined,
+            company_name: "",
         },
     })
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }
+
+    console.log(form.formState.errors)
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm flex flex-col items-center gap-y-6">
@@ -45,7 +49,6 @@ const GForm = () => {
                             <FormControl>
                                 <Input className="h-12" placeholder="Name" {...field} />
                             </FormControl>
-                            <FormMessage />
                         </FormItem>
                     )}
                 />
@@ -57,7 +60,6 @@ const GForm = () => {
                             <FormControl>
                                 <Input className="h-12" placeholder="Email" {...field} />
                             </FormControl>
-                            <FormMessage />
                         </FormItem>
                     )}
                 />
@@ -67,9 +69,8 @@ const GForm = () => {
                     render={({ field }) => (
                         <FormItem className="w-full max-w-[372px] h-full max-h-12">
                             <FormControl>
-                                <PhoneNumber onChange={field.onChange} />
+                                <PhoneNumber {...field} />
                             </FormControl>
-                            <FormMessage />
                         </FormItem>
                     )}
                 />
@@ -81,18 +82,10 @@ const GForm = () => {
                             <FormControl>
                                 <Input className="h-12" placeholder="Company name" {...field} />
                             </FormControl>
-                            <FormMessage />
                         </FormItem>
                     )}
                 />
-                <Magnetic
-                    intensity={0.2}
-                    springOptions={{ bounce: 0.1 }}
-                    actionArea="global"
-                    range={200}
-                >
-                    <Button type="submit" variant='blue' className="cursor-pointer w-[240px]">Request a Demo</Button>
-                </Magnetic>
+                <Button type="submit" variant='blue' className="cursor-pointer w-[240px]">Request a Demo</Button>
             </form>
         </Form>
     )
