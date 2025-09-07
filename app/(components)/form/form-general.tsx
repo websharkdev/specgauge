@@ -17,7 +17,7 @@ import { PhoneNumber } from "@/components/ui/phone-number"
 const formSchema = z.object({
     name: z.string().min(2).max(50),
     email: z.email(),
-    phone: z.number().min(3).max(15),
+    phone: z.string().min(3).max(15),
     company_name: z.string().min(2).max(50),
 })
 
@@ -30,13 +30,14 @@ const GForm = () => {
             phone: undefined,
             company_name: "",
         },
+        mode: "onTouched"
     })
+    const { control } = form
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
         console.log(values)
     }
-
-    console.log(form.formState.errors)
+    const phoneError = form.formState.errors.phone?.message
 
     return (
         <Form {...form}>
@@ -69,7 +70,7 @@ const GForm = () => {
                     render={({ field }) => (
                         <FormItem className="w-full max-w-[372px] h-full max-h-12">
                             <FormControl>
-                                <PhoneNumber {...field} />
+                                <PhoneNumber {...field} control={control} error={phoneError} />
                             </FormControl>
                         </FormItem>
                     )}

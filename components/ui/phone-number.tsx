@@ -4,8 +4,7 @@ import i18nIsoCountries from 'i18n-iso-countries';
 import enCountries from "i18n-iso-countries/langs/en.json";
 
 import {
-    type CountryCallingCode, type E164Number,
-    isValidPhoneNumber as matchIsValidPhoneNumber,
+    type CountryCallingCode, type E164Number
 } from 'libphonenumber-js';
 import PhoneInput, { type Country } from 'react-phone-number-input/input';
 import { Input } from '../ui/input';
@@ -19,14 +18,17 @@ type CountryOption = {
 i18nIsoCountries.registerLocale(enCountries);
 
 export const PhoneNumber = ({
+    control,
+    error,
     onChange,
 }: {
+    control: any;
+    error: string | undefined;
     onChange: (value: unknown) => void;
 }) => {
     const options = getCountriesOptions().filter((option) =>
         'RU' !== option.value
     );
-
     const defaultCountryOption = options.find((option) => option.value === 'ES');
 
     const [country, setCountry] = useState<CountryOption>(
@@ -38,9 +40,6 @@ export const PhoneNumber = ({
         setPhoneNumber(undefined);
         setCountry(value);
     };
-
-    const isValidPhoneNumber = matchIsValidPhoneNumber(phoneNumber ?? "")
-
 
     return (
         <div className="flex items-center gap-2">
@@ -55,17 +54,23 @@ export const PhoneNumber = ({
                 renderValue={(option) => option.label}
                 emptyMessage="No country found."
             />
-            <div className={`${isValidPhoneNumber ? '' : 'border ring-destructive/20 border-destructive rounded-md'} flex-1`}>
-                <PhoneInput
-                    international
-                    withCountryCallingCode
-                    country={country.value.toUpperCase() as Country}
-                    value={phoneNumber}
-                    inputComponent={Input}
-                    onChange={(value) => {
-                        setPhoneNumber(value);
-                        onChange(value as string);
-                    }}
+            <div className={`${!!error ? 'border ring-destructive/20 border-destructive rounded-md' : ''} flex-1`}>
+                <Controller
+                    control={control}
+                    name="phone"
+                    render={({ field }) => (<PhoneInput
+                        international
+                        withCountryCallingCode
+                        country={country.value.toUpperCase() as Country}
+                        {...field}
+                        value={phoneNumber}
+                        inputComponent={Input}
+                        onChange={(value) => {
+                            setPhoneNumber(value);
+                            onChange(value as string);
+                        }}
+                    />
+                    )}
                 />
             </div>
         </div>
@@ -166,9 +171,8 @@ import {
     getCountries,
     getCountryCallingCode,
 } from 'libphonenumber-js';
+import { Controller } from 'react-hook-form';
 import { Button } from './button';
-import { DefaultInputComponentProps } from 'react-phone-number-input';
-import { Slot } from '@radix-ui/react-slot';
 
 /**
  * Source: https://grafikart.fr/tutoriels/drapeau-emoji-fonction-2152

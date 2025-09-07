@@ -7,6 +7,7 @@ import { ArrowDownIcon, BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 
+
 const BHero = () => {
     const ref = useRef(null)
     const isInView = useInView(ref, {
@@ -31,8 +32,11 @@ const BHero = () => {
                 />
                 <div className="pb-11 px-3.5  pt-0 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
                     <motion.div
-                        initial={{ opacity: 0, }}
-                        animate={isInView ? { opacity: 1, } : {}}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={isInView ? {
+                            opacity: 1,
+                            y: 0,
+                        } : {}}
                         transition={{
                             duration: .6,
                             delay: 0.1,
@@ -46,8 +50,11 @@ const BHero = () => {
                     </motion.div>
                     <h1 className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl flex flex-col">
                         <motion.span
-                            initial={{ opacity: 0, }}
-                            animate={isInView ? { opacity: 1, } : {}}
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={isInView ? {
+                                opacity: 1,
+                                y: 0,
+                            } : {}}
                             transition={{
                                 duration: .8,
                                 delay: 0.7,
@@ -55,8 +62,11 @@ const BHero = () => {
                             }}
                             className="text-white">Know before they’re low,</motion.span>
                         <motion.span
-                            initial={{ opacity: 0, }}
-                            animate={isInView ? { opacity: 1, } : {}}
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={isInView ? {
+                                opacity: 1,
+                                y: 0,
+                            } : {}}
                             transition={{
                                 duration: 1,
                                 delay: 1.3,
@@ -65,10 +75,13 @@ const BHero = () => {
                             className="text-white/60">stay ahead every time</motion.span>
                     </h1>
                     <motion.p
-                        initial={{ opacity: 0, }}
-                        animate={isInView ? { opacity: 1, } : {}}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={isInView ? {
+                            opacity: 1,
+                            y: 0,
+                        } : {}}
                         transition={{
-                            duration: 1,
+                            duration: 1.3,
                             delay: 1.8,
                             ease: [0, 0.71, 0.3, 1.01],
                         }} className="text-white/50 max-w-xs text-base lg:text-sm xs:text-xs">SpecGauge turns every tank into a connected data source – helping you deliver smarter, faster, and more profitably.</motion.p>

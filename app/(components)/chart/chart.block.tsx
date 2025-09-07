@@ -18,20 +18,26 @@ const BChart = () => {
         <div className="md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end relative" ref={ref}>
             <div className="md:snap-none snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">
                 <motion.h6
-                    initial={{ opacity: 0, }}
-                    animate={isInView ? { opacity: 1, } : {}}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isInView ? {
+                        opacity: 1,
+                        y: 0,
+                    } : {}}
                     transition={{
-                        duration: 1,
+                        duration: .6,
                         delay: 0.5,
                         ease: [0, 0.71, 0.3, 1.01],
                     }}
                     className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</motion.h6>
                 <motion.h2
-                    initial={{ opacity: 0, }}
-                    animate={isInView ? { opacity: 1, } : {}}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isInView ? {
+                        opacity: 1,
+                        y: 0,
+                    } : {}}
                     transition={{
                         duration: 1,
-                        delay: 0.8,
+                        delay: 1,
                         ease: [0, 0.3, 0.2, 1.5],
                     }}
                     className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md mb-10">Monthly top-ups wasting resources</motion.h2>
@@ -129,21 +135,27 @@ const BChart = () => {
             </div>
             <div className="md:snap-none snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 bg-white">
                 <motion.h6
-                    initial={{ opacity: 0, }}
-                    animate={isInView ? { opacity: 1, } : {}}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isInView ? {
+                        opacity: 1,
+                        y: 0,
+                    } : {}}
                     transition={{
-                        duration: 1,
-                        delay: 1.2,
-                        ease: [0, 0.71, 0.3, 1.01],
+                        duration: .6,
+                        delay: 1.3,
+                        ease: [0, 0.3, 0.2, 1.5],
                     }}
                     className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49] text-sm">With SpecGauge</motion.h6>
                 <motion.h2
-                    initial={{ opacity: 0, }}
-                    animate={isInView ? { opacity: 1, } : {}}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={isInView ? {
+                        opacity: 1,
+                        y: 0,
+                    } : {}}
                     transition={{
-                        duration: 1.2,
+                        duration: 1,
                         delay: 1.5,
-                        ease: [0, 0.71, 0.3, 1.01],
+                        ease: [0, 0.3, 0.2, 1.5],
                     }}
                     className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md mb-8">Efficient refills only when they’re needed</motion.h2>
 

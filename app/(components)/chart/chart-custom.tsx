@@ -59,12 +59,15 @@ const ChartCustom = ({ data, isInView }: {
                                 stroke="black"
                                 strokeOpacity={0.2}
                                 z={-1}
-                                initial={{ opacity: 0, scaleY: 0 }}
-                                animate={isInView ? { opacity: 1, scaleY: 1 } : {}}
+                                initial={{ opacity: 0, scaleY: 0, y: 50 }}
+                                animate={isInView ? {
+                                    opacity: 1, scaleY: 1,
+                                    y: 0,
+                                } : {}}
                                 transition={{
                                     duration: 1,
                                     delay: 1.5 + card.index * 0.05,
-                                    ease: [0, 0.71, 0.3, 1.01],
+                                    ease: [0, 0.3, 0.2, 1.5],
                                 }}
                             />
                             {/* Иконка */}
@@ -84,12 +87,15 @@ const ChartCustom = ({ data, isInView }: {
                                 x={centerX}
                                 y={topY - card.padding_y - 20}
                                 className="text-sm leading-snug font-medium"
-                                initial={{ opacity: 0, }}
-                                animate={isInView ? { opacity: 1, } : {}}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={isInView ? {
+                                    opacity: 1,
+                                    y: 0,
+                                } : {}}
                                 transition={{
                                     duration: 1,
                                     delay: 1.5 + card.index * 0.05,
-                                    ease: [0, 0.71, 0.3, 1.01],
+                                    ease: [0, 0.3, 0.2, 1.5],
                                 }}
                             >
                                 {card.text.map((line, index) => (

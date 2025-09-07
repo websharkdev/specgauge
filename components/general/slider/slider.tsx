@@ -62,19 +62,26 @@ const Slider = ({ slides, scrollers }: Props) => {
                     <div className="grid grid-cols-10 pt-24 lg:pl-11 p-3.5 pb-0 h-full" ref={ref}>
                         <div className="lg:col-span-3 col-span-full flex flex-col items-start gap-5">
                             <motion.h2
-                                initial={{ opacity: 0, }}
-                                animate={isInView ? { opacity: 1, } : {}}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={isInView ? {
+                                    opacity: 1,
+                                    y: 0,
+                                } : {}}
                                 transition={{
                                     duration: 1.2,
                                     delay: 0.5,
                                     ease: [0, 0.71, 0.3, 1.01],
-                                }} className='text-left whitespace-pre-wrap max-w-sm text-4xl leading-snug font-medium text-gray-900'>{slide.title}</motion.h2>
+                                }}
+                                className='text-left whitespace-pre-wrap max-w-sm text-4xl leading-snug font-medium text-gray-900'>{slide.title}</motion.h2>
                             <motion.p
-                                initial={{ opacity: 0, }}
-                                animate={isInView ? { opacity: 1, } : {}}
+                                initial={{ opacity: 0, y: 50 }}
+                                animate={isInView ? {
+                                    opacity: 1,
+                                    y: 0,
+                                } : {}}
                                 transition={{
                                     duration: 1.2,
-                                    delay: 1.2,
+                                    delay: 0.9,
                                     ease: [0, 0.71, 0.3, 1.01],
                                 }}
                                 className='text-left max-w-sm text-sm leading-normal opacity-50'>{slide.description}</motion.p>

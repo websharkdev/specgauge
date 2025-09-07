@@ -21,11 +21,14 @@ const WhyUsItem = ({
 }) => {
     return <div className="flex gap-4">
         <motion.div
-            initial={{ opacity: 0, }}
-            animate={isInView ? { opacity: 1, } : {}}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? {
+                opacity: 1,
+                y: 0,
+            } : {}}
             transition={{
                 duration: .5,
-                delay: 0.8 + index * 0.4,
+                delay: .85 + index * 0.4,
                 ease: [0, 0.71, 0.3, 1.01],
             }}
             className={`size-12 rounded-lg flex justify-center items-center`}
@@ -36,8 +39,11 @@ const WhyUsItem = ({
         </motion.div>
         <div className="flex flex-col gap-2.5 flex-1 max-w-xl">
             <motion.h3
-                initial={{ opacity: 0, }}
-                animate={isInView ? { opacity: 1, } : {}}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? {
+                    opacity: 1,
+                    y: 0,
+                } : {}}
                 transition={{
                     duration: .5,
                     delay: .85 + index * 0.4,
@@ -45,8 +51,11 @@ const WhyUsItem = ({
                 }}
                 className="text-xl font-medium whitespace-pre">{title}</motion.h3>
             <motion.h6
-                initial={{ opacity: 0, }}
-                animate={isInView ? { opacity: 1, } : {}}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? {
+                    opacity: 1,
+                    y: 0,
+                } : {}}
                 transition={{
                     duration: .5,
                     delay: .85 + index * 0.4,
