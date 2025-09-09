@@ -22,6 +22,7 @@ export const PhoneNumber = ({
     error,
     onChange,
 }: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: any;
     error: string | undefined;
     onChange: (value: unknown) => void;
