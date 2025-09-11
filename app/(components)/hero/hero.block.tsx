@@ -10,12 +10,20 @@ import { useRef } from "react";
 
 const BHero = () => {
     const ref = useRef(null)
-    const isInView = useInView(ref, {
-        once: true,
-    })
+    const isInView = useInView(ref)
 
     return (
-        <div ref={ref} className="snap-start w-full h-full min-h-dvh relative flex justify-between items-center max-h-dvh overflow-hidden">
+        <motion.div ref={ref}
+            initial={{ opacity: 0, }}
+            animate={isInView ? {
+                opacity: 1,
+            } : {}}
+            transition={{
+                duration: .5,
+                delay: .2,
+                ease: 'easeIn'
+            }}
+            className="snap-start w-full h-full min-h-dvh relative flex justify-between items-center max-h-dvh overflow-hidden">
             <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end md:p-11 gap-7 xl:gap-5 lg:gap-4 xs:gap-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
@@ -45,10 +53,10 @@ const BHero = () => {
 
                         <Badge variant='outline' className="rounded-full flex items-center gap-2 px-2 py-1.5 mb-2.5 text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
                             <BadgeCheck size={14} />
-                            <span>Beta version is Live!</span>
+                            <span className="text-xs leading-[90%]">Beta version is Live!</span>
                         </Badge>
                     </motion.div>
-                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl flex flex-col">
+                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl flex flex-col leading-[95%] font-medium">
                         <motion.span
                             initial={{ opacity: 0, y: 50 }}
                             animate={isInView ? {
@@ -84,9 +92,9 @@ const BHero = () => {
                             duration: 1.3,
                             delay: 1.8,
                             ease: [0, 0.71, 0.3, 1.01],
-                        }} className="text-white/50 max-w-xs text-base lg:text-sm xs:text-xs">SpecGauge turns every tank into a connected data source – helping you deliver smarter, faster, and more profitably.</motion.p>
-                    <div className="flex justify-between items-center w-full">
-                        <Button className="max-w-max cursor-pointer text-[#14416C] px-8" variant='secondary'>Request a Demo</Button>
+                        }} className="text-white/50 max-w-xs text-base lg:text-sm xs:text-xs leading-[110%]">SpecGauge turns every tank into a connected data source – helping you deliver smarter, faster, and more profitably.</motion.p>
+                    <div className="flex justify-between items-center w-full mt-2.5">
+                        <Button className="max-w-max cursor-pointer w-[177px] font-medium text-base leading-[90%]" variant='secondary'>Request a Demo</Button>
 
                         <Button onClick={() => window.scrollTo({
                             top: document.body.scrollHeight,
@@ -105,12 +113,12 @@ const BHero = () => {
                     alt='Main Devices'
                     width={1158}
                     height={652}
-                    className="max-w-3xl xl:max-w-xl lg:max-w-lg md:max-w-sm object-contain"
+                    className="2xl:max-w-3xl xl:max-w-2xl lg:max-w-lg md:max-w-sm object-contain"
                     priority
                 />
                 <div className="flex-1" />
             </div>
-        </div>
+        </motion.div>
     )
 }
 

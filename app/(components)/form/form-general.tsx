@@ -2,8 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { z } from "zod"
-
 import { Button } from "@/components/ui/button"
 import {
     Form,
@@ -12,81 +10,79 @@ import {
     FormItem
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { PhoneNumber } from "@/components/ui/phone-number"
+import { formSchema, TFormSchema } from "@/schemas/form.schema"
 
-const formSchema = z.object({
-    name: z.string().min(2).max(50),
-    email: z.email(),
-    phone: z.string().min(3).max(15),
-    company_name: z.string().min(2).max(50),
-})
+
+const inputs = [
+    {
+        placeholder: 'Name',
+        name: 'name',
+        type: 'text'
+    },
+
+    {
+        placeholder: 'Email',
+        name: 'email',
+        type: 'email'
+    },
+    {
+        placeholder: 'Phone',
+        name: 'phone',
+        type: 'tel'
+    },
+    {
+        placeholder: 'Company Name',
+        name: 'company_name',
+        type: 'text'
+    },
+
+]
+
+type names = "name" | "email" | "phone" | "company_name"
 
 const GForm = () => {
-    const form = useForm<z.infer<typeof formSchema>>({
+    const form = useForm<TFormSchema>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: "",
             email: "",
-            phone: undefined,
+            phone: 380,
             company_name: "",
         },
-        mode: "onTouched"
     })
-    const { control } = form
-    // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    function onSubmit(values: TFormSchema) {
         console.log(values)
     }
-    const phoneError = form.formState.errors.phone?.message
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm flex flex-col items-center gap-y-6">
-                <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                        <FormItem className="w-full max-w-[372px] h-full max-h-12">
-                            <FormControl>
-                                <Input className="h-12" placeholder="Name" {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                        <FormItem className="w-full max-w-[372px] h-full max-h-12">
-                            <FormControl>
-                                <Input className="h-12" placeholder="Email" {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="phone"
-                    render={({ field }) => (
-                        <FormItem className="w-full max-w-[372px] h-full max-h-12">
-                            <FormControl>
-                                <PhoneNumber {...field} control={control} error={phoneError} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="company_name"
-                    render={({ field }) => (
-                        <FormItem className="w-full max-w-[372px] h-full max-h-12">
-                            <FormControl>
-                                <Input className="h-12" placeholder="Company name" {...field} />
-                            </FormControl>
-                        </FormItem>
-                    )}
-                />
-                <Button type="submit" variant='blue' className="cursor-pointer w-[240px]">Request a Demo</Button>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm flex flex-col items-center gap-y-4">
+                {
+                    inputs.map((input, index) => <FormField
+                        key={`input-${input.name}-${index}`}
+                        control={form.control}
+                        name={input.name as names}
+                        rules={{
+                            onChange: (e) =>
+                                input?.type === 'tel'
+                                    ? form.setValue(input.name as names, +e.target.value)
+                                    : form.setValue(input.name as names, e.target.value),
+                        }}
+                        render={({ field }) => (
+                            <FormItem className="w-full max-w-[372px] h-full max-h-12">
+                                <FormControl>
+                                    <Input
+                                        className="h-12 bg-[#11111104] border-0 font-medium text-base leading-[110%]"
+                                        placeholder={input.placeholder}
+                                        type={input.type}
+                                        {...field}
+                                    />
+                                </FormControl>
+                            </FormItem>
+                        )}
+                    />)
+                }
+                <Button type="submit" variant='blue' className="cursor-pointer w-[177px] text-base font-medium mt-6">Request a Demo</Button>
             </form>
         </Form>
     )

@@ -1,11 +1,26 @@
 'use client'
 
 import { Slider } from "@/components/general/slider"
+import { motion, useInView } from "motion/react";
+import { useRef } from "react"
 
 
 const BSlider = () => {
+    const ref = useRef(null)
+    const isInView = useInView(ref)
     return (
-        <div className="snap-start w-full h-dvh relative max-h-dvh overflow-hidden flex items-end"
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, }}
+            animate={isInView ? {
+                opacity: 1,
+            } : {}}
+            transition={{
+                duration: .5,
+                delay: .2,
+                ease: 'easeIn'
+            }}
+            className="snap-start w-full h-dvh relative max-h-dvh overflow-hidden flex items-end"
             style={{
                 background: 'url("/backgrounds/slider-bg.svg") center center / cover no-repeat',
             }}>
@@ -28,10 +43,10 @@ const BSlider = () => {
                     }
                 },
             ]} scrollers={[
-                { id: 1, title: "High-Accuracy pressure sensor for every tank" },
-                { id: 2, title: "Real-Time Insights Across All Depots" },
+                { id: 1, title: "High-Accuracy\n\pressure sensor\n\for every tank" },
+                { id: 2, title: "Real-Time\n\Insights Across\n\All Depots" },
             ]} />
-        </div>
+        </motion.div>
     )
 }
 

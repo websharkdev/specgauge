@@ -25,7 +25,7 @@ const ProgressBar = ({
 
     return (<Badge variant='glass' className="w-[120px] h-8 rounded-full px-3 border-none bg-black/5 backdrop-blur-xl bg-blend-multiply">
         <Progress value={progress} indicatorClassName={indicator} />
-        <span className="text-sm font-medium">{progress}%</span>
+        <span className="text-sm font-medium leading-[90%] text-[#111111]">{progress}%</span>
     </Badge>
     )
 }

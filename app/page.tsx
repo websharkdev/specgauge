@@ -1,7 +1,7 @@
 "use client"
 
-import useSectionScroll from "@/hooks/use-section-scroll";
-import { BChart, BHero, BSlider, BWhyUs, BForm } from "./(components)";
+import { useProgressStore } from "@/stores/general.store";
+import { BChart, BForm, BHero, BSlider, BWhyUs } from "./(components)";
 
 const sections = [
   <BHero key="hero" />,
@@ -12,18 +12,10 @@ const sections = [
 ]
 
 export default function Home() {
-  const sectionRefs = useSectionScroll(5); // 5 секций
+  const { progress } = useProgressStore()
   return (
     <div className="w-full h-full overflow-hidden">
-      {sectionRefs.map((ref, i) => (
-        <section
-          key={i}
-          ref={ref}
-          className="transition-colors duration-700"
-        >
-          {sections[i]}
-        </section>
-      ))}
+      {sections.map((section, i) => i === progress ? section : null)}
     </div>
   );
 }

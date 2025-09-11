@@ -86,7 +86,7 @@ const ChartCustom = ({ data, isInView }: {
                             <motion.text
                                 x={centerX}
                                 y={topY - card.padding_y - 20}
-                                className="text-sm leading-snug font-medium"
+                                className="text-base leading-[90%] font-medium"
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={isInView ? {
                                     opacity: 1,
@@ -95,7 +95,7 @@ const ChartCustom = ({ data, isInView }: {
                                 transition={{
                                     duration: 1,
                                     delay: 1.5 + card.index * 0.05,
-                                    ease: [0, 0.3, 0.2, 1.5],
+                                    ease: 'linear'
                                 }}
                             >
                                 {card.text.map((line, index) => (
@@ -113,7 +113,7 @@ const ChartCustom = ({ data, isInView }: {
 
     return (<ChartContainer config={{} satisfies ChartConfig} className="h-[750px] w-full relative">
         <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
-            <Bar dataKey="point" fill="var(--color-point)" radius={1} barSize={1.5}>
+            <Bar dataKey="point" fill="var(--color-point)" style={{}} radius={1} barSize={1.5}>
                 <LabelList dataKey="point" content={renderCustomizedLabel} />
             </Bar>
             <Customized

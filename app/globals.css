@@ -150,7 +150,7 @@ html {
   flex-direction: column;
   text-align: left;
   justify-content: space-between;
-  height: 90px !important;
+  height: 74px !important;
   border-radius: 0 !important;
   /* чтобы была отступ под линию */
   opacity: 1;
@@ -206,7 +206,15 @@ html {
   }
 }
 
-input[type="tel"] {
-  height: 48px;
-  border-radius: var(--radius-md);
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  /* Firefox */
 }

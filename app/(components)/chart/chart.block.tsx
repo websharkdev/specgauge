@@ -9,13 +9,22 @@ import { PhoneCall } from "lucide-react"
 
 const BChart = () => {
     const ref = useRef(null)
-    const isInView = useInView(ref, {
-        once: true,
-    })
+    const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
 
     return (
-        <div className="md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end relative" ref={ref}>
+        <motion.div
+            initial={{ opacity: 0, }}
+            animate={isInView ? {
+                opacity: 1,
+            } : {}}
+
+            transition={{
+                duration: .5,
+                delay: .2,
+                ease: 'easeIn'
+            }}
+            className="md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end relative" ref={ref}>
             <div className="md:snap-none snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">
                 <motion.h6
                     initial={{ opacity: 0, y: 50 }}
@@ -28,7 +37,7 @@ const BChart = () => {
                         delay: 0.5,
                         ease: [0, 0.71, 0.3, 1.01],
                     }}
-                    className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</motion.h6>
+                    className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</motion.h6>
                 <motion.h2
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? {
@@ -40,7 +49,7 @@ const BChart = () => {
                         delay: 1,
                         ease: [0, 0.3, 0.2, 1.5],
                     }}
-                    className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md mb-10">Monthly top-ups wasting resources</motion.h2>
+                    className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-[95%] max-w-md mb-10">Monthly top-ups wasting resources</motion.h2>
 
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -145,7 +154,7 @@ const BChart = () => {
                         delay: 1.3,
                         ease: [0, 0.3, 0.2, 1.5],
                     }}
-                    className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-extrabold bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49] text-sm">With SpecGauge</motion.h6>
+                    className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49] text-sm">With SpecGauge</motion.h6>
                 <motion.h2
                     initial={{ opacity: 0, y: 50 }}
                     animate={isInView ? {
@@ -157,7 +166,7 @@ const BChart = () => {
                         delay: 1.5,
                         ease: [0, 0.3, 0.2, 1.5],
                     }}
-                    className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-tight max-w-md mb-8">Efficient refills only when they’re needed</motion.h2>
+                    className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-[95%] max-w-md mb-8">Efficient refills only when they’re needed</motion.h2>
 
                 <svg className="flex-1 absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                     <g filter="url(#filter0_f_1_1182)" opacity="0.15">
@@ -214,7 +223,7 @@ const BChart = () => {
             </div>
 
             {small ? null : <ChartBG isInView={isInView} />}
-        </div>
+        </motion.div>
     )
 }
 
