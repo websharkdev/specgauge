@@ -18,7 +18,7 @@ const BSlider = () => {
             transition={{
                 duration: .5,
                 delay: .2,
-                ease: 'easeIn'
+                ease: 'linear'
             }}
             className="snap-start w-full h-dvh relative max-h-dvh overflow-hidden flex items-end"
             style={{

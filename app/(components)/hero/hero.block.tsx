@@ -21,7 +21,7 @@ const BHero = () => {
             transition={{
                 duration: .5,
                 delay: .2,
-                ease: 'easeIn'
+                ease: 'linear'
             }}
             className="snap-start w-full h-full min-h-dvh relative flex justify-between items-center max-h-dvh overflow-hidden">
             <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end md:p-11 gap-7 xl:gap-5 lg:gap-4 xs:gap-0" style={{

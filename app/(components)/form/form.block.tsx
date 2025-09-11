@@ -17,7 +17,7 @@ const BForm = () => {
             transition={{
                 duration: .5,
                 delay: .2,
-                ease: 'easeIn'
+                ease: 'linear'
             }}
             className="snap-start w-full flex items-center min-h-dvh h-full flex-col pb-10 justify-center relative overflow-hidden"
             style={{

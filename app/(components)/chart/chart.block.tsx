@@ -18,11 +18,10 @@ const BChart = () => {
             animate={isInView ? {
                 opacity: 1,
             } : {}}
-
             transition={{
                 duration: .5,
                 delay: .2,
-                ease: 'easeIn'
+                ease: 'linear'
             }}
             className="md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end relative" ref={ref}>
             <div className="md:snap-none snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">

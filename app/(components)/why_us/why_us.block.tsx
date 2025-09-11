@@ -79,7 +79,7 @@ const BWhyUs = () => {
             transition={{
                 duration: .5,
                 delay: .2,
-                ease: 'easeIn'
+                ease: 'linear'
             }}
             ref={ref} className="snap-start w-full grid grid-cols-12 items-center min-h-dvh justify-end relative">
             <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between lg:pl-20 pl-3.5 gap-6 xl:gap-10 2xl:gap-20">
