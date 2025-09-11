@@ -2,11 +2,13 @@
 
 import { useProgressStore } from "@/stores/general.store";
 import { useCallback, useEffect } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 const GProvider = ({ children }: Readonly<{
     children: React.ReactNode;
 }>) => {
-    const { progress, setProgress, sections } = useProgressStore();
+    const { progress, setProgress, sections, updateSections } = useProgressStore();
+    const small = useMediaQuery('(max-width: 768px)')
 
     useEffect(() => {
         let scrollStart = performance.now();
@@ -17,6 +19,11 @@ const GProvider = ({ children }: Readonly<{
             clientX: 0,
             clientY: 0
         };
+
+
+        if (small) {
+            updateSections()
+        }
 
         const handleScroll = (e: WheelEvent) => {
             const scrollCurrent = performance.now();
@@ -87,6 +94,7 @@ const GProvider = ({ children }: Readonly<{
         };
     }, [
         progress,
+        small,
     ]);
 
     const scrollTo = useCallback((progress: number) => {

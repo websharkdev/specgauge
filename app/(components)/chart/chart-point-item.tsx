@@ -1,5 +1,8 @@
 'use client'
 
+import { motion, useInView } from 'motion/react'
+import { useRef } from 'react'
+
 type Props = {
     color: {
         line: string[],
@@ -7,17 +10,32 @@ type Props = {
     }
     direction: 'left' | 'right'
     icon: React.ReactNode
-    title: string
+    title: string,
+    index: number
 }
 
 const ChartPointItem = ({
     color,
     icon,
     title,
-    direction = 'left'
+    direction = 'left',
+    index
 }: Props) => {
+    const ref = useRef(null)
+    const isInView = useInView(ref)
+
     return (
-        <div className="flex flex-nowrap items-start gap-3">
+        <motion.div
+            ref={ref}
+            initial={{ opacity: 0, }}
+            animate={isInView ? {
+                opacity: 1,
+            } : {}}
+            transition={{
+                duration: .5,
+                delay: .2 + index * .5 + .5,
+                ease: 'linear'
+            }} className="flex flex-nowrap items-start gap-3">
             {direction === 'left' ? <div className={`flex flex-nowrap items-center min-w-10 gap-0 mt-1`}>
                 <div className='flex-1 h-0.5' style={{
                     background: `linear-gradient(to right, ${color.line[0]}, ${color.line[1]})`,
@@ -39,9 +57,9 @@ const ChartPointItem = ({
                         }} />
                     </div> : null}
                 </div>
-                <h4 className="font-semibold text-lg text-gray-700 max-w-36 leading-tight">{title}</h4>
+                <h4 className="font-semibold text-lg text-gray-700 max-w-full leading-[90%] whitespace-pre-wrap">{title}</h4>
             </div>
-        </div>
+        </motion.div>
     )
 }
 
