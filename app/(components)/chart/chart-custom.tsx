@@ -72,7 +72,7 @@ const ChartCustom = ({ data, isInView }: {
                             />
                             {/* Иконка */}
                             {/* Вставка SVG-иконки */}
-                            <motion.g transform={`translate(${centerX + 40}, ${topY - 70 - card.padding_y})`}
+                            <motion.g transform={`translate(${centerX + 12}, ${topY - 58 - card.padding_y})`}
                                 initial={{ opacity: 0, }}
                                 animate={isInView ? { opacity: 1, } : {}}
                                 transition={{
@@ -99,7 +99,7 @@ const ChartCustom = ({ data, isInView }: {
                                 }}
                             >
                                 {card.text.map((line, index) => (
-                                    <tspan key={index} x={centerX + 40} dy={index === 0 ? 0 : '1.2em'} fill="#111111">
+                                    <tspan key={index} x={centerX + 12} dy={index === 0 ? 0 : 14} fill="#111111">
                                         {line}
                                     </tspan>
                                 ))}

@@ -5,14 +5,25 @@ import { motion, useInView } from "motion/react"
 import ChartPointItem from "./chart-point-item"
 import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
+import { useProgressStore } from "@/stores/general.store"
 
-const CEfficient = () => {
+const CEfficient = ({ index }: { index: number }) => {
+    const { progress } = useProgressStore()
     const ref = useRef(null)
     const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
 
     return (
-        <div ref={ref} className="md:snap-none minhdvh snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 bg-white">
+        <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView && progress === index ? {
+                opacity: 1,
+            } : {}}
+            transition={{
+                duration: .5,
+                delay: .2,
+                ease: 'linear'
+            }} ref={ref} className="md:snap-none min-h-dvh snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4 overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 bg-white">
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -24,7 +35,7 @@ const CEfficient = () => {
                     delay: small ? 0.3 : 1.3,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-sky-[#175F49] text-sm">With SpecGauge</motion.h6>
+                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -93,7 +104,7 @@ const CEfficient = () => {
                     index={2}
                 />
             </div>
-        </div>
+        </motion.div>
     )
 }
 

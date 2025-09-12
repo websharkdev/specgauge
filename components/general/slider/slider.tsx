@@ -87,7 +87,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                                 className='text-left max-w-sm text-sm leading-[110%] opacity-50'>{slide.description}</motion.p>
                             {slide.button &&
                                 <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer'>{slide.button.title}</Button>}
-                            <Image src={slide.imageMobile} alt="Slide Image" width={900 * 2} height={900 * 2} className={`lg:hidden block mt-5 xs:max-w-full sm:max-w-8/12 mx-auto`} />
+                            <Image src={slide.imageMobile} alt="Slide Image" width={900 * 2} height={900 * 2} className={`lg:hidden block mt-5 xs:max-w-9/12 sm:max-w-[calc(var(--index)_*_900_/_1.5_/_23.4)] mx-auto`} />
                         </div>
 
                         <div className={`lg:col-span-7 col-span-full w-full h-full relative overflow-hidden lg:flex hidden justify-center items-center ${slide.imageSize}`}

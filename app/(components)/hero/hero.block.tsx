@@ -6,16 +6,18 @@ import { Button } from "@/components/ui/button";
 import { ArrowDownIcon, BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
+import { useProgressStore } from "@/stores/general.store";
 
 
-const BHero = () => {
+const BHero = ({ index }: { index: number }) => {
+    const { setProgress, sections, progress } = useProgressStore()
     const ref = useRef(null)
     const isInView = useInView(ref)
 
     return (
         <motion.div ref={ref}
             initial={{ opacity: 0, }}
-            animate={isInView ? {
+            animate={isInView && progress === index ? {
                 opacity: 1,
             } : {}}
             transition={{
@@ -23,12 +25,13 @@ const BHero = () => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className="snap-start w-full h-full min-h-dvh relative flex justify-between items-center max-h-dvh overflow-hidden">
-            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end md:p-11 gap-7 xl:gap-5 lg:gap-4 xs:gap-0" style={{
+            className="fixed inset-0 z-50 bg-white snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
+            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
+                padding: 'calc(var(--index) * 45 / 23.4)'
             }}>
                 <Image
                     src='/main-devices.png'
@@ -38,7 +41,7 @@ const BHero = () => {
                     className="md:hidden xs:flex max-w-[328px] object-contain"
                     priority
                 />
-                <div className="pb-11 px-3.5  pt-0 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
+                <div className="pb-11 px-3.5 pt-0 w-full h-full flex relative flex-col justify-end gap-8 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={isInView ? {
@@ -51,12 +54,13 @@ const BHero = () => {
                             ease: [0, 0.71, 0.3, 1.01],
                         }}>
 
-                        <Badge variant='outline' className="rounded-full flex items-center gap-2 px-2 py-1.5 mb-2.5 text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
-                            <BadgeCheck size={14} />
-                            <span className="text-xs leading-[90%]">Beta version is Live!</span>
+                        <Badge variant='outline' className="rounded-full flex items-center gap-2 p-2 mb-5 text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
+                            <BadgeCheck size={16} />
+                            <span className="text-xs leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
                     </motion.div>
-                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl flex flex-col leading-[95%] font-medium">
+                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl flex flex-col leading-[95%] font-medium font-mona_sans"
+                    >
                         <motion.span
                             initial={{ opacity: 0, y: 50 }}
                             animate={isInView ? {
@@ -92,15 +96,15 @@ const BHero = () => {
                             duration: 1.3,
                             delay: 1.8,
                             ease: [0, 0.71, 0.3, 1.01],
-                        }} className="text-white/50 max-w-xs text-base lg:text-sm xs:text-xs leading-[110%]">SpecGauge turns every tank into a connected data source – helping you deliver smarter, faster, and more profitably.</motion.p>
+                        }} className="text-white/50 max-w-[322px] leading-5 font-normal whitespace-pre-wrap text-sm"
+                    >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
-                        <Button className="max-w-max cursor-pointer w-[177px] font-medium text-base leading-[90%]" variant='secondary'>Request a Demo</Button>
+                        <Button className="cursor-pointer w-[177px]" variant='secondary'>
+                            <span className="font-medium leading-[90%] text-base ">Request a Demo</span>
+                        </Button>
 
-                        <Button onClick={() => window.scrollTo({
-                            top: document.body.scrollHeight,
-                            behavior: 'smooth'
-                        })} size='icon' variant='glass' className="size-10 text-white rounded-full cursor-pointer">
-                            <ArrowDownIcon size={14} />
+                        <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 text-white rounded-full cursor-pointer border-white/10 bg-white/5">
+                            <ArrowDownIcon size={19} />
                         </Button>
                     </div>
                 </div>
@@ -113,7 +117,10 @@ const BHero = () => {
                     alt='Main Devices'
                     width={1158}
                     height={652}
-                    className="2xl:max-w-3xl xl:max-w-2xl lg:max-w-lg md:max-w-sm object-contain"
+                    className="object-contain"
+                    style={{
+                        maxWidth: 'calc(var(--index) * 1158/2 / 23.4)'
+                    }}
                     priority
                 />
                 <div className="flex-1" />

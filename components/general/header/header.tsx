@@ -28,7 +28,7 @@ const Header = () => {
     }, [progress])
 
     return (
-        <header className="px-5 pt-5 flex justify-between items-center fixed top-0 left-0 right-0 z-10">
+        <header className="px-5 pt-5 flex justify-between items-center fixed top-0 left-0 right-0 z-[100]">
             <LogoIcon />
             <div className="flex items-center gap-4">
                 {small ? null : progressBAR}

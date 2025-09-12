@@ -5,14 +5,25 @@ import { motion, useInView } from "motion/react"
 import ChartPointItem from "./chart-point-item"
 import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
+import { useProgressStore } from "@/stores/general.store"
 
-const CMonthly = () => {
+const CMonthly = ({ index }: { index: number }) => {
+    const { progress } = useProgressStore()
     const ref = useRef(null)
     const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
 
     return (
-        <div ref={ref} className="md:snap-none snap-start min-h-dvh md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4  relative overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">
+        <motion.div ref={ref}
+            initial={{ opacity: 0 }}
+            animate={isInView && progress === index ? {
+                opacity: 1,
+            } : {}}
+            transition={{
+                duration: .5,
+                delay: .1,
+                ease: 'linear'
+            }} className="md:snap-none snap-start min-h-dvh md:col-span-1 col-span-full relative flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -24,7 +35,7 @@ const CMonthly = () => {
                     delay: small ? 0.3 : 0.5,
                     ease: [0, 0.71, 0.3, 1.01],
                 }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-sky-[#860000]">tanks often 80% full</motion.h6>
+                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000]">tanks often 80% full</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -131,7 +142,7 @@ const CMonthly = () => {
                     index={2}
                 />
             </div>
-        </div>
+        </motion.div>
     )
 }
 

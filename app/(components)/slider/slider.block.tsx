@@ -1,18 +1,20 @@
 'use client'
 
 import { Slider } from "@/components/general/slider"
+import { useProgressStore } from "@/stores/general.store";
 import { motion, useInView } from "motion/react";
 import { useRef } from "react"
 
 
-const BSlider = () => {
+const BSlider = ({ index }: { index: number }) => {
+    const { progress } = useProgressStore()
     const ref = useRef(null)
     const isInView = useInView(ref)
     return (
         <motion.div
             ref={ref}
             initial={{ opacity: 0, }}
-            animate={isInView ? {
+            animate={isInView && progress === index ? {
                 opacity: 1,
             } : {}}
             transition={{
@@ -30,7 +32,7 @@ const BSlider = () => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: '!bg-center',
+                    imageSize: 'xs:!bg-center lg:!bg-bottom',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",

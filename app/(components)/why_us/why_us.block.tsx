@@ -1,5 +1,6 @@
 'use client'
 
+import { useProgressStore } from "@/stores/general.store"
 import { Building2, ChartNoAxesCombined, ClockPlus, HandCoins } from "lucide-react"
 import { motion, useInView } from "motion/react"
 import Image from "next/image"
@@ -67,13 +68,14 @@ const WhyUsItem = ({
     </div>
 }
 
-const BWhyUs = () => {
+const BWhyUs = ({ index }: { index: number }) => {
+    const { progress } = useProgressStore()
     const ref = useRef(null)
     const isInView = useInView(ref)
     return (
         <motion.div
             initial={{ opacity: 0, }}
-            animate={isInView ? {
+            animate={isInView && progress === index ? {
                 opacity: 1,
             } : {}}
             transition={{
@@ -81,8 +83,8 @@ const BWhyUs = () => {
                 delay: .2,
                 ease: 'linear'
             }}
-            ref={ref} className="snap-start w-full grid grid-cols-12 items-center min-h-dvh justify-end relative">
-            <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between lg:pl-20 pl-3.5 gap-6 xl:gap-10 2xl:gap-20">
+            ref={ref} className="fixed inset-0 z-50 transition-all duration-700 snap-start w-full grid grid-cols-10 items-center min-h-dvh justify-end">
+            <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between xl:px-20 lg:px-10 px-3.5 gap-6 xl:gap-10 2xl:gap-20">
                 <div className="flex flex-col gap-4 max-w-lg">
                     <motion.h5
                         initial={{ opacity: 0, }}
@@ -92,7 +94,7 @@ const BWhyUs = () => {
                             delay: 0.4,
                             ease: [0, 0.71, 0.3, 1.01],
                         }}
-                        className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm uppercase">Real-Time Advantage</motion.h5>
+                        className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm uppercase font-medium">Real-Time Advantage</motion.h5>
                     <motion.h2
                         initial={{ opacity: 0, }}
                         animate={isInView ? { opacity: 1, } : {}}
@@ -101,7 +103,7 @@ const BWhyUs = () => {
                             delay: 0.8,
                             ease: [0, 0.71, 0.3, 1.01],
                         }}
-                        className="md:text-4xl text-3xl font-medium leading-[95%] text-[#111111] max-w-[353px]">Why oil companies choose SpecGauge</motion.h2>
+                        className="md:text-4xl text-3xl font-medium leading-[95%] text-[#111111]">{`Why oil companies choose\nSpecGauge`}</motion.h2>
                 </div>
                 <div className="flex flex-col gap-11">
                     <WhyUsItem index={1} isInView={isInView} icon={<Image src='/icons/coins-hand.svg' alt='icon' width={24} height={24} />} iconBG="linear-gradient(205.6deg, #EBF3F9 11.6%, #F9F0F0 83.8%)" title={"Save costs\n\on every delivery"} subtitle="Cut wasted trips, reduce fuel consumption, and maximize the efficiency of every delivery run — saving your depot money with every mile driven." />
@@ -110,7 +112,6 @@ const BWhyUs = () => {
                     <WhyUsItem index={4} isInView={isInView} icon={<Image src='/icons/bar-line-chart.svg' alt='icon' width={24} height={24} />} iconBG="linear-gradient(205.6deg, #F3F9EB 11.6%, #F9F0F0 83.8%)" title={"Predict with confidence,\n\stay ahead always"} subtitle="Move from reactive to proactive planning by knowing tank levels before customers even call, ensuring your business is always one step ahead of demand" />
                 </div>
             </div>
-            <div className="col-span-2 lg:flex hidden" />
             <div className="col-span-5 lg:flex hidden flex-col gap-4 relative overflow-hidden h-full"
                 style={{
                     background: 'url("/why_us.png") center center / cover no-repeat',

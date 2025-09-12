@@ -20,7 +20,7 @@ const GProvider = ({ children }: Readonly<{
             clientY: 0
         };
 
-
+        console.log(small)
         if (small) {
             updateSections()
         }
@@ -101,9 +101,7 @@ const GProvider = ({ children }: Readonly<{
         setProgress(progress);
     }, [])
 
-    return (
-        <>{children}</>
-    )
+    return children
 }
 
 export default GProvider
