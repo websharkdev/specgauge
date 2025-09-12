@@ -14,8 +14,8 @@ export default function Home() {
     if (small) {
       return [
         <BHero index={0} key="hero" />,
-        <CMonthly index={1} key="chart" />,
-        <CEfficient index={2} key="chart" />,
+        <CMonthly index={1} key="chart_1" />,
+        <CEfficient index={2} key="chart_2" />,
         <BSlider index={3} key="slider" />,
         <BWhyUs index={4} key="whyus" />,
         <BForm index={5} key="form" />

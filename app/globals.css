@@ -43,7 +43,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-
 .font-mona_sans {
   font-family: var(--font-mona) !important
 }

@@ -13,6 +13,8 @@ const CEfficient = ({ index }: { index: number }) => {
     const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
 
+    console.log(isInView, progress === index)
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -23,7 +25,10 @@ const CEfficient = ({ index }: { index: number }) => {
                 duration: .5,
                 delay: .2,
                 ease: 'linear'
-            }} ref={ref} className="md:snap-none min-h-dvh snap-start md:col-span-1 col-span-full flex flex-col md:justify-start justify-center gap-4 overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 bg-white">
+            }}
+            className={`fixed lg:relative inset-0 md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-white`}
+            ref={ref}
+        >
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -81,7 +86,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     </filter>
                 </defs>
             </svg>
-            <div className="col-span-full md:hidden flex flex-col gap-8 relative z-10 mt-10">
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-8 relative z-10 mt-10`}>
                 <ChartPointItem
                     color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                     direction="right"

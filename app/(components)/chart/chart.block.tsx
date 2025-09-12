@@ -32,8 +32,8 @@ const BChart = ({ index }: { index: number }) => {
                 ease: 'linear'
             }}
             className="fixed inset-0 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end" ref={ref}>
-            <CMonthly index={index} />
-            <CEfficient index={index} />
+            <CMonthly index={small ? 1 : index} />
+            <CEfficient index={small ? 2 : index} />
 
 
             {small ? null : <ChartBG isInView={isInView} />}

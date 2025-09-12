@@ -13,6 +13,7 @@ const CMonthly = ({ index }: { index: number }) => {
     const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
 
+
     return (
         <motion.div ref={ref}
             initial={{ opacity: 0 }}
@@ -23,7 +24,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 duration: .5,
                 delay: .1,
                 ease: 'linear'
-            }} className="md:snap-none snap-start min-h-dvh md:col-span-1 col-span-full relative flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]">
+            }} className={`fixed inset-0 lg:relative md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -119,7 +120,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     </clipPath>
                 </defs>
             </svg>
-            <div className="col-span-full md:hidden flex flex-col gap-8 relative z-10 mt-10">
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-8 relative z-10 mt-10`}>
                 <ChartPointItem
                     color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
                     direction="left"

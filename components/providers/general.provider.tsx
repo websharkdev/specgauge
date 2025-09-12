@@ -20,7 +20,6 @@ const GProvider = ({ children }: Readonly<{
             clientY: 0
         };
 
-        console.log(small)
         if (small) {
             updateSections()
         }
@@ -95,6 +94,7 @@ const GProvider = ({ children }: Readonly<{
     }, [
         progress,
         small,
+        sections
     ]);
 
     const scrollTo = useCallback((progress: number) => {

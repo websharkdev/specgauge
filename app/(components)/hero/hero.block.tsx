@@ -32,12 +32,11 @@ const BHero = ({ index }: { index: number }) => {
                 ease: 'linear'
             }}
             className="fixed inset-0 transition-all duration-700 bg-white snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
-            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0" style={{
+            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-[calc(var(--index)_*_45_/_23.4)] px-0 py-10" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
-                padding: 'calc(var(--index) * 45 / 23.4)'
             }}>
                 <Image
                     src='/main-devices.png'
@@ -47,7 +46,7 @@ const BHero = ({ index }: { index: number }) => {
                     className="md:hidden xs:flex max-w-[328px] object-contain"
                     priority
                 />
-                <div className="pb-11 px-3.5 pt-0 w-full h-full flex relative flex-col justify-end gap-8 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
+                <div className="pb-11 px-3.5 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-8 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={isInView ? {
@@ -65,7 +64,7 @@ const BHero = ({ index }: { index: number }) => {
                             <span className="text-xs leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
                     </motion.div>
-                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-4xl md:text-3xl sm:text-2xl text-xl flex flex-col leading-[95%] font-medium font-mona_sans"
+                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-3xl sm:text-2xl text-xl flex flex-col leading-[95%] font-medium font-mona_sans"
                     >
                         <motion.span
                             initial={{ opacity: 0, y: 50 }}
@@ -102,7 +101,7 @@ const BHero = ({ index }: { index: number }) => {
                             duration: 1.3,
                             delay: 1.8,
                             ease: [0, 0.71, 0.3, 1.01],
-                        }} className="text-white/50 max-w-[322px] leading-5 font-normal whitespace-pre-wrap text-sm"
+                        }} className="text-white/50 max-w-[322px] leading-5 font-normal whitespace-pre-wrap text-xs lg:text-sm"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
                         <Button className="cursor-pointer w-[177px]" variant='secondary'>
@@ -123,10 +122,7 @@ const BHero = ({ index }: { index: number }) => {
                     alt='Main Devices'
                     width={1158}
                     height={652}
-                    className="object-contain"
-                    style={{
-                        maxWidth: 'calc(var(--index) * 1158/2 / 23.4)'
-                    }}
+                    className="object-contain xl:max-w-[calc(var(--index)_*_1158/2_/_23.4)] max-w-11/12"
                     priority
                 />
                 <div className="flex-1" />
