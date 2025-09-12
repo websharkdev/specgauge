@@ -16,16 +16,22 @@ const BHero = ({ index }: { index: number }) => {
 
     return (
         <motion.div ref={ref}
-            initial={{ opacity: 0, }}
+            initial={{
+                opacity: 0,
+                zIndex: '-50'
+            }}
             animate={isInView && progress === index ? {
                 opacity: 1,
-            } : {}}
+                zIndex: 50
+            } : {
+                zIndex: '-50'
+            }}
             transition={{
                 duration: .5,
                 delay: .2,
                 ease: 'linear'
             }}
-            className="fixed inset-0 z-50 bg-white snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
+            className="fixed inset-0 transition-all duration-700 bg-white snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
             <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',

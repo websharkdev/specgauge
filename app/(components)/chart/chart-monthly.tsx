@@ -35,7 +35,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     delay: small ? 0.3 : 0.5,
                     ease: [0, 0.71, 0.3, 1.01],
                 }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000]">tanks often 80% full</motion.h6>
+                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {

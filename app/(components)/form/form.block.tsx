@@ -12,11 +12,16 @@ const BForm = ({ index }: { index: number }) => {
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, }}
+            initial={{
+                opacity: 0,
+                zIndex: '-50'
+            }}
             animate={isInView && progress === index ? {
                 opacity: 1,
-                z: 50
-            } : {}}
+                zIndex: 50
+            } : {
+                zIndex: '-50'
+            }}
             transition={{
                 duration: .5,
                 delay: .2,

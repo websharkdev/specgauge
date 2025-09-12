@@ -16,16 +16,22 @@ const BChart = ({ index }: { index: number }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
+            initial={{
+                opacity: 0,
+                zIndex: '-50'
+            }}
             animate={isInView && progress === index ? {
                 opacity: 1,
-            } : {}}
+                zIndex: 50
+            } : {
+                zIndex: '-50'
+            }}
             transition={{
                 duration: .5,
                 delay: .2,
                 ease: 'linear'
             }}
-            className="fixed inset-0 z-50 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end" ref={ref}>
+            className="fixed inset-0 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end" ref={ref}>
             <CMonthly index={index} />
             <CEfficient index={index} />
 

@@ -13,16 +13,22 @@ const BSlider = ({ index }: { index: number }) => {
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, }}
+            initial={{
+                opacity: 0,
+                zIndex: '-50'
+            }}
             animate={isInView && progress === index ? {
                 opacity: 1,
-            } : {}}
+                zIndex: 50
+            } : {
+                zIndex: '-50'
+            }}
             transition={{
                 duration: .5,
                 delay: .2,
                 ease: 'linear'
             }}
-            className="snap-start w-full h-dvh relative max-h-dvh overflow-hidden flex items-end"
+            className="fixed inset-0 snap-start w-full h-dvh max-h-dvh overflow-hidden flex items-end"
             style={{
                 background: 'url("/backgrounds/slider-bg.svg") center center / cover no-repeat',
             }}>

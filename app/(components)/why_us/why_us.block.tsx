@@ -74,16 +74,22 @@ const BWhyUs = ({ index }: { index: number }) => {
     const isInView = useInView(ref)
     return (
         <motion.div
-            initial={{ opacity: 0, }}
+            initial={{
+                opacity: 0,
+                zIndex: '-50'
+            }}
             animate={isInView && progress === index ? {
                 opacity: 1,
-            } : {}}
+                zIndex: 50
+            } : {
+                zIndex: '-50'
+            }}
             transition={{
                 duration: .5,
                 delay: .2,
                 ease: 'linear'
             }}
-            ref={ref} className="fixed inset-0 z-50 transition-all duration-700 snap-start w-full grid grid-cols-10 items-center min-h-dvh justify-end">
+            ref={ref} className="fixed inset-0 transition-all duration-700 snap-start w-full grid grid-cols-10 items-center min-h-dvh justify-end">
             <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between xl:px-20 lg:px-10 px-3.5 gap-6 xl:gap-10 2xl:gap-20">
                 <div className="flex flex-col gap-4 max-w-lg">
                     <motion.h5

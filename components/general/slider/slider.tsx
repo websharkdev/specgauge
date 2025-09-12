@@ -84,9 +84,9 @@ const Slider = ({ slides, scrollers }: Props) => {
                                     delay: 0.9,
                                     ease: [0, 0.71, 0.3, 1.01],
                                 }}
-                                className='text-left max-w-sm text-sm leading-[110%] opacity-50'>{slide.description}</motion.p>
+                                className='text-left max-w-sm text-sm leading-tight opacity-50'>{slide.description}</motion.p>
                             {slide.button &&
-                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer'>{slide.button.title}</Button>}
+                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer w-[177px] h-10 text-base font-medium leading-4'>{slide.button.title}</Button>}
                             <Image src={slide.imageMobile} alt="Slide Image" width={900 * 2} height={900 * 2} className={`lg:hidden block mt-5 xs:max-w-9/12 sm:max-w-[calc(var(--index)_*_900_/_1.5_/_23.4)] mx-auto`} />
                         </div>
 
