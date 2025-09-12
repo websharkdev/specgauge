@@ -24,7 +24,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 duration: .5,
                 delay: .1,
                 ease: 'linear'
-            }} className={`fixed inset-0 lg:relative md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
+            }} className={`fixed inset-0 lg:relative md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -36,7 +36,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     delay: small ? 0.3 : 0.5,
                     ease: [0, 0.71, 0.3, 1.01],
                 }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
+                className="md:px-0 px-ds-[14] z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -48,7 +48,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-[95%] max-w-md mb-10">Monthly top-ups wasting resources</motion.h2>
+                className="md:px-0 px-ds-[14] z-10 text-ds-[36] font-medium text-[#111111] leading-[95%] mb-10 whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</motion.h2>
 
             <svg
                 xmlns="http://www.w3.org/2000/svg"

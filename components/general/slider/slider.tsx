@@ -59,8 +59,8 @@ const Slider = ({ slides, scrollers }: Props) => {
         >
             {slides.map((slide, index) => (
                 <SwiperSlide className='w-full h-full overflow-hidden' key={index}>
-                    <div className="grid grid-cols-10 pt-24 lg:pl-11 p-3.5 pb-0 h-full" ref={ref}>
-                        <div className="lg:col-span-3 col-span-full flex flex-col items-start gap-5 md:mt-20">
+                    <div className="grid grid-cols-12 pt-24 lg:pl-11 p-3.5 pb-0 h-full" ref={ref}>
+                        <div className="lg:col-span-5 col-span-full flex flex-col items-start gap-5 md:mt-ds-[80]">
                             <motion.h2
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView ? {
@@ -72,7 +72,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                                     delay: 0.5,
                                     ease: [0, 0.71, 0.3, 1.01],
                                 }}
-                                className='text-left whitespace-pre-wrap max-w-sm text-4xl leading-[95%] font-medium text-gray-900'>{slide.title}</motion.h2>
+                                className='text-left whitespace-pre-wrap text-ds-[32] leading-[95%] font-medium text-gray-900'>{slide.title}</motion.h2>
                             <motion.p
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView ? {
@@ -84,9 +84,9 @@ const Slider = ({ slides, scrollers }: Props) => {
                                     delay: 0.9,
                                     ease: [0, 0.71, 0.3, 1.01],
                                 }}
-                                className='text-left max-w-sm text-sm leading-tight opacity-50'>{slide.description}</motion.p>
+                                className='text-left max-w-sm lg:max-w-ds-[392] text-sm lg:text-ds-[14] leading-tight opacity-50'>{slide.description}</motion.p>
                             {slide.button &&
-                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer w-[177px] h-10 text-base font-medium leading-4'>{slide.button.title}</Button>}
+                                <Button variant="blue" href={slide.button.link} className='mt-2 cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39] text-base sm:text-ds-[16] font-medium leading-4'>{slide.button.title}</Button>}
                             <Image src={slide.imageMobile} alt="Slide Image" width={900 * 2} height={900 * 2} className={`lg:hidden block mt-5 xs:max-w-9/12 sm:max-w-[calc(var(--index)_*_900_/_1.5_/_23.4)] mx-auto`} />
                         </div>
 

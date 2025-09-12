@@ -33,10 +33,10 @@ const BForm = ({ index }: { index: number }) => {
             }}
         >
             <div className="flex-1" />
-            <div className="flex flex-col items-center max-w-sm w-full mb-20">
-                <h5 className="text-transparent text-center bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] uppercase font-medium text-sm">No more guesswork</h5>
-                <h2 className="text-4xl font-medium leading-[95%] text-[#111111] text-center mt-4 mb-5">Ready to transform your oil delivery?</h2>
-                <p className="text-sm text-center text-[#111111] opacity-50 font-normal leading-snug tracking-normal whitespace-pre-wrap">{'Stop firefighting emergencies. Start\nplanning profitable runs. With SpecGauge,\nyou’ll always know before they’re low.'}</p>
+            <div className="flex flex-col items-center w-full mb-ds-[60]">
+                <h5 className="text-transparent text-center bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] uppercase font-medium text-ds-[16]">No more guesswork</h5>
+                <h2 className="text-ds-[36] font-medium leading-[95%] text-[#111111] text-center mt-ds-[16] mb-ds-[20] whitespace-pre-wrap">{'Ready to transform\nyour oil delivery?'}</h2>
+                <p className="text-ds-[14] text-center text-[#111111] opacity-50 font-normal leading-snug tracking-normal whitespace-pre-wrap">{'Stop firefighting emergencies. Start\nplanning profitable runs. With SpecGauge,\nyou’ll always know before they’re low.'}</p>
             </div>
             <GForm />
             <div className="flex-1" />

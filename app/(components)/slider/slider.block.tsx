@@ -38,7 +38,7 @@ const BSlider = ({ index }: { index: number }) => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: 'xs:!bg-center lg:!bg-bottom',
+                    imageSize: 'xs:!bg-center lg:!bg-bottom-right',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",

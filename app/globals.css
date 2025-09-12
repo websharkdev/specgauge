@@ -80,6 +80,7 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --index: calc(1vw + 1vh);
 }
 
 .dark {
@@ -114,6 +115,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --index: calc(1vw + 1vh);
 }
 
 @layer base {
@@ -126,9 +128,57 @@
   }
 }
 
-:root {
-  --index: calc(1vw + 1vh);
+@utility mt-ds-* {
+  margin-top: calc(var(--index) * --value([number]) / 23.4);
 }
+
+@utility mb-ds-* {
+  margin-bottom: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility pt-ds-* {
+  padding-top: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility pb-ds-* {
+  padding-bottom: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility py-ds-* {
+  padding-top: calc(var(--index) * --value([number]) / 23.4);
+  padding-bottom: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility px-ds-* {
+  padding-left: calc(var(--index) * --value([number]) / 23.4);
+  padding-right: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility p-ds-* {
+  padding: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility text-ds-* {
+  font-size: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility w-ds-* {
+  width: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility max-w-ds-* {
+  max-width: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility h-ds-* {
+  height: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility gap-ds-* {
+  gap: calc(var(--index) * --value([number]) / 23.4);
+}
+
+
 
 html {
   scroll-snap-type: y mandatory;

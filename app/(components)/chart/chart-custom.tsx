@@ -47,54 +47,58 @@ const ChartCustom = ({ data, isInView }: {
                     const topY = y; // Позиция карточки над баром
                     const Icon = () => card.icon;
 
+                    const height = 3
+
                     return (
                         <g key={card.index}>
                             <motion.rect
                                 x={centerX - .5}
-                                y={topY - card.padding_y - 58}
+                                y={topY - card.padding_y - height}
                                 width={1}
-                                height={card.padding_y + 50}
+                                height={card.padding_y + height}
                                 fill="white"
                                 fillOpacity={0.8}
                                 stroke="black"
                                 strokeOpacity={0.2}
                                 z={-1}
-                                initial={{ opacity: 0, scaleY: 0, y: 50 }}
+                                initial={{ opacity: 0, scaleY: 0, y: height }}
                                 animate={isInView ? {
                                     opacity: 1, scaleY: 1,
                                     y: 0,
                                 } : {}}
                                 transition={{
-                                    duration: 1,
-                                    delay: 1.5 + card.index * 0.05,
+                                    duration: .5,
+                                    delay: .4 + card.index * 0.05,
                                     ease: [0, 0.3, 0.2, 1.5],
                                 }}
+                                className={`h-ds-[${card.padding_y + height}]`}
                             />
                             {/* Иконка */}
                             {/* Вставка SVG-иконки */}
-                            <motion.g transform={`translate(${centerX + 12}, ${topY - 58 - card.padding_y})`}
+                            <motion.g transform={`translate(${centerX + 12}, ${topY - height - card.padding_y})`}
                                 initial={{ opacity: 0, }}
                                 animate={isInView ? { opacity: 1, } : {}}
                                 transition={{
-                                    duration: 1,
-                                    delay: 1.5 + card.index * 0.05,
+                                    duration: .5,
+                                    delay: 0.4 + card.index * 0.05,
                                     ease: [0, 0.71, 0.3, 1.01],
-                                }}>
+                                }}
+                            >
                                 <Icon />
                             </motion.g>
 
                             <motion.text
                                 x={centerX}
-                                y={topY - card.padding_y - 20}
+                                y={topY - card.padding_y + 32}
                                 className="text-base leading-[90%] font-medium"
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: height }}
                                 animate={isInView ? {
                                     opacity: 1,
                                     y: 0,
                                 } : {}}
                                 transition={{
-                                    duration: 1,
-                                    delay: 1.5 + card.index * 0.05,
+                                    duration: .5,
+                                    delay: .4 + card.index * 0.05,
                                     ease: 'linear'
                                 }}
                             >
@@ -111,7 +115,7 @@ const ChartCustom = ({ data, isInView }: {
         );
     };
 
-    return (<ChartContainer config={{} satisfies ChartConfig} className="h-[750px] w-full relative">
+    return (<ChartContainer config={{} satisfies ChartConfig} className="h-ds-[574] w-full relative">
         <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
             <Bar dataKey="point" fill="var(--color-point)" style={{}} radius={1} barSize={1.5}>
                 <LabelList dataKey="point" content={renderCustomizedLabel} />

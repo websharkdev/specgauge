@@ -32,7 +32,7 @@ const BHero = ({ index }: { index: number }) => {
                 ease: 'linear'
             }}
             className="fixed inset-0 transition-all duration-700 bg-white snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
-            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-[calc(var(--index)_*_45_/_23.4)] px-0 py-10" style={{
+            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] px-0 py-10" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
@@ -41,12 +41,12 @@ const BHero = ({ index }: { index: number }) => {
                 <Image
                     src='/main-devices.png'
                     alt='Main Devices'
-                    width={1158}
-                    height={652}
-                    className="md:hidden xs:flex max-w-[328px] object-contain"
+                    width={405}
+                    height={383}
+                    className="md:hidden xs:flex object-contain max-w-2xs"
                     priority
                 />
-                <div className="pb-11 px-3.5 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-8 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
+                <div className="pb-ds-[42] px-3.5 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-8 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={isInView ? {
@@ -64,7 +64,7 @@ const BHero = ({ index }: { index: number }) => {
                             <span className="text-xs leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
                     </motion.div>
-                    <h1 className="2xl:text-6xl xl:text-5xl lg:text-3xl sm:text-2xl text-xl flex flex-col leading-[95%] font-medium font-mona_sans"
+                    <h1 className="flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] md:text-ds-[30] text-ds-[48]"
                     >
                         <motion.span
                             initial={{ opacity: 0, y: 50 }}
@@ -101,11 +101,11 @@ const BHero = ({ index }: { index: number }) => {
                             duration: 1.3,
                             delay: 1.8,
                             ease: [0, 0.71, 0.3, 1.01],
-                        }} className="text-white/50 max-w-[322px] leading-5 font-normal whitespace-pre-wrap text-xs lg:text-sm"
+                        }} className="text-white/50 leading-ds-[20] font-normal whitespace-pre-wrap text-xs sm:text-ds-[14]"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
-                        <Button className="cursor-pointer w-[177px]" variant='secondary'>
-                            <span className="font-medium leading-[90%] text-base ">Request a Demo</span>
+                        <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary'>
+                            <span className="font-medium leading-[90%] text-sm sm:text-ds-[16]">Request a Demo</span>
                         </Button>
 
                         <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 text-white rounded-full cursor-pointer border-white/10 bg-white/5">
@@ -120,9 +120,9 @@ const BHero = ({ index }: { index: number }) => {
                 <Image
                     src='/main-devices.png'
                     alt='Main Devices'
-                    width={1158}
-                    height={652}
-                    className="object-contain xl:max-w-[calc(var(--index)_*_1158/2_/_23.4)] max-w-11/12"
+                    width={783}
+                    height={730}
+                    className="object-contain max-w-8/10 xl:max-w-[80dvh]"
                     priority
                 />
                 <div className="flex-1" />

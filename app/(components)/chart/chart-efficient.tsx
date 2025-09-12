@@ -13,8 +13,6 @@ const CEfficient = ({ index }: { index: number }) => {
     const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
 
-    console.log(isInView, progress === index)
-
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -26,7 +24,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className={`fixed lg:relative inset-0 md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh md:pt-32 pt-0 md:px-11 px-0 border-r border-[#00000050] bg-white`}
+            className={`fixed lg:relative inset-0 md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-11 px-0 border-r border-[#00000050] bg-white`}
             ref={ref}
         >
             <motion.h6
@@ -40,7 +38,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.3 : 1.3,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
+                className="md:px-0 px-ds-[14] z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -52,7 +50,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1.5,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-3.5 z-10 text-4xl font-medium text-[#111111] leading-[95%] max-w-md mb-8">Efficient refills only when they’re needed</motion.h2>
+                className="md:px-0 px-ds-[14] z-10 text-ds-[32] font-medium text-[#111111] leading-[95%] whitespace-pre-wrap mb-ds-[32]">{'Efficient refills only when\nthey’re needed'}</motion.h2>
 
             <svg className="flex-1 absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                 <g filter="url(#filter0_f_1_1182)" opacity="0.15">
