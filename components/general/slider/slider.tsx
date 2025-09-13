@@ -102,7 +102,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                                     {s.button.title}
                                 </Button>
                             )}
-                            <div className="py-[60px]">
+                            <div className="py-[60px] w-full">
                                 <Image
                                     src={s.imageMobile}
                                     alt="Slide Image"

@@ -27,13 +27,13 @@ const menu = [
         title: 'Pressure Sensor',
         link: 'slider',
         index: 2,
-        slide: 1,
+        slide: 0,
     },
     {
         title: 'Web Portal',
         link: 'slider',
         index: 2,
-        slide: 2,
+        slide: 1,
     },
     {
         title: 'Advantages',
@@ -52,8 +52,10 @@ type TState = 'open' | 'closed'
 
 const MobileHeader = () => {
     const [state, setState] = useState<TState>('closed')
-    const { setSlide } = useCSlider()
+    const { setSlide, slide } = useCSlider()
 
+
+    console.log(slide)
 
 
     return (
