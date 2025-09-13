@@ -69,11 +69,11 @@ const ProgressBar = ({
     return <NavigationMenu onMouseLeave={() => setHovered(false)} onMouseEnter={() => setHovered(true)}>
         <NavigationMenuList>
             <NavigationMenuItem>
-                <NavigationMenuTrigger className={`p-0 transition-all duration-700 ${hovered ? 'w-[180px]' : 'w-[120px]'}`} ><Badge variant='glass' className={`w-full transition-all duration-700 cursor-pointer h-8 rounded-full px-3 border-none bg-black/5 backdrop-blur-xl bg-blend-multiply`}>
+                <NavigationMenuTrigger className={`p-0 transition-all duration-700 ${hovered ? 'w-[180px]' : 'w-[120px]'}`} ><Badge className={`w-full transition-all duration-700 cursor-pointer h-8 rounded-full px-3.5 border-none bg-[#F1F1F1]`}>
                     {hovered ? <>
                         <span className="text-sm font-medium leading-[90%] text-[#111111]">Menu</span>
                         <div className="flex-1" />
-                        <ChevronDown size={14} />
+                        <ChevronDown size={14} color="#111111" />
                     </> : <>
                         <Progress value={progress} indicatorClassName={indicator} />
                         <span className="text-sm font-medium leading-[90%] text-[#111111]">{progress}%</span>
@@ -81,6 +81,10 @@ const ProgressBar = ({
                 </Badge></NavigationMenuTrigger>
                 <NavigationMenuContent className={hovered ? '!w-[180px]' : ''}>
                     <ul className="flex flex-col gap-4">
+                        <NavigationMenuLink className="flex flex-row flex-nowrap gap-2.5 justify-between w-full items-center hover:bg-transparent">
+                            <span className="text-sm font-medium leading-[90%] text-[#111111]">Menu</span>
+                            <ChevronDown size={14} color="#111111" />
+                        </NavigationMenuLink>
                         {menu.map((item, index) =>
                             <li key={`menu_item--${index}`} onMouseLeave={() => setHoverItem(undefined)} onMouseEnter={() => setHoverItem(index)} className="cursor-pointer text-sm font-medium leading-[90%]" onClick={() => setProgress(item.index)}>
                                 <NavigationMenuLink className="flex flex-row flex-nowrap gap-2.5 items-center">
