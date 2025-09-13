@@ -30,7 +30,8 @@ const BForm = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className="relative md:fixed md:inset-0 snap-normal md:snap-start transition-all duration-700 w-full flex items-center min-h-dvh h-full flex-col pb-[25px] md:pb-10 justify-center overflow-hidden"
+            id="request_demo"
+            className="relative md:fixed md:inset-0 snap-normal md:snap-start transition-all duration-700 w-full flex items-center md:min-h-dvh h-full flex-col pb-[25px] md:pb-10 pt-20 md:pt-0 justify-center overflow-hidden"
             style={{
                 background: small ? 'url("/backgrounds/form-bg_mobile.svg") bottom left / cover no-repeat' : 'url("/backgrounds/form-bg.svg") center center / cover no-repeat',
             }}
@@ -43,7 +44,7 @@ const BForm = ({ index }: { index: number }) => {
             </div>
             <GForm />
             <div className="flex-1" />
-            <h6 className="text-xs text-[#111111]">© SpecGauge. All rights reserved.</h6>
+            <h6 className="text-xs text-[#111111] mt-[100px] md:mt-0">© SpecGauge. All rights reserved.</h6>
 
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10">
             </div>

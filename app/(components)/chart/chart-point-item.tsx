@@ -41,7 +41,7 @@ const ChartPointItem = ({
             }} className="flex flex-nowrap items-start gap-3">
             {direction === 'left' ? <div className={`flex flex-nowrap items-center min-w-10 gap-0 mt-1`}>
                 <div className='flex-1 h-0.5' style={{
-                    background: `linear-gradient(to right, ${color.line[0]}, ${color.line[1]})`,
+                    background: `linear-gradient(to left, ${color.line[0]}, ${color.line[1]})`,
                 }} />
                 <div className='size-2.5 rounded-full' style={{
                     backgroundColor: color.point,

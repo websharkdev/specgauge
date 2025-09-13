@@ -1,0 +1,52 @@
+<svg width="390" height="855" viewBox="0 0 390 855" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_89_5802)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1139.62 1354.48C1266.59 1202.41 1388.33 985.062 1287.63 797.943C1188.82 614.353 897.67 685.723 717.852 570.794C542.181 458.517 486.192 152.745 284.294 156.675C86.1312 160.533 15.2789 406.35 -39.5589 585.54C-80.8922 720.602 -25.6671 862.299 25.6051 1001.98C69.818 1122.42 130.938 1230.74 229.775 1319.27C354.741 1431.19 486.58 1555.04 650.183 1561.37C841.729 1568.78 1024.69 1492.12 1139.62 1354.48Z" fill="url(#paint0_linear_89_5802)"/>
+</g>
+<mask id="mask0_89_5802" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="800" height="900">
+<rect width="800" height="900" fill="url(#paint1_radial_89_5802)"/>
+<rect width="800" height="900" fill="url(#paint2_radial_89_5802)"/>
+</mask>
+<g mask="url(#mask0_89_5802)">
+<line x1="41.5" y1="-67" x2="41.5" y2="1029" stroke="black"/>
+<line x1="96.5" y1="-67" x2="96.5" y2="1029" stroke="black"/>
+<line x1="151.5" y1="-67" x2="151.5" y2="1029" stroke="black"/>
+<line x1="206.5" y1="-67" x2="206.5" y2="1029" stroke="black"/>
+<line x1="261.5" y1="-67" x2="261.5" y2="1029" stroke="black"/>
+<line x1="316.5" y1="-67" x2="316.5" y2="1029" stroke="black"/>
+<line x1="371.5" y1="-67" x2="371.5" y2="1029" stroke="black"/>
+<line x1="1029" y1="41.5" x2="-67" y2="41.5" stroke="black"/>
+<line x1="1029" y1="96.5" x2="-67" y2="96.5" stroke="black"/>
+<line x1="1029" y1="151.5" x2="-67" y2="151.5" stroke="black"/>
+<line x1="1029" y1="206.5" x2="-67" y2="206.5" stroke="black"/>
+<line x1="1029" y1="261.5" x2="-67" y2="261.5" stroke="black"/>
+<line x1="1029" y1="316.5" x2="-67" y2="316.5" stroke="black"/>
+<line x1="1029" y1="371.5" x2="-67" y2="371.5" stroke="black"/>
+<line x1="1029" y1="426.5" x2="-67" y2="426.5" stroke="black"/>
+<line x1="1029" y1="481.5" x2="-67" y2="481.5" stroke="black"/>
+<line x1="1029" y1="536.5" x2="-67" y2="536.5" stroke="black"/>
+<line x1="1029" y1="591.5" x2="-67" y2="591.5" stroke="black"/>
+<line x1="1029" y1="646.5" x2="-67" y2="646.5" stroke="black"/>
+<line x1="1029" y1="701.5" x2="-67" y2="701.5" stroke="black"/>
+<line x1="1029" y1="756.5" x2="-67" y2="756.5" stroke="black"/>
+<line x1="1029" y1="811.5" x2="-67" y2="811.5" stroke="black"/>
+</g>
+<defs>
+<filter id="filter0_f_89_5802" x="-354.029" y="-143.362" width="1978.91" height="2005.22" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="150" result="effect1_foregroundBlur_89_5802"/>
+</filter>
+<linearGradient id="paint0_linear_89_5802" x1="836.803" y1="1258.85" x2="564.915" y2="152.119" gradientUnits="userSpaceOnUse">
+<stop offset="0.206022" stop-color="#D2DDF7"/>
+<stop offset="1" stop-color="#D6C9F2"/>
+</linearGradient>
+<radialGradient id="paint1_radial_89_5802" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(662.5 143) rotate(122.48) scale(256.051 227.601)">
+<stop stop-color="#D9D9D9" stop-opacity="0.05"/>
+<stop offset="1" stop-color="#D9D9D9" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_89_5802" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(511.5 839) rotate(-76.5813) scale(303.794 270.039)">
+<stop stop-opacity="0.08"/>
+<stop offset="1" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>

@@ -23,3 +23,13 @@ export const useHeightStore = create<HeightState>()((set) => ({
     height: 0,
     setHeight: (updated) => set(() => ({ height: updated })),
 }))
+
+interface CSliderState {
+    slide: number
+    setSlide: (slide: number) => void
+}
+
+export const useCSlider = create<CSliderState>()((set) => ({
+    slide: 0,
+    setSlide: (updated) => set(() => ({ slide: updated })),
+}))

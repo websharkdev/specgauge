@@ -72,7 +72,7 @@ const GForm = () => {
                             <FormItem className="w-full max-w-[315px] md:max-w-[372px] h-full max-h-max md:max-h-12">
                                 <FormControl>
                                     <Input
-                                        className="h-[49px] bg-[#11111104] border-0 font-medium text-sm md:text-ds-[16] leading-[110%] px-5 py-4 placeholder:text-[#111111]/40 text-[#111111]/40"
+                                        className="h-[49px] bg-[#1111110a] border-0 font-medium shadow-none text-base md:text-ds-[16] leading-[110%] px-5 py-4 placeholder:text-[#111111]/40 text-[#111111]/40"
                                         placeholder={input.placeholder}
                                         type={input.type}
                                         {...field}
@@ -82,7 +82,7 @@ const GForm = () => {
                         )}
                     />)
                 }
-                <Button type="submit" variant='blue' className="cursor-pointer w-[177px] text-ds-[16] text-white font-medium h-[39px] mt-ds-[20]">Request a Demo</Button>
+                <Button type="submit" variant='blue' className="cursor-pointer w-[177px] text-ds-[16] text-white font-medium h-[39px] mt-ds-[20] text-base">Request a Demo</Button>
             </form>
         </Form>
     )

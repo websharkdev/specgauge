@@ -28,7 +28,7 @@ const Header = () => {
     }, [progress])
 
     return (
-        <header className="px-5 pt-5 flex justify-between items-center fixed top-0 left-0 right-0 z-[100]">
+        <header className="px-5 py-3.5 flex justify-between items-center sticky md:fixed top-0 left-0 right-0 z-[100] bg-[#fffff20] md:bg-transparent backdrop-blur-xl md:backdrop-blur-none bg-blend-multiply md:bg-blend-normal translate-z-0">
             <LogoIcon />
             <div className="flex items-center gap-4">
                 {small ? null : progressBAR}

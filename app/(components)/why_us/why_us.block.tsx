@@ -79,6 +79,7 @@ const BWhyUs = ({ index }: { index: number }) => {
 
     return (
         <motion.div
+            id="advantages"
             initial={{
                 opacity: small ? 1 : 0,
                 zIndex: small ? '-50' : 50

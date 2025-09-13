@@ -17,6 +17,7 @@ const CMonthly = ({ index }: { index: number }) => {
 
     return (
         <motion.div ref={ref}
+            id="pain_point_1"
             initial={{ opacity: small ? 1 : 0 }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,

@@ -31,7 +31,8 @@ const BChart = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className="md:fixed md:inset-0 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end" ref={ref}>
+            className="md:fixed md:inset-0 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center min-h-dvh justify-end"
+            id="pain_point" ref={ref}>
             <CMonthly index={small ? 1 : index} />
             <CEfficient index={small ? 2 : index} />
 

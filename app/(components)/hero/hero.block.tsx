@@ -35,8 +35,8 @@ const BHero = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className="relative md:fixed md:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
-            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] px-0 py-ds-[40]" style={{
+            className="relative md:fixed md:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-auto min-h-vh flex justify-between items-center overflow-hidden">
+            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
@@ -47,7 +47,7 @@ const BHero = ({ index }: { index: number }) => {
                     alt='Main Devices'
                     width={405}
                     height={383}
-                    className="md:hidden xs:flex object-contain max-w-9/10"
+                    className="md:hidden xs:flex object-contain max-w-[77%] aspect-[329/368]"
                     priority
                 />
                 <div className="pb-ds-[42] px-3.5 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 md:gap-ds-[32]">
@@ -111,7 +111,7 @@ const BHero = ({ index }: { index: number }) => {
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
                         <Button className="cursor-pointer w-[177px] md:w-ds-[177] h-10 md:h-ds-[39]" variant='secondary'>
-                            <span className="font-medium leading-[90%] text-sm md:text-ds-[16]">Request a Demo</span>
+                            <span className="font-medium leading-[90%] text-base md:text-ds-[16]">Request a Demo</span>
                         </Button>
 
                         <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 text-white rounded-full cursor-pointer border-white/10 bg-white/5">
