@@ -2,6 +2,7 @@
 
 import { motion, useInView } from 'motion/react'
 import { useRef } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 
 type Props = {
     color: {
@@ -22,8 +23,10 @@ const ChartPointItem = ({
     index
 }: Props) => {
     const ref = useRef(null)
-    const isInView = useInView(ref)
-
+    const small = useMediaQuery('(max-width: 768px)')
+    const isInView = useInView(ref, {
+        once: small
+    })
     return (
         <motion.div
             ref={ref}

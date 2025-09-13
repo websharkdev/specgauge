@@ -26,7 +26,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-11 px-0 border-r border-[#00000050] bg-white`}
+            className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] pb-ds-[40] md:px-11 px-0 border-r border-[#00000050] bg-white`}
             ref={ref}
         >
             <motion.h6
@@ -86,14 +86,14 @@ const CEfficient = ({ index }: { index: number }) => {
                     </filter>
                 </defs>
             </svg>
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-8 relative z-10 mt-ds-[40]`}>
-                <ChartPointItem
-                    color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
-                    direction="right"
-                    icon={<Radio size={18} color="#0B9C36" />}
-                    title={"Real-time visibility\nof every tank"}
-                    index={0}
-                />
+
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-ds-[32] relative z-10 mt-ds-[40]`}>                <ChartPointItem
+                color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                direction="right"
+                icon={<Radio size={18} color="#0B9C36" />}
+                title={"Real-time visibility\nof every tank"}
+                index={0}
+            />
                 <ChartPointItem
                     color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                     direction="right"
