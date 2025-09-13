@@ -41,7 +41,7 @@ const menu = [
 type TState = 'open' | 'closed'
 
 const MobileHeader = () => {
-    const [state, setState] = useState<TState>('open')
+    const [state, setState] = useState<TState>('closed')
     const { setProgress } = useProgressStore()
 
     return (
@@ -53,7 +53,6 @@ const MobileHeader = () => {
             }}>
                 <DialogHeader className="w-full">
                     <div className="flex w-full items-center justify-between">
-
                         <DialogTitle className="font-mona_sans text-[32px] text-[#111111] font-medium">Menu</DialogTitle>
                         <Button className="cursor-pointer size-10 flex justify-center items-center rounded-full bg-[#11111110] text-[#111111]"
                             onClick={() => setState('closed')}>
