@@ -228,12 +228,6 @@ html {
   cursor: pointer;
 }
 
-@media screen and (max-width: 400px) {
-  .swiper-pagination-bullet {
-    height: 52px !important;
-  }
-}
-
 .swiper-pagination-bullet span {
   color: rgba(17, 17, 17, 0.3);
   /* текст неактивный */

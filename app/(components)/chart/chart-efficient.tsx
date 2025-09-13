@@ -26,7 +26,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] pb-ds-[40] md:px-11 px-0 border-r border-[#00000050] bg-white`}
+            className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] md:pt-ds-[80] md:pb-ds-[40] py-[70px] md:px-11 px-0 border-r border-[#00000050] bg-white`}
             ref={ref}
         >
             <motion.h6
@@ -40,7 +40,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.3 : 1.3,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-ds-[14] z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
+                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -52,9 +52,9 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1.5,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-ds-[14] z-10 text-2xl md:text-ds-[32] font-medium text-[#111111] leading-[95%] whitespace-pre-wrap mb-ds-[32]">{'Efficient refills only when\nthey’re needed'}</motion.h2>
+                className="md:px-0 px-3.5 z-10 text-[32px] md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</motion.h2>
 
-            <svg className="flex-1 absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
+            <svg className="flex-1 absolute hidden md:flex" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                 <g filter="url(#filter0_f_1_1182)" opacity="0.15">
                     <path
                         fill="#5C98FF"
@@ -87,7 +87,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 </defs>
             </svg>
 
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-ds-[32] relative z-10 mt-ds-[40]`}>                <ChartPointItem
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] md:gap-ds-[32] relative z-10 mt-10 md:mt-ds-[40]`}>                <ChartPointItem
                 color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                 direction="right"
                 icon={<Radio size={18} color="#0B9C36" />}

@@ -15,7 +15,6 @@ const CMonthly = ({ index }: { index: number }) => {
         once: small
     })
 
-
     return (
         <motion.div ref={ref}
             initial={{ opacity: small ? 1 : 0 }}
@@ -26,7 +25,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 duration: .5,
                 delay: .1,
                 ease: 'linear'
-            }} className={`relative md:inset-0 lg:fixed snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-ds-[44] px-0 pb-ds-[128] border-r border-[#00000050] bg-[#E5E8EF]`}>
+            }} className={`relative md:inset-0 lg:fixed snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -38,7 +37,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     delay: small ? 0.3 : 0.5,
                     ease: [0, 0.71, 0.3, 1.01],
                 }}
-                className="md:px-0 px-ds-[14] z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
+                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -50,7 +49,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-ds-[14] z-10 text-2xl md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-ds-[40] whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</motion.h2>
+                className="md:px-0 px-3.5 z-10 text-[32px] md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-ds-[40] md:whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</motion.h2>
 
             <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +121,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     </clipPath>
                 </defs>
             </svg>
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-ds-[32] relative z-10 mt-ds-[40]`}>
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] md:gap-ds-[32] relative z-10 mt-10 md:mt-ds-[40]`}>
                 <ChartPointItem
                     color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
                     direction="left"
