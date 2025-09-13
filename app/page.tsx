@@ -32,7 +32,7 @@ export default function Home() {
   }, [small])
 
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-full md:overflow-hidden">
       {sections.map((section) => section)}
     </div>
   );

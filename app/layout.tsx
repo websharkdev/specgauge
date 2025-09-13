@@ -28,7 +28,7 @@ export default function RootLayout({
       suppressHydrationWarning
       suppressContentEditableWarning>
       <body
-        className={`${monaSans.variable} ${poppins.className} antialiased overflow-hidden`}
+        className={`${monaSans.variable} ${poppins.className} antialiased md:overflow-hidden`}
         suppressHydrationWarning
         suppressContentEditableWarning
       >

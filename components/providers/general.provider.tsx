@@ -11,6 +11,10 @@ const GProvider = ({ children }: Readonly<{
     const small = useMediaQuery('(max-width: 768px)')
 
     useEffect(() => {
+        if (small) {
+            return updateSections()
+        }
+
         let scrollStart = performance.now();
         let touchStart: {
             clientX: number,
@@ -19,10 +23,6 @@ const GProvider = ({ children }: Readonly<{
             clientX: 0,
             clientY: 0
         };
-
-        if (small) {
-            updateSections()
-        }
 
         const handleScroll = (e: WheelEvent) => {
             const scrollCurrent = performance.now();

@@ -1,23 +1,28 @@
 'use client'
 
-import { Slider } from "@/components/general/slider"
+import { Slider } from "@/components/general/slider";
 import { useProgressStore } from "@/stores/general.store";
 import { motion, useInView } from "motion/react";
-import { useRef } from "react"
+import { useRef } from "react";
+import { useMediaQuery } from "usehooks-ts";
 
 
 const BSlider = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const small = useMediaQuery('(max-width: 768px)')
+    const isInView = useInView(ref, {
+        once: small
+    })
+
     return (
         <motion.div
             ref={ref}
             initial={{
-                opacity: 0,
+                opacity: small ? 1 : 0,
                 zIndex: '-50'
             }}
-            animate={isInView && progress === index ? {
+            animate={isInView && (progress === index || small) ? {
                 opacity: 1,
                 zIndex: 50
             } : {
@@ -28,7 +33,7 @@ const BSlider = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className="fixed inset-0 snap-start w-full h-dvh max-h-dvh overflow-hidden flex items-end"
+            className="relative md:fixed md:inset-0 snap-normal md:snap-start w-full h-dvh max-h-dvh overflow-hidden flex items-end"
             style={{
                 background: 'url("/backgrounds/slider-bg.svg") center center / cover no-repeat',
             }}>

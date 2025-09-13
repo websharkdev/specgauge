@@ -7,20 +7,24 @@ import { ArrowDownIcon, BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
 import { useProgressStore } from "@/stores/general.store";
+import { useMediaQuery } from "usehooks-ts";
 
 
 const BHero = ({ index }: { index: number }) => {
     const { setProgress, sections, progress } = useProgressStore()
     const ref = useRef(null)
-    const isInView = useInView(ref)
+    const small = useMediaQuery('(max-width: 768px)')
+    const isInView = useInView(ref, {
+        once: small
+    })
 
     return (
         <motion.div ref={ref}
             initial={{
-                opacity: 0,
-                zIndex: '-50'
+                opacity: small ? 1 : 0,
+                zIndex: small ? '-50' : 50
             }}
-            animate={isInView && progress === index ? {
+            animate={isInView && (progress === index || small) ? {
                 opacity: 1,
                 zIndex: 50
             } : {
@@ -31,8 +35,8 @@ const BHero = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className="fixed inset-0 transition-all duration-700 bg-white snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
-            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] px-0 py-10" style={{
+            className="relative md:fixed md:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-full min-h-dvh flex justify-between items-center max-h-dvh overflow-hidden">
+            <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] px-0 py-ds-[40]" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
@@ -43,10 +47,10 @@ const BHero = ({ index }: { index: number }) => {
                     alt='Main Devices'
                     width={405}
                     height={383}
-                    className="md:hidden xs:flex object-contain max-w-2xs"
+                    className="md:hidden xs:flex object-contain max-w-ds-[405]"
                     priority
                 />
-                <div className="pb-ds-[42] px-3.5 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-8 xl:gap-5 lg:gap-4 sm:gap-3 xs:gap-2">
+                <div className="pb-ds-[42] px-3.5 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-ds-[32]">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={isInView ? {
@@ -59,12 +63,12 @@ const BHero = ({ index }: { index: number }) => {
                             ease: [0, 0.71, 0.3, 1.01],
                         }}>
 
-                        <Badge variant='outline' className="rounded-full flex items-center gap-2 p-2 mb-5 text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
+                        <Badge variant='outline' className="rounded-full flex items-center gap-2 p-2 mb-ds-[20] text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
                             <BadgeCheck size={16} />
                             <span className="text-xs leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
                     </motion.div>
-                    <h1 className="flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] md:text-ds-[30] text-ds-[48]"
+                    <h1 className="flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] md:text-ds-[30] text-ds-[52]"
                     >
                         <motion.span
                             initial={{ opacity: 0, y: 50 }}
@@ -101,7 +105,7 @@ const BHero = ({ index }: { index: number }) => {
                             duration: 1.3,
                             delay: 1.8,
                             ease: [0, 0.71, 0.3, 1.01],
-                        }} className="text-white/50 leading-ds-[20] font-normal whitespace-pre-wrap text-xs sm:text-ds-[14]"
+                        }} className="text-white/50 leading-snug font-normal whitespace-pre-wrap text-xs sm:text-ds-[14]"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
                         <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary'>

@@ -56,7 +56,7 @@ const GForm = () => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm flex flex-col items-center gap-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm flex flex-col items-center gap-6 md:gap-y-4">
                 {
                     inputs.map((input, index) => <FormField
                         key={`input-${input.name}-${index}`}
@@ -69,10 +69,10 @@ const GForm = () => {
                                     : form.setValue(input.name as names, e.target.value),
                         }}
                         render={({ field }) => (
-                            <FormItem className="w-full max-w-[372px] h-full max-h-12">
+                            <FormItem className="w-full max-w-9/10 md:max-w-[372px] h-full max-h-8 md:max-h-12">
                                 <FormControl>
                                     <Input
-                                        className="h-[49px] bg-[#F5F5F5] border-0 font-medium text-ds-[16] leading-[110%] px-5 py-4 placeholder:text-[#111111]/40 text-[#111111]/40"
+                                        className="h-11 md:h-[49px] bg-[#F5F5F5] border-0 font-medium text-sm md:text-ds-[16] leading-[110%] px-5 py-4 placeholder:text-[#111111]/40 text-[#111111]/40"
                                         placeholder={input.placeholder}
                                         type={input.type}
                                         {...field}

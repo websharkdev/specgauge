@@ -10,13 +10,15 @@ import { useProgressStore } from "@/stores/general.store"
 const CEfficient = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef(null)
-    const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
+    const isInView = useInView(ref, {
+        once: small
+    })
 
     return (
         <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView && progress === index ? {
+            initial={{ opacity: small ? 1 : 0 }}
+            animate={isInView && (progress === index || small) ? {
                 opacity: 1,
             } : {}}
             transition={{
@@ -24,7 +26,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className={`fixed lg:relative inset-0 md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-11 px-0 border-r border-[#00000050] bg-white`}
+            className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-11 px-0 border-r border-[#00000050] bg-white`}
             ref={ref}
         >
             <motion.h6
@@ -50,7 +52,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1.5,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-ds-[14] z-10 text-ds-[32] font-medium text-[#111111] leading-[95%] whitespace-pre-wrap mb-ds-[32]">{'Efficient refills only when\nthey’re needed'}</motion.h2>
+                className="md:px-0 px-ds-[14] z-10 text-2xl md:text-ds-[32] font-medium text-[#111111] leading-[95%] whitespace-pre-wrap mb-ds-[32]">{'Efficient refills only when\nthey’re needed'}</motion.h2>
 
             <svg className="flex-1 absolute" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                 <g filter="url(#filter0_f_1_1182)" opacity="0.15">
@@ -84,7 +86,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     </filter>
                 </defs>
             </svg>
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-8 relative z-10 mt-10`}>
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-8 relative z-10 mt-ds-[40]`}>
                 <ChartPointItem
                     color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                     direction="right"

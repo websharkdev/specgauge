@@ -10,21 +10,23 @@ import { useProgressStore } from "@/stores/general.store"
 const CMonthly = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef(null)
-    const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
+    const isInView = useInView(ref, {
+        once: small
+    })
 
 
     return (
         <motion.div ref={ref}
-            initial={{ opacity: 0 }}
-            animate={isInView && progress === index ? {
+            initial={{ opacity: small ? 1 : 0 }}
+            animate={isInView && (progress === index || small) ? {
                 opacity: 1,
             } : {}}
             transition={{
                 duration: .5,
                 delay: .1,
                 ease: 'linear'
-            }} className={`fixed inset-0 lg:relative md:snap-none snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
+            }} className={`relative md:inset-0 lg:fixed snap-normal md:snap-start min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] pt-ds-[80] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -48,7 +50,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1,
                     ease: [0, 0.3, 0.2, 1.5],
                 }}
-                className="md:px-0 px-ds-[14] z-10 text-ds-[36] font-medium text-[#111111] leading-[95%] mb-10 whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</motion.h2>
+                className="md:px-0 px-ds-[14] z-10 text-2xl md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-10 whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</motion.h2>
 
             <svg
                 xmlns="http://www.w3.org/2000/svg"

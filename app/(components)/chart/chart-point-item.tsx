@@ -44,7 +44,7 @@ const ChartPointItem = ({
                     backgroundColor: color.point,
                 }} />
             </div> : null}
-            <div className={`flex flex-col gap-2 flex-1 ${direction === 'right' ? 'ml-16' : ''}`}>
+            <div className={`flex flex-col gap-2 flex-1 ${direction === 'right' ? 'ml-12 md:ml-16' : ''}`}>
                 <div className="flex flex-nowrap items-start gap-3 w-full">
                     {icon}
                     {direction === 'right' ? <div className={`flex flex-nowrap items-center w-full gap-0 mt-1`}>
@@ -57,7 +57,7 @@ const ChartPointItem = ({
                         }} />
                     </div> : null}
                 </div>
-                <h4 className="font-semibold text-lg text-gray-700 max-w-full leading-[90%] whitespace-pre-wrap">{title}</h4>
+                <h4 className="font-medium text-base text-gray-700 max-w-full leading-[90%] whitespace-pre-wrap">{title}</h4>
             </div>
         </motion.div>
     )

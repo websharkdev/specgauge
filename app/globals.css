@@ -136,6 +136,18 @@
   margin-bottom: calc(var(--index) * --value([number]) / 23.4);
 }
 
+@utility ml-ds-* {
+  margin-left: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility mr-ds-* {
+  margin-right: calc(var(--index) * --value([number]) / 23.4);
+}
+
+@utility m-ds-* {
+  margin: calc(var(--index) * --value([number]) / 23.4);
+}
+
 @utility pt-ds-* {
   padding-top: calc(var(--index) * --value([number]) / 23.4);
 }
@@ -214,6 +226,12 @@ html {
   opacity: 1;
   background: none !important;
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .swiper-pagination-bullet {
+    height: 52px !important;
+  }
 }
 
 .swiper-pagination-bullet span {
