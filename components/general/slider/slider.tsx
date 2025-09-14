@@ -9,7 +9,7 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { PaginationOptions } from 'swiper/types';
-import { useCSlider } from '@/stores/general.store';
+import { useCSlider, useProgressStore } from '@/stores/general.store';
 import { useMediaQuery } from 'usehooks-ts';
 
 type Props = {
@@ -29,10 +29,12 @@ type Props = {
         id: number;
         title: string;
     }[];
+    pageIndex: number
 };
 
-const Slider = ({ slides, scrollers }: Props) => {
+const Slider = ({ slides, scrollers, pageIndex }: Props) => {
     const { slide } = useCSlider();
+    const { progress } = useProgressStore()
     const swiperRef = useRef<SwiperRef>(null);
     const small = useMediaQuery('(max-width: 768px)')
     const ref = useRef(null);
@@ -83,7 +85,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                         <div className="lg:col-span-5 col-span-full flex flex-col items-start gap-[18px] md:gap-ds-[32] md:mt-ds-[80]">
                             <motion.h2
                                 initial={{ opacity: 0, y: 50 }}
-                                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                                animate={isInView && (progress === pageIndex || small) ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 1.2, delay: 0.5, ease: 'linear' }}
                                 className="text-left whitespace-pre-wrap px-3.5 text-[32px] md:text-ds-[32] leading-[95%] font-medium text-gray-900"
                             >
@@ -91,7 +93,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                             </motion.h2>
                             <motion.p
                                 initial={{ opacity: 0, y: 50 }}
-                                animate={isInView ? { opacity: 0.5, y: 0 } : {}}
+                                animate={isInView && (progress === pageIndex || small) ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 1.2, delay: 0.9, ease: 'linear' }}
                                 className="text-left max-w-sm lg:max-w-ds-[392] px-3.5 text-base lg:text-ds-[14] leading-tight opacity-50"
                             >

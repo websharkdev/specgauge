@@ -20,14 +20,12 @@ const BSlider = ({ index }: { index: number }) => {
             ref={ref}
             initial={{
                 opacity: small ? 1 : 0,
-                zIndex: '-50'
+                pointerEvents: 'none'
             }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
-                zIndex: 50
-            } : {
-                zIndex: '-50'
-            }}
+                pointerEvents: 'auto'
+            } : {}}
             transition={{
                 duration: .5,
                 delay: .2,
@@ -60,7 +58,9 @@ const BSlider = ({ index }: { index: number }) => {
             ]} scrollers={[
                 { id: 1, title: "High-Accuracy\n\pressure sensor\n\for every tank" },
                 { id: 2, title: "Real-Time\n\Insights Across\n\All Depots" },
-            ]} />
+            ]}
+                pageIndex={index}
+            />
         </motion.div>
     )
 }

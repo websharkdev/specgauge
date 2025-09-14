@@ -17,14 +17,12 @@ const BForm = ({ index }: { index: number }) => {
             ref={ref}
             initial={{
                 opacity: small ? 1 : 0,
-                zIndex: '-50'
+                pointerEvents: 'none'
             }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
-                zIndex: 50
-            } : {
-                zIndex: '-50'
-            }}
+                pointerEvents: 'auto'
+            } : {}}
             transition={{
                 duration: .5,
                 delay: .2,
@@ -57,10 +55,10 @@ const BForm = ({ index }: { index: number }) => {
                         opacity: 0,
                         y: 50
                     }}
-                    animate={isInView && {
+                    animate={isInView && (progress === index || small) ? {
                         opacity: 1,
                         y: 0
-                    }}
+                    } : {}}
                     transition={{
                         duration: .5,
                         delay: .2,
@@ -71,10 +69,10 @@ const BForm = ({ index }: { index: number }) => {
                         opacity: 0,
                         y: 50
                     }}
-                    animate={isInView && {
+                    animate={isInView && (progress === index || small) ? {
                         opacity: 1,
                         y: 0
-                    }}
+                    } : {}}
                     transition={{
                         duration: .5,
                         delay: .3,
@@ -88,10 +86,10 @@ const BForm = ({ index }: { index: number }) => {
                     opacity: 0,
                     y: 50
                 }}
-                animate={isInView && {
+                animate={isInView && (progress === index || small) ? {
                     opacity: 1,
                     y: 0
-                }}
+                } : {}}
                 transition={{
                     duration: .5,
                     delay: .3,

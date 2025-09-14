@@ -22,14 +22,12 @@ const BHero = ({ index }: { index: number }) => {
         <motion.div ref={ref}
             initial={{
                 opacity: small ? 1 : 0,
-                zIndex: small ? '-50' : 50
+                pointerEvents: 'none'
             }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
-                zIndex: 50
-            } : {
-                zIndex: '-50'
-            }}
+                pointerEvents: 'auto'
+            } : {}}
             transition={{
                 duration: .5,
                 delay: .2,

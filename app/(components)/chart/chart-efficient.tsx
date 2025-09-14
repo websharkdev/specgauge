@@ -18,9 +18,13 @@ const CEfficient = ({ index }: { index: number }) => {
 
     return (
         <motion.div
-            initial={{ opacity: small ? 1 : 0 }}
+            initial={{
+                opacity: small ? 1 : 0,
+                pointerEvents: 'none'
+            }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
+                pointerEvents: 'auto'
             } : {}}
             transition={{
                 duration: .5,
@@ -32,7 +36,7 @@ const CEfficient = ({ index }: { index: number }) => {
         >
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? {
+                animate={isInView && (progress === index || small) ? {
                     opacity: 1,
                     y: 0,
                 } : {}}
@@ -44,7 +48,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? {
+                animate={isInView && (progress === index || small) ? {
                     opacity: 1,
                     y: 0,
                 } : {}}

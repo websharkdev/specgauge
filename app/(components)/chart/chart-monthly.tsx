@@ -18,9 +18,13 @@ const CMonthly = ({ index }: { index: number }) => {
     return (
         <motion.div ref={ref}
             id="pain_point_1"
-            initial={{ opacity: small ? 1 : 0 }}
+            initial={{
+                opacity: small ? 1 : 0,
+                pointerEvents: 'none'
+            }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
+                pointerEvents: 'auto'
             } : {}}
             transition={{
                 duration: .5,
@@ -29,7 +33,7 @@ const CMonthly = ({ index }: { index: number }) => {
             }} className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? {
+                animate={isInView && (progress === index || small) ? {
                     opacity: 1,
                     y: 0,
                 } : {}}
@@ -41,7 +45,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? {
+                animate={isInView && (progress === index || small) ? {
                     opacity: 1,
                     y: 0,
                 } : {}}

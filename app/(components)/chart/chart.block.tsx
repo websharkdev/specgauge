@@ -17,15 +17,13 @@ const BChart = ({ index }: { index: number }) => {
     return (
         <motion.div
             initial={{
-                opacity: 0,
-                zIndex: '-50'
+                opacity: small ? 1 : 0,
+                pointerEvents: 'none'
             }}
-            animate={isInView && progress === index ? {
+            animate={isInView && (progress === index || small) ? {
                 opacity: 1,
-                zIndex: 50
-            } : {
-                zIndex: '-50'
-            }}
+                pointerEvents: 'auto'
+            } : {}}
             transition={{
                 duration: .5,
                 delay: .2,

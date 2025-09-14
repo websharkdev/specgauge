@@ -82,11 +82,11 @@ const BWhyUs = ({ index }: { index: number }) => {
             id="advantages"
             initial={{
                 opacity: small ? 1 : 0,
-                zIndex: '-50'
+                pointerEvents: 'none'
             }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
-                zIndex: 50
+                pointerEvents: 'auto'
             } : {}}
             transition={{
                 duration: .5,
@@ -99,7 +99,7 @@ const BWhyUs = ({ index }: { index: number }) => {
                 <div className="flex flex-col gap-3.5 md:gap-ds-[14]">
                     <motion.h5
                         initial={{ opacity: 0, y: 50 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        animate={isInView && (progress === index || small) ? { opacity: 1, y: 0 } : {}}
                         transition={{
                             duration: 1,
                             delay: 0.4,
@@ -108,7 +108,7 @@ const BWhyUs = ({ index }: { index: number }) => {
                         className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm lg:text-ds-[14] uppercase font-medium">Real-Time Advantage</motion.h5>
                     <motion.h2
                         initial={{ opacity: 0, y: 50 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
+                        animate={isInView && (progress === index || small) ? { opacity: 1, y: 0 } : {}}
                         transition={{
                             duration: 1,
                             delay: 0.8,
