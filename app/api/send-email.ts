@@ -1,40 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import nodemailer, { SentMessageInfo } from 'nodemailer';
+import nodemailer from 'nodemailer';
 
-type FeedbackRequestBody = {
-    email: string;
-    feedback: string;
-};
-
-type MainResult =
-    | { ok: true; info: SentMessageInfo }
-    | { ok: false; error: unknown };
-
-export default async function handler(
-    req: NextApiRequest,
-    res: NextApiResponse
-): Promise<void> {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { method, body } = req;
 
-    // Проверяем что метод POST и тело валидно
-    if (
-        method !== 'POST' ||
-        !body ||
-
-        typeof (body as any).email !== 'string' ||
-
-        typeof (body as any).feedback !== 'string'
-    ) {
-        res.status(400).json({
+    if (method !== 'POST' || !body || !body.email || !body.feedback) {
+        res.statusCode = 400;
+        res.json({
             ok: false,
             error: 'Invalid request',
         });
-        return;
     }
 
-    const { email, feedback } = body as FeedbackRequestBody;
+    const { email, feedback } = body;
 
-    async function main(): Promise<MainResult> {
+    async function main() {
         try {
             const transporter = nodemailer.createTransport({
                 host: 'smtp.eu.mailgun.org',
@@ -45,7 +25,6 @@ export default async function handler(
                     pass: process.env.MAILGUN_PASSWORD,
                 },
             });
-
             const info = await transporter.sendMail({
                 from: process.env.MAILGUN_USERNAME,
                 to: process.env.MAILGUN_TO,
@@ -60,5 +39,6 @@ export default async function handler(
     }
 
     const result = await main();
+
     res.json({ result });
 }

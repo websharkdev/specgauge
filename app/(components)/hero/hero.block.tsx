@@ -34,7 +34,7 @@ const BHero = ({ index }: { index: number }) => {
                 ease: 'easeIn'
             }}
             className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-[100vh] flex justify-between items-center overflow-hidden">
-            <div className="md:w-1/2 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
+            <div className="md:w-1/2 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 sm:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
@@ -64,7 +64,7 @@ const BHero = ({ index }: { index: number }) => {
                         priority
                     />
                 </motion.div>
-                <div className="pb-ds-[42] px-3.5 md:px-0 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 md:gap-ds-[32]">
+                <div className="pb-ds-[42] px-3.5 md:px-0 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 sm:gap-ds-[32]">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={isInView ? {
@@ -79,12 +79,12 @@ const BHero = ({ index }: { index: number }) => {
                         className="hidden md:flex"
                     >
 
-                        <Badge variant='outline' className="rounded-full flex items-center gap-2 md:gap-ds-[4] p-2 md:py-ds-[10] md:px-ds-[15] mb-ds-[20] text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
-                            <BadgeCheck className="size-[13px] md:!size-ds-[13]" />
-                            <span className="text-xs md:text-ds-[12] leading-[90%] font-poppins">Beta version is Live!</span>
+                        <Badge variant='outline' className="rounded-full flex items-center gap-2 sm:gap-ds-[4] p-2 sm:py-ds-[10] sm:px-ds-[15] mb-ds-[20] text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
+                            <BadgeCheck className="size-[13px] sm:!size-ds-[13]" />
+                            <span className="text-xs sm:text-ds-[12] leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
                     </motion.div>
-                    <h1 className="inline xl:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] md:text-ds-[30] text-[40px]"
+                    <h1 className="inline md:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] sm:text-ds-[30] text-[40px]"
                     >
                         <motion.span
                             initial={{ opacity: 0, y: 50 }}
@@ -121,29 +121,29 @@ const BHero = ({ index }: { index: number }) => {
                             duration: 1.3,
                             delay: .4,
                             ease: 'easeIn'
-                        }} className="text-white/50 leading-snug font-normal md:whitespace-pre-wrap text-base sm:text-ds-[14]"
+                        }} className="text-white/50 leading-snug font-normal sm:whitespace-pre-wrap text-base sm:text-ds-[14]"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
-                        <Button className="cursor-pointer w-[177px] md:w-ds-[177] h-10 md:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
-                            <span className="font-medium leading-[90%] text-base md:text-ds-[16]">Request a Demo</span>
+                        <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
+                            <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
                         </Button>
 
-                        <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 md:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
-                            <ArrowDownIcon className="size-[19px] md:!size-ds-[19]" />
+                        <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
+                            <ArrowDownIcon className="size-[19px] sm:!size-ds-[19]" />
                         </Button>
                     </div>
                 </div>
             </div>
             <div className="w-1/2 h-full hidden md:flex justify-start items-center relative">
-                <div className="absolute inset-0 -z-[5] h-full w-full bg-[#E5E8EF] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_6%,transparent_110%)]"></div>
-                <div className="absolute inset-0 -z-10 h-full w-full bg-[#E5E8EF] bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:55px_55px]"></div>
+                <div className="absolute inset-0 z-[5] h-full w-full bg-[#E5E8EF] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_6%,transparent_110%)]"></div>
+                <div className="absolute inset-0 z-10 h-full w-full bg-[#E5E8EF] bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:55px_55px]"></div>
                 <div className="pr-8">
                     <Image
                         src='/main-devices.png'
                         alt='Main Devices'
                         width={783}
                         height={730}
-                        className="object-contain max-w-8/10 md:max-w-ds-[700] w-full"
+                        className="object-contain max-w-8/10 sm:max-w-ds-[700] w-full z-20 relative"
                         priority
                     />
                 </div>

@@ -93,7 +93,7 @@ const MobileHeader = () => {
                     scrollToSection('request_demo')
                     setState('closed')
                 }}>
-                    <span className="font-medium leading-[90%] text-base md:text-ds-[16] text-[#087EEF]">Request a Demo</span>
+                    <span className="font-medium leading-[90%] text-base sm:text-ds-[16] text-[#087EEF]">Request a Demo</span>
                 </Button>
             </DialogContent>
         </Dialog>

@@ -86,19 +86,19 @@ const ProgressBar = ({
         }
     }, []);
 
-    return <HoverCard onOpenChange={setHovered} openDelay={600} closeDelay={600}>
-        <HoverCardTrigger className={`p-0 w-[120px] md:w-ds-[120]`}><Badge ref={badgeREF} className={`w-full transition-all duration-700 cursor-pointer h-8 md:h-ds-[32] rounded-full px-3.5 md:px-ds-[14] border-none bg-[#F1F1F1]`}>
+    return <HoverCard onOpenChange={setHovered}>
+        <HoverCardTrigger className={`p-0 w-[120px] sm:w-ds-[120]`}><Badge ref={badgeREF} className={`w-full transition-all duration-700 cursor-pointer h-8 sm:h-ds-[32] rounded-full px-3.5 sm:px-ds-[14] border-none bg-[#F1F1F1]`}>
             <Progress value={progress} indicatorClassName={indicator} />
-            <span className="text-sm md:text-ds-[14] font-medium leading-[90%] text-[#111111]">{progress}%</span>
+            <span className="text-sm sm:text-ds-[14] font-medium leading-[90%] text-[#111111]">{progress}%</span>
         </Badge></HoverCardTrigger>
-        <HoverCardContent align="end" side="top" sideOffset={-badge} className={`static z-[100] shadow-none rounded-xl border-none bg-[#F1f1f1] ${hovered ? '!w-[180px] md:!w-ds-[180] h-max py-[14px] md:py-ds-[14]' : ''}`}>
+        <HoverCardContent align="end" side="top" sideOffset={-badge} className={`static z-[100] shadow-none rounded-xl border-none bg-[#F1f1f1] ${hovered ? '!w-[180px] sm:!w-ds-[180] h-max py-[14px] sm:py-ds-[14]' : ''}`}>
             <div
-                className="flex flex-col gap-4 md:gap-ds-[16]">
-                <div className="flex flex-row flex-nowrap gap-2.5 md:gap-ds-[10] justify-between w-full items-center hover:bg-transparent">
-                    <span className="text-sm md:text-ds-[14] font-medium leading-[90%] text-[#111111]">Menu</span>
-                    <ChevronDown className="size-[15px] md:size-ds-[15]" color="#111111" />
+                className="flex flex-col gap-4 sm:gap-ds-[16]">
+                <div className="flex flex-row flex-nowrap gap-2.5 sm:gap-ds-[10] justify-between w-full items-center hover:bg-transparent">
+                    <span className="text-sm sm:text-ds-[14] font-medium leading-[90%] text-[#111111]">Menu</span>
+                    <ChevronDown className="size-[15px] sm:size-ds-[15]" color="#111111" />
                 </div>
-                {menu.map((item, index) => <div key={`menu_item--${index}`} onMouseLeave={() => setHoverItem(undefined)} onMouseEnter={() => setHoverItem(index)} className="flex flex-row flex-nowrap gap-2.5 items-center cursor-pointer text-sm md:text-ds-[14] font-medium leading-[90%]" onClick={() => {
+                {menu.map((item, index) => <div key={`menu_item--${index}`} onMouseLeave={() => setHoverItem(undefined)} onMouseEnter={() => setHoverItem(index)} className="flex flex-row flex-nowrap gap-2.5 items-center cursor-pointer text-sm sm:text-ds-[14] font-medium leading-[90%]" onClick={() => {
                     if (item.index === 2) {
                         setSlide(item.slide || 0)
                     }

@@ -48,7 +48,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
         type: 'bullets',
         clickable: true,
         renderBullet: (index: number, className: string) =>
-            `<div class="${className} !w-1/2 !whitespace-pre-wrap leading-[110%] font-medium text-base md:text-ds-[16]">${scrollers[index].title}<i><b></b></i></div>`
+            `<div class="${className} !w-1/2 !whitespace-pre-wrap leading-[110%] font-medium text-base sm:text-ds-[16]">${scrollers[index].title}<i><b></b></i></div>`
     } as PaginationOptions;
 
     useEffect(() => {
@@ -81,13 +81,13 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
         >
             {slides.map((s, index) => (
                 <SwiperSlide className="w-full h-full overflow-hidden" key={index} >
-                    <div className="grid grid-cols-12 pt-24 lg:pl-11 pb-0 h-full" ref={ref}>
-                        <div className="lg:col-span-5 col-span-full flex flex-col items-start gap-[18px] md:gap-ds-[32] md:mt-ds-[80]">
+                    <div className="flex flex-nowrap flex-col lg:grid lg:grid-cols-12 pt-24 lg:pl-11 pb-0 h-full" ref={ref}>
+                        <div className="lg:col-span-5 col-span-full flex flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full">
                             <motion.h2
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView && (progress === pageIndex || small) ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 1.2, delay: 0.5, ease: 'linear' }}
-                                className="text-left whitespace-pre-wrap px-3.5 text-[32px] md:text-ds-[32] leading-[95%] font-medium text-gray-900"
+                                className="text-left whitespace-pre-wrap px-3.5 text-[32px] sm:text-ds-[32] leading-[95%] font-medium text-gray-900"
                             >
                                 {s.title}
                             </motion.h2>
@@ -95,7 +95,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView && (progress === pageIndex || small) ? { opacity: 1, y: 0 } : {}}
                                 transition={{ duration: 1.2, delay: 0.9, ease: 'linear' }}
-                                className="text-left max-w-sm lg:max-w-ds-[392] px-3.5 text-base lg:text-ds-[14] leading-tight opacity-50"
+                                className="text-left max-w-sm sm:max-w-ds-[392] px-3.5 text-base sm:text-ds-[14] leading-tight opacity-50"
                             >
                                 {s.description}
                             </motion.p>
@@ -103,7 +103,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                                 <Button
                                     variant="blue"
                                     onClick={s.button.onClick}
-                                    className="ml-3.5 mt-ds-[4] cursor-pointer w-[177px] md:w-[177px] h-[39px] text-base font-medium leading-4"
+                                    className="ml-3.5 mt-ds-[4] cursor-pointer w-[177px] md:w-ds-[177] h-[39px] sm:h-ds-[39] text-base sm:text-ds-[16] font-medium leading-snug"
                                 >
                                     {s.button.title}
                                 </Button>
@@ -113,10 +113,10 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                                 alt="Slide Image"
                                 width={800}
                                 height={800}
-                                className={`lg:hidden block w-full ${s.imageSize}`}
+                                className={`md:hidden block w-full ${s.imageSize}`}
                             />
                         </div>
-                        <div className={`lg:col-span-7 col-span-full w-full h-full relative overflow-hidden lg:flex hidden justify-center items-center`}>
+                        <div className={`lg:col-span-7 col-span-full w-full h-max lg:h-full relative overflow-hidden md:flex hidden justify-center items-center`}>
                             <Image
                                 src={s.image}
                                 alt="Slide Image"
@@ -129,7 +129,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination flex flex-nowrap w-full md:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 static sm:relative lg:fixed md:!left-[45px] md:!bottom-10" />
+            <div className="swiper-pagination flex flex-nowrap w-full sm:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 static sm:relative lg:fixed md:!left-[45px] md:!bottom-10" />
         </Swiper>
     );
 };

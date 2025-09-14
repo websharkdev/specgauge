@@ -31,7 +31,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 bg-white`}
+            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
             ref={ref}
         >
             <motion.h6
@@ -45,7 +45,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.3 : 1.3,
                     ease: 'easeIn',
                 }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
+                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm sm:text-ds-[14]">With SpecGauge</motion.h6>
             <motion.h2
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView && (progress === index || small) ? {
@@ -57,7 +57,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     delay: small ? 0.5 : 1.5,
                     ease: 'easeIn',
                 }}
-                className="md:px-0 px-3.5 z-10 text-[32px] md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</motion.h2>
+                className="md:px-0 px-3.5 z-10 text-[32px] sm:text-ds-[32] font-medium text-[#111111] leading-[95%] sm:mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</motion.h2>
 
             <svg className="flex-1 absolute hidden md:flex" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                 <g filter="url(#filter0_f_1_1182)" opacity="0.15">
@@ -92,7 +92,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 </defs>
             </svg>
 
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] md:gap-ds-[32] relative z-10 mt-10 md:mt-ds-[40]`}>                <ChartPointItem
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>                <ChartPointItem
                 color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                 direction="right"
                 icon={<Radio size={18} color="#0B9C36" />}

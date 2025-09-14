@@ -18,7 +18,7 @@ const renderCustomizedLabel = (props: unknown) => {
 
     return (
         <g>
-            <circle cx={x + width / 2} cy={y - radius} r={radius} fill={fill} z={10} />
+            <circle cx={x + width / 2} cy={y - radius} r={radius} fill={fill} z={25} />
         </g>
     );
 };
@@ -77,10 +77,9 @@ const ChartCustom = ({ data, isInView }: {
                                 } : {}}
                                 transition={{
                                     duration: .5,
-                                    delay: card.index * 0.025,
+                                    delay: 0.8 + card.index * 0.002,
                                     ease: 'easeIn',
                                 }}
-                                className={`h-ds-[${card.padding_y + height}]`}
                             />
                             {/* Иконка */}
                             {/* Вставка SVG-иконки */}
@@ -89,7 +88,7 @@ const ChartCustom = ({ data, isInView }: {
                                 animate={isInView ? { opacity: 1, } : {}}
                                 transition={{
                                     duration: .5,
-                                    delay: 0.1 + card.index * 0.025,
+                                    delay: 0.5 + card.index * 0.025,
                                     ease: 'easeIn'
                                 }}
                             >
@@ -99,7 +98,7 @@ const ChartCustom = ({ data, isInView }: {
                             <motion.text
                                 x={centerX}
                                 y={topY - card.padding_y + 32 - addH}
-                                className="text-base leading-[90%] font-medium md:text-ds-[16]"
+                                className="text-base leading-[90%] font-medium sm:text-ds-[16]"
                                 initial={{ opacity: 0, y: height }}
                                 animate={isInView ? {
                                     opacity: 1,
@@ -107,7 +106,7 @@ const ChartCustom = ({ data, isInView }: {
                                 } : {}}
                                 transition={{
                                     duration: .5,
-                                    delay: .1 + card.index * 0.025,
+                                    delay: .5 + card.index * 0.025,
                                     ease: 'easeIn'
                                 }}
                             >
@@ -126,7 +125,7 @@ const ChartCustom = ({ data, isInView }: {
 
     return (
         <ResponsiveContainer className='overflow-visible flex justify-center items-center w-full col-span-full pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-0'>
-            <ChartContainer config={{} satisfies ChartConfig} className="h-full w-full relative">
+            <ChartContainer config={{} satisfies ChartConfig} className="h-full max-h-[85vh] mt-auto w-full relative">
                 <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
                     <Bar dataKey="point" fill="var(--color-point)" style={{}} radius={1} barSize={1.5}>
                         <LabelList dataKey="point" content={renderCustomizedLabel} />

@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { formSchema, TFormSchema } from "@/schemas/form.schema"
 import { Textarea } from "@/components/ui/textarea"
-
+import axios from 'axios'
 
 const inputs = [
     {
@@ -51,10 +51,17 @@ const GForm = () => {
             message: "",
         },
     })
-    function onSubmit(values: TFormSchema) {
-        console.log(values)
-    }
 
+
+    const onSubmit = async (values: TFormSchema) => {
+
+        try {
+            const response = await axios.post('/api/send-email', values);
+            console.log(response)
+        } catch (error) {
+            console.log('ERROR:', error)
+        }
+    };
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm md:max-w-none flex flex-col items-center gap-[15px] md:gap-y-4">
@@ -63,19 +70,19 @@ const GForm = () => {
                         key={`input-${input.name}-${index}`}
                         control={form.control}
                         name={input.name as names}
-                        render={({ field }) => input.type === 'textarea' ? <FormItem className="w-full max-w-[315px] md:max-w-ds-[372] h-full max-h-max">
+                        render={({ field }) => input.type === 'textarea' ? <FormItem className="w-full max-w-[315px] sm:max-w-ds-[372] h-full max-h-max">
                             <FormControl>
                                 <Textarea
                                     placeholder="Message"
-                                    className="h-[121px] md:h-ds-[121] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] md:!rounded-ds-[10] text-base md:text-ds-[16] leading-[110%] px-5 py-4 md:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40 resize-none"
+                                    className="h-[121px] md:h-ds-[121] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] sm:!rounded-ds-[10] text-base sm:text-ds-[16] leading-[110%] px-5 py-4 sm:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40 resize-none"
                                     {...field}
                                 />
                             </FormControl>
                         </FormItem> : (
-                            <FormItem className="w-full max-w-[315px] md:max-w-ds-[372] h-full max-h-max">
+                            <FormItem className="w-full max-w-[315px] sm:max-w-ds-[372] h-full max-h-max">
                                 <FormControl>
                                     <Input
-                                        className="h-[49px] md:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] md:!rounded-ds-[10] text-base md:text-ds-[16] leading-[110%] px-5 py-4 md:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40"
+                                        className="h-[49px] sm:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] sm:!rounded-ds-[10] text-base sm:text-ds-[16] leading-[110%] px-5 py-4 sm:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40"
                                         placeholder={input.placeholder}
                                         type={input.type}
                                         {...field}
@@ -85,7 +92,7 @@ const GForm = () => {
                         )}
                     />)
                 }
-                <Button type="submit" variant='blue' className="cursor-pointer md:text-ds-[16] text-white font-medium w-[177px] h-[39px] md:w-ds-[177] md:h-ds-[39] mt-ds-[20] text-base">Request a Demo</Button>
+                <Button type="submit" variant='blue' className="cursor-pointer sm:text-ds-[16] text-white font-medium w-[177px] h-[39px] sm:w-ds-[177] sm:h-ds-[39] mt-ds-[20] text-base">Request a Demo</Button>
             </form>
         </Form>
     )
