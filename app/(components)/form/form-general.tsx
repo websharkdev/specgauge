@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { formSchema, TFormSchema } from "@/schemas/form.schema"
+import { Textarea } from "@/components/ui/textarea"
 
 
 const inputs = [
@@ -26,19 +27,19 @@ const inputs = [
         type: 'email'
     },
     {
-        placeholder: 'Phone',
-        name: 'phone',
-        type: 'tel'
-    },
-    {
         placeholder: 'Company Name',
         name: 'company_name',
         type: 'text'
     },
+    {
+        placeholder: 'Message',
+        name: 'message',
+        type: 'textarea'
+    },
 
 ]
 
-type names = "name" | "email" | "phone" | "company_name"
+type names = "name" | "email" | "message" | "company_name"
 
 const GForm = () => {
     const form = useForm<TFormSchema>({
@@ -46,8 +47,8 @@ const GForm = () => {
         defaultValues: {
             name: "",
             email: "",
-            phone: undefined,
             company_name: "",
+            message: "",
         },
     })
     function onSubmit(values: TFormSchema) {
@@ -62,17 +63,19 @@ const GForm = () => {
                         key={`input-${input.name}-${index}`}
                         control={form.control}
                         name={input.name as names}
-                        rules={{
-                            onChange: (e) =>
-                                input?.type === 'tel'
-                                    ? form.setValue(input.name as names, +e.target.value)
-                                    : form.setValue(input.name as names, e.target.value),
-                        }}
-                        render={({ field }) => (
+                        render={({ field }) => input.type === 'textarea' ? <FormItem className="w-full max-w-[315px] md:max-w-ds-[372] h-full max-h-max">
+                            <FormControl>
+                                <Textarea
+                                    placeholder="Message"
+                                    className="h-[121px] md:h-ds-[121] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] md:!rounded-ds-[10] text-base md:text-ds-[16] leading-[110%] px-5 py-4 md:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40 resize-none"
+                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem> : (
                             <FormItem className="w-full max-w-[315px] md:max-w-ds-[372] h-full max-h-max">
                                 <FormControl>
                                     <Input
-                                        className="h-[49px] md:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] md:!rounded-ds-[10] text-base md:text-ds-[16] leading-[110%] px-5 py-4 md:px-ds-[20] md:py-0 placeholder:text-[#111111]/40 text-[#111111]/40"
+                                        className="h-[49px] md:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] md:!rounded-ds-[10] text-base md:text-ds-[16] leading-[110%] px-5 py-4 md:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40"
                                         placeholder={input.placeholder}
                                         type={input.type}
                                         {...field}

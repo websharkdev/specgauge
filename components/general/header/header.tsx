@@ -33,7 +33,7 @@ const Header = () => {
             <div className="flex items-center gap-4">
                 {small ? null : progressBAR}
 
-                <Button className="cursor-pointer w-[102px] md:w-ds-[102] h-[38px] md:h-ds-[38] text-sm md:text-ds-[14] font-medium leading-[90%]">Contact</Button>
+                <Button onClick={() => setProgress(sections - 1)} className="cursor-pointer w-[102px] md:w-ds-[102] h-[38px] md:h-ds-[38] text-sm md:text-ds-[14] font-medium leading-[90%]">Contact</Button>
 
                 {small ? <MobileHeader /> : null}
             </div>

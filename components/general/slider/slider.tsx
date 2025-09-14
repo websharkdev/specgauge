@@ -21,7 +21,7 @@ type Props = {
         imageSize?: string;
         button?: {
             title: string;
-            link: string;
+            onClick: () => void;
         };
         children?: React.ReactNode;
     }[];
@@ -102,7 +102,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                             {s.button && (
                                 <Button
                                     variant="blue"
-                                    href={s.button.link}
+                                    onClick={s.button.onClick}
                                     className="ml-3.5 mt-ds-[4] cursor-pointer w-[177px] md:w-[177px] h-[39px] text-base font-medium leading-4"
                                 >
                                     {s.button.title}

@@ -124,7 +124,7 @@ const BHero = ({ index }: { index: number }) => {
                         }} className="text-white/50 leading-snug font-normal md:whitespace-pre-wrap text-base sm:text-ds-[14]"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
-                        <Button className="cursor-pointer w-[177px] md:w-ds-[177] h-10 md:h-ds-[39]" variant='secondary'>
+                        <Button className="cursor-pointer w-[177px] md:w-ds-[177] h-10 md:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
                             <span className="font-medium leading-[90%] text-base md:text-ds-[16]">Request a Demo</span>
                         </Button>
 

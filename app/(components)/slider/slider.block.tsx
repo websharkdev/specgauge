@@ -8,7 +8,7 @@ import { useMediaQuery } from "usehooks-ts";
 
 
 const BSlider = ({ index }: { index: number }) => {
-    const { progress } = useProgressStore()
+    const { progress, sections, setProgress } = useProgressStore()
     const ref = useRef(null)
     const small = useMediaQuery('(max-width: 768px)')
     const isInView = useInView(ref, {
@@ -52,7 +52,7 @@ const BSlider = ({ index }: { index: number }) => {
                     imageSize: 'max-w-9/10 sm:max-w-[60vw] lg:max-w-[50vw] ml-auto mb-auto lg:mb-0 mt-10 lg:mt-auto',
                     button: {
                         title: 'Request a demo',
-                        link: '#'
+                        onClick: () => setProgress(sections - 1)
                     }
                 },
             ]} scrollers={[
