@@ -82,14 +82,12 @@ const BWhyUs = ({ index }: { index: number }) => {
             id="advantages"
             initial={{
                 opacity: small ? 1 : 0,
-                zIndex: small ? '-50' : 50
+                zIndex: '-50'
             }}
             animate={isInView && (progress === index || small) ? {
                 opacity: 1,
                 zIndex: 50
-            } : {
-                zIndex: '-50'
-            }}
+            } : {}}
             transition={{
                 duration: .5,
                 delay: .2,

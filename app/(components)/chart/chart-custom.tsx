@@ -53,7 +53,7 @@ const ChartCustom = ({ data, isInView }: {
                     const height = 3
 
                     const multiplyer = large ? 0.15 : 0.03
-                    let addH = window.innerHeight * multiplyer
+                    const addH = window.innerHeight * multiplyer
 
                     return (
                         <g key={card.index}>
