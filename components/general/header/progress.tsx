@@ -78,11 +78,11 @@ const ProgressBar = ({
     }, [progress])
 
     return <HoverCard onOpenChange={setHovered}>
-        <HoverCardTrigger className={`p-0 w-[120px] md:w-ds-[120]`}><Badge className={`w-full transition-all duration-700 cursor-pointer h-8 md:h-ds-[32] ${hovered ? '' : 'rounded-full'} px-3.5 md:px-ds-[14] border-none bg-[#F1F1F1]`}>
+        <HoverCardTrigger className={`p-0 w-[120px] md:w-ds-[120]`}><Badge className={`w-full transition-all duration-700 cursor-pointer h-8 md:h-ds-[32] rounded-full px-3.5 md:px-ds-[14] border-none bg-[#F1F1F1]`}>
             <Progress value={progress} indicatorClassName={indicator} />
             <span className="text-sm md:text-ds-[14] font-medium leading-[90%] text-[#111111]">{progress}%</span>
         </Badge></HoverCardTrigger>
-        <HoverCardContent align="end" sideOffset={-32} className={`static z-[100] shadow-none rounded-xl border-none bg-[#F1f1f1] ${hovered ? '!w-[180px] md:!w-ds-[180px] h-max' : ''}`}>
+        <HoverCardContent align="end" side="top" sideOffset={-32} className={`static z-[100] shadow-none rounded-xl border-none bg-[#F1f1f1] ${hovered ? '!w-[180px] md:!w-ds-[180] h-max' : ''}`}>
             <div
                 className="flex flex-col gap-4">
                 <div className="flex flex-row flex-nowrap gap-2.5 justify-between w-full items-center hover:bg-transparent">
@@ -99,7 +99,6 @@ const ProgressBar = ({
                     <span className="text-sm">{item.title}</span>
 
                 </div>
-
                 )}
             </div>
         </HoverCardContent>

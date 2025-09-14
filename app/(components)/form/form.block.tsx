@@ -31,7 +31,7 @@ const BForm = ({ index }: { index: number }) => {
                 ease: 'linear'
             }}
             id="request_demo"
-            className="relative md:fixed md:inset-0 snap-normal md:snap-start transition-all duration-700 w-full flex items-center md:min-h-dvh h-full flex-col pb-[25px] md:pb-10 pt-20 md:pt-0 justify-center overflow-hidden"
+            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start transition-all duration-700 w-full flex items-center h-[100vh] flex-col pb-[25px] md:pb-10 pt-20 md:pt-0 justify-center overflow-hidden"
             style={{
                 background: small ? 'url("/backgrounds/form-bg_mobile.svg") bottom left / cover no-repeat' : 'url("/backgrounds/form-bg.svg") center center / cover no-repeat',
             }}

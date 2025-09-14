@@ -65,7 +65,7 @@ const Slider = ({ slides, scrollers }: Props) => {
             loop
             autoplay={{ delay: 10000 }}
             pagination={pagination}
-            modules={[Pagination, Autoplay]}
+            modules={[Pagination]}
             ref={swiperRef}
             className="relative"
             onSwiper={(swiper) => {
@@ -106,15 +106,13 @@ const Slider = ({ slides, scrollers }: Props) => {
                                     {s.button.title}
                                 </Button>
                             )}
-                            <div className="py-[60px] w-full">
-                                <Image
-                                    src={s.imageMobile}
-                                    alt="Slide Image"
-                                    width={362}
-                                    height={584}
-                                    className={`lg:hidden block w-full ${s.imageSize}`}
-                                />
-                            </div>
+                            <Image
+                                src={s.imageMobile}
+                                alt="Slide Image"
+                                width={800}
+                                height={800}
+                                className={`lg:hidden block w-full ${s.imageSize}`}
+                            />
                         </div>
                         <div className={`lg:col-span-7 col-span-full w-full h-full relative overflow-hidden lg:flex hidden justify-center items-center`}>
                             <Image
@@ -122,14 +120,14 @@ const Slider = ({ slides, scrollers }: Props) => {
                                 alt="Slide Image"
                                 width={1200}
                                 height={1200}
-                                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-full ${s.imageSize}`}
+                                className={s.imageSize}
                             />
                         </div>
                     </div>
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination flex flex-nowrap w-full md:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 !static md:!fixed md:!left-[45px] md:!bottom-10" />
+            <div className="swiper-pagination flex flex-nowrap w-full md:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 static sm:relative lg:fixed md:!left-[45px] md:!bottom-10" />
         </Swiper>
     );
 };

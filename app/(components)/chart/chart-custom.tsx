@@ -2,7 +2,7 @@
 
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { motion } from "motion/react";
-import { Bar, BarChart, Customized, LabelList } from "recharts";
+import { Bar, BarChart, Customized, LabelList, ResponsiveContainer } from "recharts";
 import { chartData } from "./chart-data";
 import { useMediaQuery } from "usehooks-ts";
 
@@ -35,6 +35,8 @@ const ChartCustom = ({ data, isInView }: {
 }) => {
     const small = useMediaQuery('(max-width: 786px)')
     const large = useMediaQuery('(min-width: 1920px)')
+    const xl = useMediaQuery('(max-width: 1528px)')
+
     // Компонент кастомизации
     const CustomCards = ({ bars }: {
         bars: { x: number; y: number; width: number; height: number; fill: string; }[]
@@ -52,7 +54,8 @@ const ChartCustom = ({ data, isInView }: {
 
                     const height = 3
 
-                    const multiplyer = large ? 0.15 : 0.03
+                    const multiplyer = large ? 0.08 : xl ? 0.05 : 0.03
+
                     const addH = window.innerHeight * multiplyer
 
                     return (
@@ -121,17 +124,20 @@ const ChartCustom = ({ data, isInView }: {
         );
     };
 
-    return (<ChartContainer config={{} satisfies ChartConfig} className="h-ds-[600] w-full relative ">
-        <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
-            <Bar dataKey="point" fill="var(--color-point)" style={{}} radius={1} barSize={1.5}>
-                <LabelList dataKey="point" content={renderCustomizedLabel} />
-            </Bar>
-            <Customized
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                component={(props: any) => <CustomCards {...props} bars={props.formattedGraphicalItems[0]!.props.data.map((_: any, i: number) => props.formattedGraphicalItems[0]!.props.data[i])} />}
-            />
-        </BarChart>
-    </ChartContainer >
+    return (
+        <ResponsiveContainer className='overflow-visible flex justify-center items-center w-full col-span-full pointer-events-none absolute left-1/2 -translate-x-1/2 bottom-0'>
+            <ChartContainer config={{} satisfies ChartConfig} className="h-full w-full relative">
+                <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
+                    <Bar dataKey="point" fill="var(--color-point)" style={{}} radius={1} barSize={1.5}>
+                        <LabelList dataKey="point" content={renderCustomizedLabel} />
+                    </Bar>
+                    <Customized
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        component={(props: any) => <CustomCards {...props} bars={props.formattedGraphicalItems[0]!.props.data.map((_: any, i: number) => props.formattedGraphicalItems[0]!.props.data[i])} />}
+                    />
+                </BarChart>
+            </ChartContainer>
+        </ResponsiveContainer>
     )
 }
 

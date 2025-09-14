@@ -34,7 +34,7 @@ const BSlider = ({ index }: { index: number }) => {
                 ease: 'linear'
             }}
             id="slider"
-            className="relative md:fixed md:inset-0 snap-normal md:snap-start w-full h-full md:h-dvh md:max-h-dvh overflow-hidden flex items-end"
+            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-[100vh] overflow-hidden flex items-end"
             style={{
                 background: small ? `url('/backgrounds/slider-bg_mobile.svg') center center / cover no-repeat` : `url('/backgrounds/slider-bg.svg') center center / cover no-repeat`,
             }}>
@@ -44,14 +44,14 @@ const BSlider = ({ index }: { index: number }) => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: '!bg-center lg:!bg-bottom-center px-3.5 mx-auto',
+                    imageSize: 'max-w-9/10 sm:max-w-[60vw] lg:max-w-[45vw] mx-auto mb-auto lg:mb-0 mt-10 lg:mt-auto',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_2.png",
                     imageMobile: "/slide_2_mobile.png",
-                    imageSize: 'h-[360px] object-top-left object-cover md:h-[78vh] md:object-left-bottom pl-3.5 rounded-l-[10]',
+                    imageSize: 'max-w-9/10 sm:max-w-[60vw] lg:max-w-[50vw] ml-auto mb-auto lg:mb-0 mt-10 lg:mt-auto',
                     button: {
                         title: 'Request a demo',
                         link: '#'

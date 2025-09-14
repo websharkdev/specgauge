@@ -35,7 +35,7 @@ const BHero = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'easeIn'
             }}
-            className="relative md:fixed md:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-auto min-h-vh flex justify-between items-center overflow-hidden">
+            className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-[100vh] flex justify-between items-center overflow-hidden">
             <div className="md:w-1/2 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
@@ -136,7 +136,7 @@ const BHero = ({ index }: { index: number }) => {
                     </div>
                 </div>
             </div>
-            <div className="w-1/2 h-full min-h-dvh hidden md:flex justify-start items-center relative">
+            <div className="w-1/2 h-full hidden md:flex justify-start items-center relative">
                 <div className="absolute inset-0 -z-[5] h-full w-full bg-[#E5E8EF] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_6%,transparent_110%)]"></div>
                 <div className="absolute inset-0 -z-10 h-full w-full bg-[#E5E8EF] bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:55px_55px]"></div>
                 <div className="pr-8">

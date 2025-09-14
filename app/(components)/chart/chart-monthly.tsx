@@ -15,8 +15,6 @@ const CMonthly = ({ index }: { index: number }) => {
         once: small
     })
 
-    console.log(isInView && (progress === index || small), progress, index, progress === index, small)
-
     return (
         <motion.div ref={ref}
             id="pain_point_1"
@@ -28,7 +26,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 duration: .5,
                 delay: .1,
                 ease: 'linear'
-            }} className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
+            }} className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {

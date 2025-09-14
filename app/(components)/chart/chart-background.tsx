@@ -42,9 +42,7 @@ const ChartBG = ({
     isInView: boolean
 }) => {
     return (
-        <div className="flex justify-center items-center w-full absolute bottom-0 left-0 z-0">
-            <ChartCustom data={info_data} isInView={isInView} />
-        </div>
+        <ChartCustom data={info_data} isInView={isInView} />
     )
 }
 

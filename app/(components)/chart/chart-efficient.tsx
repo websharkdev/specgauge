@@ -27,7 +27,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] md:pt-ds-[80] md:pb-ds-[40] py-[70px] md:px-11 px-0 border-r border-[#00000050] bg-white`}
+            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 bg-white`}
             ref={ref}
         >
             <motion.h6
