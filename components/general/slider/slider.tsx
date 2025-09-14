@@ -116,12 +116,15 @@ const Slider = ({ slides, scrollers }: Props) => {
                                 />
                             </div>
                         </div>
-                        <div
-                            className={`lg:col-span-7 col-span-full w-full h-full relative overflow-hidden lg:flex hidden justify-center items-center ${s.imageSize}`}
-                            style={{
-                                background: `url(${s.image}) bottom center / contain no-repeat`
-                            }}
-                        />
+                        <div className={`lg:col-span-7 col-span-full w-full h-full relative overflow-hidden lg:flex hidden justify-center items-center`}>
+                            <Image
+                                src={s.image}
+                                alt="Slide Image"
+                                width={1200}
+                                height={1200}
+                                className={`absolute bottom-0 left-1/2 -translate-x-1/2 w-full ${s.imageSize}`}
+                            />
+                        </div>
                     </div>
                 </SwiperSlide>
             ))}
