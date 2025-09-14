@@ -10,6 +10,7 @@ import { useEffect, useRef } from 'react';
 import { Autoplay, Pagination } from 'swiper/modules';
 import { PaginationOptions } from 'swiper/types';
 import { useCSlider } from '@/stores/general.store';
+import { useMediaQuery } from 'usehooks-ts';
 
 type Props = {
     slides: {
@@ -33,9 +34,12 @@ type Props = {
 const Slider = ({ slides, scrollers }: Props) => {
     const { slide } = useCSlider();
     const swiperRef = useRef<SwiperRef>(null);
+    const small = useMediaQuery('(max-width: 768px)')
     const ref = useRef(null);
 
-    const isInView = useInView(ref);
+    const isInView = useInView(ref, {
+        once: small
+    });
 
     const pagination = {
         el: '.swiper-pagination',
@@ -55,8 +59,6 @@ const Slider = ({ slides, scrollers }: Props) => {
             swiper.slideTo(slide, 0, false);
         }
     }, [slide]);
-
-    console.log(isInView)
 
     return (
         <Swiper

@@ -50,7 +50,7 @@ const BSlider = ({ index }: { index: number }) => {
                     title: "Two parts. \n\One smart solution.",
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_2.png",
-                    imageMobile: "/slide_2.png",
+                    imageMobile: "/slide_2_mobile.png",
                     imageSize: 'h-[360px] object-top-left object-cover md:h-full md:object-none pl-3.5 rounded-l-xl',
                     button: {
                         title: 'Request a demo',

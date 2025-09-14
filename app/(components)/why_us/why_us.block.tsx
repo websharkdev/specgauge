@@ -93,7 +93,8 @@ const BWhyUs = ({ index }: { index: number }) => {
                 delay: .2,
                 ease: 'linear'
             }}
-            ref={ref} className="relative md:fixed md:inset-0 snap-normal md:snap-start transition-all duration-700 w-full grid grid-cols-10 items-center min-h-dvh justify-end">
+            ref={ref}
+            className="relative md:fixed md:inset-0 snap-normal md:snap-start transition-all duration-700 w-full grid grid-cols-10 items-center min-h-dvh justify-end">
             <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between py-14 lg:pt-ds-[65] lg:pb-ds-[25] lg:px-ds-[80] px-3.5 gap-[50px] md:gap-ds-[40]">
                 <div className="flex flex-col gap-3.5 md:gap-ds-[14]">
                     <motion.h5

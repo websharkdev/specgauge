@@ -59,7 +59,7 @@ const ChartCustom = ({ data, isInView }: {
                         <g key={card.index}>
                             <motion.rect
                                 x={centerX - .5}
-                                y={topY - card.padding_y - height - addH}
+                                y={topY - card.padding_y - height - addH - 8}
                                 width={1}
                                 height={card.padding_y + height + addH}
                                 fill="white"
@@ -75,7 +75,7 @@ const ChartCustom = ({ data, isInView }: {
                                 transition={{
                                     duration: .5,
                                     delay: card.index * 0.025,
-                                    ease: 'easeInOut',
+                                    ease: 'easeIn',
                                 }}
                                 className={`h-ds-[${card.padding_y + height}]`}
                             />
@@ -87,7 +87,7 @@ const ChartCustom = ({ data, isInView }: {
                                 transition={{
                                     duration: .5,
                                     delay: 0.1 + card.index * 0.025,
-                                    ease: 'linear'
+                                    ease: 'easeIn'
                                 }}
                             >
                                 <Icon />
@@ -105,7 +105,7 @@ const ChartCustom = ({ data, isInView }: {
                                 transition={{
                                     duration: .5,
                                     delay: .1 + card.index * 0.025,
-                                    ease: 'linear'
+                                    ease: 'easeIn'
                                 }}
                             >
                                 {card.text.map((line, index) => (

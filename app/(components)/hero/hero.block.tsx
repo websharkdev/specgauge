@@ -33,7 +33,7 @@ const BHero = ({ index }: { index: number }) => {
             transition={{
                 duration: .5,
                 delay: .2,
-                ease: 'linear'
+                ease: 'easeIn'
             }}
             className="relative md:fixed md:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-auto min-h-vh flex justify-between items-center overflow-hidden">
             <div className="md:w-1/2 w-full h-full min-h-dvh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
@@ -54,7 +54,7 @@ const BHero = ({ index }: { index: number }) => {
                     transition={{
                         duration: .5,
                         delay: .1,
-                        ease: 'linear'
+                        ease: 'easeIn'
                     }}
                     className="md:hidden xs:flex">
                     <Image
@@ -76,7 +76,7 @@ const BHero = ({ index }: { index: number }) => {
                         transition={{
                             duration: .6,
                             delay: 0.1,
-                            ease: 'linear'
+                            ease: 'easeIn'
                         }}
                         className="hidden md:flex"
                     >
@@ -97,7 +97,7 @@ const BHero = ({ index }: { index: number }) => {
                             transition={{
                                 duration: .8,
                                 delay: 0.2,
-                                ease: 'linear'
+                                ease: 'easeIn'
                             }}
                             className="text-white">Know before they’re low,</motion.span>
                         <motion.span
@@ -109,7 +109,7 @@ const BHero = ({ index }: { index: number }) => {
                             transition={{
                                 duration: 1,
                                 delay: .3,
-                                ease: 'linear'
+                                ease: 'easeIn'
                             }}
                             className="text-white/60">{small ? ' ' : ''}stay ahead every time</motion.span>
                     </h1>
@@ -122,7 +122,7 @@ const BHero = ({ index }: { index: number }) => {
                         transition={{
                             duration: 1.3,
                             delay: .4,
-                            ease: 'linear'
+                            ease: 'easeIn'
                         }} className="text-white/50 leading-snug font-normal md:whitespace-pre-wrap text-base sm:text-ds-[14]"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
