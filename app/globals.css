@@ -129,68 +129,83 @@
 }
 
 @utility mt-ds-* {
-  margin-top: calc(var(--index) * --value([number]) / 23.4);
+  margin-top: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility mb-ds-* {
-  margin-bottom: calc(var(--index) * --value([number]) / 23.4);
+  margin-bottom: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility ml-ds-* {
-  margin-left: calc(var(--index) * --value([number]) / 23.4);
+  margin-left: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility mr-ds-* {
-  margin-right: calc(var(--index) * --value([number]) / 23.4);
+  margin-right: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility m-ds-* {
-  margin: calc(var(--index) * --value([number]) / 23.4);
+  margin: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility pt-ds-* {
-  padding-top: calc(var(--index) * --value([number]) / 23.4);
+  padding-top: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility pb-ds-* {
-  padding-bottom: calc(var(--index) * --value([number]) / 23.4);
+  padding-bottom: calc(var(--index) * --value([number]) / 25);
+}
+
+@utility pl-ds-* {
+  padding-left: calc(var(--index) * --value([number]) / 25);
+}
+
+@utility pr-ds-* {
+  padding-right: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility py-ds-* {
-  padding-top: calc(var(--index) * --value([number]) / 23.4);
-  padding-bottom: calc(var(--index) * --value([number]) / 23.4);
+  padding-top: calc(var(--index) * --value([number]) / 25);
+  padding-bottom: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility px-ds-* {
-  padding-left: calc(var(--index) * --value([number]) / 23.4);
-  padding-right: calc(var(--index) * --value([number]) / 23.4);
+  padding-left: calc(var(--index) * --value([number]) / 25);
+  padding-right: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility p-ds-* {
-  padding: calc(var(--index) * --value([number]) / 23.4);
+  padding: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility text-ds-* {
-  font-size: calc(var(--index) * --value([number]) / 23.4);
+  font-size: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility w-ds-* {
-  width: calc(var(--index) * --value([number]) / 23.4);
+  width: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility max-w-ds-* {
-  max-width: calc(var(--index) * --value([number]) / 23.4);
+  max-width: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility h-ds-* {
-  height: calc(var(--index) * --value([number]) / 23.4);
+  height: calc(var(--index) * --value([number]) / 25);
 }
 
 @utility gap-ds-* {
-  gap: calc(var(--index) * --value([number]) / 23.4);
+  gap: calc(var(--index) * --value([number]) / 25);
 }
 
+@utility size-ds-* {
+  width: calc(var(--index) * --value([number]) / 25);
+  height: calc(var(--index) * --value([number]) / 25);
+}
 
+@utility rounded-ds-* {
+  border-radius: calc(var(--index) * --value([number]) / 25);
+}
 
 html {
   scroll-snap-type: y mandatory;
@@ -220,12 +235,18 @@ html {
   flex-direction: column;
   text-align: left;
   justify-content: space-between;
-  height: 74px !important;
+  height: calc(var(--index) * 74 / 25) !important;
   border-radius: 0 !important;
   /* чтобы была отступ под линию */
   opacity: 1;
   background: none !important;
   cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-pagination-bullet {
+    height: 74px !important
+  }
 }
 
 .swiper-pagination-bullet span {

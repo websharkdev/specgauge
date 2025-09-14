@@ -52,11 +52,7 @@ type TState = 'open' | 'closed'
 
 const MobileHeader = () => {
     const [state, setState] = useState<TState>('closed')
-    const { setSlide, slide } = useCSlider()
-
-
-    console.log(slide)
-
+    const { setSlide } = useCSlider()
 
     return (
         <Dialog open={state === 'open'} onOpenChange={(opened) => opened ? setState('open') : setState('closed')}>

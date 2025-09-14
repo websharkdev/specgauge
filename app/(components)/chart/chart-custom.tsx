@@ -4,6 +4,7 @@ import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { motion } from "motion/react";
 import { Bar, BarChart, Customized, LabelList } from "recharts";
 import { chartData } from "./chart-data";
+import { useMediaQuery } from "usehooks-ts";
 
 const renderCustomizedLabel = (props: unknown) => {
     const { x, y, width, fill } = props as { x: number; y: number; width: number; fill: string; };
@@ -32,6 +33,8 @@ const ChartCustom = ({ data, isInView }: {
     }[],
     isInView: boolean;
 }) => {
+    const small = useMediaQuery('(max-width: 786px)')
+    const large = useMediaQuery('(min-width: 1920px)')
     // Компонент кастомизации
     const CustomCards = ({ bars }: {
         bars: { x: number; y: number; width: number; height: number; fill: string; }[]
@@ -49,48 +52,21 @@ const ChartCustom = ({ data, isInView }: {
 
                     const height = 3
 
+                    const multiplyer = large ? 0.15 : 0.03
+                    let addH = window.innerHeight * multiplyer
+
                     return (
                         <g key={card.index}>
                             <motion.rect
                                 x={centerX - .5}
-                                y={topY - card.padding_y - height}
+                                y={topY - card.padding_y - height - addH}
                                 width={1}
-                                height={card.padding_y + height}
+                                height={card.padding_y + height + addH}
                                 fill="white"
                                 fillOpacity={0.8}
                                 stroke="black"
                                 strokeOpacity={0.2}
                                 z={-1}
-                                initial={{ opacity: 0, scaleY: 0, y: height }}
-                                animate={isInView ? {
-                                    opacity: 1, scaleY: 1,
-                                    y: 0,
-                                } : {}}
-                                transition={{
-                                    duration: .5,
-                                    delay: .4 + card.index * 0.05,
-                                    ease: [0, 0.3, 0.2, 1.5],
-                                }}
-                                className={`h-ds-[${card.padding_y + height}]`}
-                            />
-                            {/* Иконка */}
-                            {/* Вставка SVG-иконки */}
-                            <motion.g transform={`translate(${centerX + 12}, ${topY - height - card.padding_y})`}
-                                initial={{ opacity: 0, }}
-                                animate={isInView ? { opacity: 1, } : {}}
-                                transition={{
-                                    duration: .5,
-                                    delay: 0.4 + card.index * 0.05,
-                                    ease: [0, 0.71, 0.3, 1.01],
-                                }}
-                            >
-                                <Icon />
-                            </motion.g>
-
-                            <motion.text
-                                x={centerX}
-                                y={topY - card.padding_y + 32}
-                                className="text-base leading-[90%] font-medium"
                                 initial={{ opacity: 0, y: height }}
                                 animate={isInView ? {
                                     opacity: 1,
@@ -98,12 +74,42 @@ const ChartCustom = ({ data, isInView }: {
                                 } : {}}
                                 transition={{
                                     duration: .5,
-                                    delay: .4 + card.index * 0.05,
+                                    delay: card.index * 0.025,
+                                    ease: 'easeInOut',
+                                }}
+                                className={`h-ds-[${card.padding_y + height}]`}
+                            />
+                            {/* Иконка */}
+                            {/* Вставка SVG-иконки */}
+                            <motion.g transform={`translate(${centerX + 12}, ${topY - height - card.padding_y - addH})`}
+                                initial={{ opacity: 0, }}
+                                animate={isInView ? { opacity: 1, } : {}}
+                                transition={{
+                                    duration: .5,
+                                    delay: 0.1 + card.index * 0.025,
+                                    ease: 'linear'
+                                }}
+                            >
+                                <Icon />
+                            </motion.g>
+
+                            <motion.text
+                                x={centerX}
+                                y={topY - card.padding_y + 32 - addH}
+                                className="text-base leading-[90%] font-medium md:text-ds-[16]"
+                                initial={{ opacity: 0, y: height }}
+                                animate={isInView ? {
+                                    opacity: 1,
+                                    y: 0,
+                                } : {}}
+                                transition={{
+                                    duration: .5,
+                                    delay: .1 + card.index * 0.025,
                                     ease: 'linear'
                                 }}
                             >
                                 {card.text.map((line, index) => (
-                                    <tspan key={index} x={centerX + 12} dy={index === 0 ? 0 : 14} fill="#111111">
+                                    <tspan key={index} x={centerX + 12} dy={small ? index === 0 ? 0 : 14 : window.innerHeight * 0.02} fill="#111111">
                                         {line}
                                     </tspan>
                                 ))}
@@ -115,7 +121,7 @@ const ChartCustom = ({ data, isInView }: {
         );
     };
 
-    return (<ChartContainer config={{} satisfies ChartConfig} className="h-ds-[574] w-full relative">
+    return (<ChartContainer config={{} satisfies ChartConfig} className="h-ds-[600] w-full relative ">
         <BarChart accessibilityLayer data={chartData} margin={{ top: 50 }} >
             <Bar dataKey="point" fill="var(--color-point)" style={{}} radius={1} barSize={1.5}>
                 <LabelList dataKey="point" content={renderCustomizedLabel} />

@@ -32,7 +32,7 @@ const WhyUsItem = ({
             transition={{
                 duration: .5,
                 delay: .85 + index * 0.4,
-                ease: [0, 0.71, 0.3, 1.01],
+                ease: 'linear'
             }}
             className={`size-10 md:size-12 rounded-lg flex justify-center items-center`}
             style={{
@@ -50,7 +50,7 @@ const WhyUsItem = ({
                 transition={{
                     duration: .5,
                     delay: .85 + index * 0.4,
-                    ease: [0, 0.71, 0.3, 1.01],
+                    ease: 'linear'
                 }}
                 className="text-[18px] md:text-ds-[22] font-medium whitespace-pre leading-[110%]">{title}</motion.h3>
             <motion.h6
@@ -62,7 +62,7 @@ const WhyUsItem = ({
                 transition={{
                     duration: .5,
                     delay: .85 + index * 0.4,
-                    ease: [0, 0.71, 0.3, 1.01],
+                    ease: 'linear'
                 }}
                 className="text-sm md:text-ds-[14] text-[#111111] leading-snug">{subtitle}</motion.h6>
         </div>
@@ -96,27 +96,28 @@ const BWhyUs = ({ index }: { index: number }) => {
                 ease: 'linear'
             }}
             ref={ref} className="relative md:fixed md:inset-0 snap-normal md:snap-start transition-all duration-700 w-full grid grid-cols-10 items-center min-h-dvh justify-end">
-            <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between py-14 lg:px-ds-[80] px-3.5 gap-[50px] md:gap-ds-[40]">
+            <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between py-14 lg:pt-ds-[65] lg:pb-ds-[25] lg:px-ds-[80] px-3.5 gap-[50px] md:gap-ds-[40]">
                 <div className="flex flex-col gap-3.5 md:gap-ds-[14]">
                     <motion.h5
-                        initial={{ opacity: 0, }}
-                        animate={isInView ? { opacity: 1, } : {}}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{
                             duration: 1,
                             delay: 0.4,
-                            ease: [0, 0.71, 0.3, 1.01],
+                            ease: 'easeIn',
                         }}
                         className="text-transparent bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm lg:text-ds-[14] uppercase font-medium">Real-Time Advantage</motion.h5>
                     <motion.h2
-                        initial={{ opacity: 0, }}
-                        animate={isInView ? { opacity: 1, } : {}}
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{
                             duration: 1,
                             delay: 0.8,
-                            ease: [0, 0.71, 0.3, 1.01],
+                            ease: 'linear'
                         }}
                         className="text-[32px] md:text-ds-[36] font-medium leading-[95%] text-[#111111] md:whitespace-pre-wrap w-full">{`Why oil companies choose\nSpecGauge`}</motion.h2>
                 </div>
+                <div className="flex-1" />
                 <div className="flex flex-col gap-5 md:gap-ds-[24]">
                     <WhyUsItem index={1} isInView={isInView} icon={<Image src='/icons/coins-hand.svg' alt='icon' width={24} className="size-5 md:size-6" height={24} />} iconBG="linear-gradient(205.6deg, #EBF3F9 11.6%, #F9F0F0 83.8%)" title={"Save costs\n\on every delivery"} subtitle="Cut wasted trips, reduce fuel consumption, and maximize the efficiency of every delivery run — saving your depot money with every mile driven." />
                     <WhyUsItem index={2} isInView={isInView} icon={<Image src='/icons/building-07.svg' alt='icon' width={24} className="size-5 md:size-6" height={24} />} iconBG="linear-gradient(211.73deg, #F3F5FC 9.55%, #F2F0F4 80.9%)" title={"Increase reliability\n\at critical facilities"} subtitle="Ensure that hospitals, care homes, and essential services never face fuel shortages, giving your customers complete peace of mind and building long-term trust" />

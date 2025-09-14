@@ -1,16 +1,17 @@
 'use client'
 
-import { BadgeCheck, ClockPlus, PhoneCall, Radio } from "lucide-react"
+import { useProgressStore } from "@/stores/general.store"
+import { BadgeCheck, ClockPlus, Radio } from "lucide-react"
 import { motion, useInView } from "motion/react"
-import ChartPointItem from "./chart-point-item"
 import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import { useProgressStore } from "@/stores/general.store"
+import ChartPointItem from "./chart-point-item"
 
 const CEfficient = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef(null)
     const small = useMediaQuery('(max-width: 768px)')
+
     const isInView = useInView(ref, {
         once: small
     })
@@ -38,7 +39,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 transition={{
                     duration: .6,
                     delay: small ? 0.3 : 1.3,
-                    ease: [0, 0.3, 0.2, 1.5],
+                    ease: 'easeIn',
                 }}
                 className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm">With SpecGauge</motion.h6>
             <motion.h2
@@ -50,7 +51,7 @@ const CEfficient = ({ index }: { index: number }) => {
                 transition={{
                     duration: 1,
                     delay: small ? 0.5 : 1.5,
-                    ease: [0, 0.3, 0.2, 1.5],
+                    ease: 'easeIn',
                 }}
                 className="md:px-0 px-3.5 z-10 text-[32px] md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</motion.h2>
 

@@ -18,9 +18,9 @@ const Header = () => {
         const current = (progress / (sections - 1)) * 100
 
         if (current === 100) {
-            return <Button variant='secondary' className="w-32 h-8 cursor-pointer bg-[#11111106] text-[#11111150] text-xs" onClick={() => setProgress(0)}>
-                <span className="text-sm">Back to top</span>
-                <ChevronUp size={14} />
+            return <Button variant='secondary' className="w-32 md:w-ds-[128] h-8 md:h-ds-[32] cursor-pointer bg-[#11111106] text-[#11111150] text-sm md:text-ds-[14]" onClick={() => setProgress(0)}>
+                <span>Back to top</span>
+                <ChevronUp className="size-[13px] md:!size-ds-[13]" />
             </Button>
         }
 
@@ -33,7 +33,7 @@ const Header = () => {
             <div className="flex items-center gap-4">
                 {small ? null : progressBAR}
 
-                <Button className="cursor-pointer w-[102px] text-sm font-medium leading-[90%]">Contact</Button>
+                <Button className="cursor-pointer w-[102px] md:w-ds-[102] h-[38px] md:h-ds-[38] text-sm md:text-ds-[14] font-medium leading-[90%]">Contact</Button>
 
                 {small ? <MobileHeader /> : null}
             </div>

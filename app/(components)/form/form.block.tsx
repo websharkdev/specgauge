@@ -38,17 +38,69 @@ const BForm = ({ index }: { index: number }) => {
         >
             <div className="flex-1" />
             <div className="flex flex-col items-center w-full mb-[50px] md:mb-ds-[60] gap-2">
-                <h5 className="text-transparent text-center bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] uppercase font-medium text-sm md:text-ds-[16]">No more guesswork</h5>
-                <h2 className="text-[32px] md:text-ds-[36] font-medium leading-[95%] text-[#111111] text-center mt-[15px] md:mt-ds-[16] mb-[25px] md:mb-ds-[20] whitespace-pre-wrap">{'Ready to transform\nyour oil delivery?'}</h2>
-                <p className="w-[246px] md:w-full text-sm md:text-ds-[14] text-center text-[#111111] opacity-50 font-normal leading-snug tracking-normal md:whitespace-pre-wrap">{'Stop firefighting emergencies. Start\nplanning profitable runs. With SpecGauge,\nyou’ll always know before they’re low.'}</p>
+                <motion.h5
+                    initial={{
+                        opacity: 0,
+                        y: 50
+                    }}
+                    animate={isInView && {
+                        opacity: 1,
+                        y: 0
+                    }}
+                    transition={{
+                        duration: .5,
+                        delay: .1,
+                        ease: 'linear'
+                    }} className="text-transparent text-center bg-clip-text bg-gradient-to-r from-[#0B9C36] to-[#175F49] uppercase font-medium text-sm md:text-ds-[16]">No more guesswork</motion.h5>
+                <motion.h2
+                    initial={{
+                        opacity: 0,
+                        y: 50
+                    }}
+                    animate={isInView && {
+                        opacity: 1,
+                        y: 0
+                    }}
+                    transition={{
+                        duration: .5,
+                        delay: .2,
+                        ease: 'linear'
+                    }} className="text-[32px] md:text-ds-[36] font-medium leading-[95%] text-[#111111] text-center mt-[15px] md:mt-ds-[16] mb-[25px] md:mb-ds-[20] whitespace-pre-wrap">{'Ready to transform\nyour oil delivery?'}</motion.h2>
+                <motion.p
+                    initial={{
+                        opacity: 0,
+                        y: 50
+                    }}
+                    animate={isInView && {
+                        opacity: 1,
+                        y: 0
+                    }}
+                    transition={{
+                        duration: .5,
+                        delay: .3,
+                        ease: 'linear'
+                    }} className="w-[246px] md:w-full text-sm md:text-ds-[14] text-center text-[#111111] opacity-50 font-normal leading-snug tracking-normal md:whitespace-pre-wrap">{'Stop firefighting emergencies. Start\nplanning profitable runs. With SpecGauge,\nyou’ll always know before they’re low.'}</motion.p>
             </div>
             <GForm />
             <div className="flex-1" />
-            <h6 className="text-xs text-[#111111] mt-[100px] md:mt-0">© SpecGauge. All rights reserved.</h6>
+            <motion.h6
+                initial={{
+                    opacity: 0,
+                    y: 50
+                }}
+                animate={isInView && {
+                    opacity: 1,
+                    y: 0
+                }}
+                transition={{
+                    duration: .5,
+                    delay: .3,
+                    ease: 'linear'
+                }} className="text-xs md:text-ds-[12] text-[#111111] mt-[100px] md:mt-0">© SpecGauge. All rights reserved.</motion.h6>
 
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-10">
             </div>
-        </motion.div>
+        </motion.div >
     )
 }
 

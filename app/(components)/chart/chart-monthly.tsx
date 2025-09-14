@@ -15,6 +15,8 @@ const CMonthly = ({ index }: { index: number }) => {
         once: small
     })
 
+    console.log(isInView && (progress === index || small), progress, index, progress === index, small)
+
     return (
         <motion.div ref={ref}
             id="pain_point_1"
@@ -26,7 +28,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 duration: .5,
                 delay: .1,
                 ease: 'linear'
-            }} className={`relative md:inset-0 lg:fixed snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
+            }} className={`md:fixed lg:relative md:inset-0 snap-normal md:snap-start h-max md:min-h-dvh ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden md:h-full h-dvh 2xl:pt-ds-[128] md:pt-ds-[80] py-[50px] md:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <motion.h6
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? {
@@ -36,7 +38,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 transition={{
                     duration: .6,
                     delay: small ? 0.3 : 0.5,
-                    ease: [0, 0.71, 0.3, 1.01],
+                    ease: 'easeIn',
                 }}
                 className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm">tanks often 80% full</motion.h6>
             <motion.h2
@@ -48,7 +50,7 @@ const CMonthly = ({ index }: { index: number }) => {
                 transition={{
                     duration: 1,
                     delay: small ? 0.5 : 1,
-                    ease: [0, 0.3, 0.2, 1.5],
+                    ease: 'easeIn',
                 }}
                 className="md:px-0 px-3.5 z-10 text-[32px] md:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-ds-[40] md:whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</motion.h2>
 

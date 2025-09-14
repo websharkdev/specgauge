@@ -35,14 +35,14 @@ const Slider = ({ slides, scrollers }: Props) => {
     const swiperRef = useRef<SwiperRef>(null);
     const ref = useRef(null);
 
-    const isInView = useInView(ref, { once: true });
+    const isInView = useInView(ref);
 
     const pagination = {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true,
         renderBullet: (index: number, className: string) =>
-            `<div class="${className} !w-1/2 !whitespace-pre-wrap leading-[110%] font-medium text-base">${scrollers[index].title}<i><b></b></i></div>`
+            `<div class="${className} !w-1/2 !whitespace-pre-wrap leading-[110%] font-medium text-base md:text-ds-[16]">${scrollers[index].title}<i><b></b></i></div>`
     } as PaginationOptions;
 
     useEffect(() => {
@@ -55,6 +55,8 @@ const Slider = ({ slides, scrollers }: Props) => {
             swiper.slideTo(slide, 0, false);
         }
     }, [slide]);
+
+    console.log(isInView)
 
     return (
         <Swiper
@@ -74,13 +76,13 @@ const Slider = ({ slides, scrollers }: Props) => {
             }}
         >
             {slides.map((s, index) => (
-                <SwiperSlide className="w-full h-full overflow-hidden" key={index}>
+                <SwiperSlide className="w-full h-full overflow-hidden" key={index} >
                     <div className="grid grid-cols-12 pt-24 lg:pl-11 pb-0 h-full" ref={ref}>
                         <div className="lg:col-span-5 col-span-full flex flex-col items-start gap-[18px] md:gap-ds-[32] md:mt-ds-[80]">
                             <motion.h2
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                                transition={{ duration: 1.2, delay: 0.5, ease: [0, 0.71, 0.3, 1.01] }}
+                                transition={{ duration: 1.2, delay: 0.5, ease: 'linear' }}
                                 className="text-left whitespace-pre-wrap px-3.5 text-[32px] md:text-ds-[32] leading-[95%] font-medium text-gray-900"
                             >
                                 {s.title}
@@ -88,7 +90,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                             <motion.p
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView ? { opacity: 0.5, y: 0 } : {}}
-                                transition={{ duration: 1.2, delay: 0.9, ease: [0, 0.71, 0.3, 1.01] }}
+                                transition={{ duration: 1.2, delay: 0.9, ease: 'linear' }}
                                 className="text-left max-w-sm lg:max-w-ds-[392] px-3.5 text-base lg:text-ds-[14] leading-tight opacity-50"
                             >
                                 {s.description}
@@ -122,7 +124,7 @@ const Slider = ({ slides, scrollers }: Props) => {
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination flex flex-nowrap w-full md:!w-[400px] justify-between gap-3.5 px-3.5 pb-11 md:p-0 !static md:!fixed md:!left-[45px] md:!bottom-10" />
+            <div className="swiper-pagination flex flex-nowrap w-full md:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 !static md:!fixed md:!left-[45px] md:!bottom-10" />
         </Swiper>
     );
 };

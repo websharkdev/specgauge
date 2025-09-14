@@ -56,7 +56,7 @@ const GForm = () => {
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm flex flex-col items-center gap-[15px] md:gap-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm md:max-w-none flex flex-col items-center gap-[15px] md:gap-y-4">
                 {
                     inputs.map((input, index) => <FormField
                         key={`input-${input.name}-${index}`}
@@ -69,10 +69,10 @@ const GForm = () => {
                                     : form.setValue(input.name as names, e.target.value),
                         }}
                         render={({ field }) => (
-                            <FormItem className="w-full max-w-[315px] md:max-w-[372px] h-full max-h-max md:max-h-12">
+                            <FormItem className="w-full max-w-[315px] md:max-w-ds-[372] h-full max-h-max">
                                 <FormControl>
                                     <Input
-                                        className="h-[49px] bg-[#1111110a] border-0 font-medium shadow-none text-base md:text-ds-[16] leading-[110%] px-5 py-4 placeholder:text-[#111111]/40 text-[#111111]/40"
+                                        className="h-[49px] md:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] md:!rounded-ds-[10] text-base md:text-ds-[16] leading-[110%] px-5 py-4 md:px-ds-[20] md:py-0 placeholder:text-[#111111]/40 text-[#111111]/40"
                                         placeholder={input.placeholder}
                                         type={input.type}
                                         {...field}
@@ -82,7 +82,7 @@ const GForm = () => {
                         )}
                     />)
                 }
-                <Button type="submit" variant='blue' className="cursor-pointer w-[177px] text-ds-[16] text-white font-medium h-[39px] mt-ds-[20] text-base">Request a Demo</Button>
+                <Button type="submit" variant='blue' className="cursor-pointer md:text-ds-[16] text-white font-medium w-[177px] h-[39px] md:w-ds-[177] md:h-ds-[39] mt-ds-[20] text-base">Request a Demo</Button>
             </form>
         </Form>
     )
