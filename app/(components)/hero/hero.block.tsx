@@ -36,7 +36,7 @@ const BHero = ({ index }: { index: number }) => {
                 ease: 'easeIn'
             }}
             className="relative md:fixed md:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-auto min-h-vh flex justify-between items-center overflow-hidden">
-            <div className="md:w-1/2 w-full h-auto min-h-vh flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
+            <div className="md:w-1/2 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
