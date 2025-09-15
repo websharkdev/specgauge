@@ -1,4 +1,5 @@
 import { Header } from "@/components/general/header";
+import { Toaster } from "@/components/ui/sonner"
 
 const Template = ({
     children,
@@ -7,10 +8,12 @@ const Template = ({
 }>) => {
 
     return (
-        <div className="flex flex-col gap-2.5 relative w-full h-full min-h-dvh">
+        <div className="flex flex-col flex-nowrap relative w-full h-full min-h-dvh">
             <Header />
 
             {children}
+
+            <Toaster />
         </div>
     );
 };

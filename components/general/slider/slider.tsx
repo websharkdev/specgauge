@@ -81,8 +81,8 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
         >
             {slides.map((s, index) => (
                 <SwiperSlide className="w-full h-full overflow-hidden" key={index} >
-                    <div className="flex flex-nowrap flex-col lg:grid lg:grid-cols-12 pt-24 lg:pl-11 pb-0 h-full" ref={ref}>
-                        <div className="lg:col-span-5 col-span-full flex flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full">
+                    <div className="flex flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full" ref={ref}>
+                        <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-0">
                             <motion.h2
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={isInView && (progress === pageIndex || small) ? { opacity: 1, y: 0 } : {}}
@@ -116,7 +116,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                                 className={`md:hidden block w-full ${s.imageSize}`}
                             />
                         </div>
-                        <div className={`lg:col-span-7 col-span-full w-full h-max lg:h-full relative overflow-hidden md:flex hidden justify-center items-center`}>
+                        <div className={`md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative md:flex hidden justify-center items-center`}>
                             <Image
                                 src={s.image}
                                 alt="Slide Image"

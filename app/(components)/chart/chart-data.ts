@@ -79,7 +79,6 @@ export const chartData = [
     { label: 'default', fill: '#00000035', point: 233 },
     { label: 'default', fill: '#00000035', point: 232 },
     { label: 'default', fill: '#00000035', point: 230 },
-    { label: 'default', fill: '#00000035', point: 226 },
     { label: 'default', fill: '#00000035', point: 221 },
     { label: 'default', fill: '#00000035', point: 214 },
     { label: 'default', fill: '#00000035', point: 205 },

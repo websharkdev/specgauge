@@ -25,9 +25,8 @@ const BChart = ({ index }: { index: number }) => {
                 pointerEvents: 'auto'
             } : {}}
             transition={{
-                duration: .5,
-                delay: .2,
-                ease: 'linear'
+                duration: .8,
+                ease: 'easeIn'
             }}
             className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end"
             id="pain_point" ref={ref}>

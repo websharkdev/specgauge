@@ -29,8 +29,7 @@ const BHero = ({ index }: { index: number }) => {
                 pointerEvents: 'auto'
             } : {}}
             transition={{
-                duration: .5,
-                delay: .2,
+                duration: .8,
                 ease: 'easeIn'
             }}
             className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-[100vh] flex justify-between items-center overflow-hidden">
@@ -137,16 +136,14 @@ const BHero = ({ index }: { index: number }) => {
             <div className="w-1/2 h-full hidden md:flex justify-start items-center relative">
                 <div className="absolute inset-0 z-[5] h-full w-full bg-[#E5E8EF] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_6%,transparent_110%)]"></div>
                 <div className="absolute inset-0 z-10 h-full w-full bg-[#E5E8EF] bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:55px_55px]"></div>
-                <div className="pr-8">
-                    <Image
-                        src='/main-devices.png'
-                        alt='Main Devices'
-                        width={783}
-                        height={730}
-                        className="object-contain max-w-8/10 sm:max-w-ds-[700] w-full z-20 relative"
-                        priority
-                    />
-                </div>
+                <Image
+                    src='/main-devices.png'
+                    alt='Main Devices'
+                    width={926}
+                    height={521}
+                    className="object-contain max-w-8/10 sm:max-w-ds-[700] w-full z-20 relative"
+                    priority
+                />
                 <div className="flex-1" />
             </div>
         </motion.div>

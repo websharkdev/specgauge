@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input"
 import { formSchema, TFormSchema } from "@/schemas/form.schema"
 import { Textarea } from "@/components/ui/textarea"
 import axios from 'axios'
+import { toast } from "sonner"
 
 const inputs = [
     {
@@ -56,15 +57,23 @@ const GForm = () => {
     const onSubmit = async (values: TFormSchema) => {
 
         try {
-            const response = await axios.post('/api/send-email', values);
-            console.log(response)
+            return await axios({
+                url: process.env.NEXT_PUBLIC_FORM_URL as string,
+                data: values,
+                method: 'POST',
+                withCredentials: false,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Access-Control-Allow-Origin": "*",
+                },
+            }).then(() => toast("Success!")).catch(() => toast('Oooops! Some things went wrong'))
         } catch (error) {
             console.log('ERROR:', error)
         }
     };
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm md:max-w-none flex flex-col items-center gap-[15px] md:gap-y-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm md:max-w-none flex flex-col items-center gap-[15px] md:gap-y-ds-[15]">
                 {
                     inputs.map((input, index) => <FormField
                         key={`input-${input.name}-${index}`}
@@ -74,7 +83,7 @@ const GForm = () => {
                             <FormControl>
                                 <Textarea
                                     placeholder="Message"
-                                    className="h-[121px] md:h-ds-[121] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] sm:!rounded-ds-[10] text-base sm:text-ds-[16] leading-[110%] px-5 py-4 sm:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40 resize-none"
+                                    className="h-[121px] md:h-ds-[121] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] sm:!rounded-ds-[10] text-base sm:text-ds-[16] leading-[110%] px-5 sm:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40 resize-none"
                                     {...field}
                                 />
                             </FormControl>
@@ -82,7 +91,7 @@ const GForm = () => {
                             <FormItem className="w-full max-w-[315px] sm:max-w-ds-[372] h-full max-h-max">
                                 <FormControl>
                                     <Input
-                                        className="h-[49px] sm:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] sm:!rounded-ds-[10] text-base sm:text-ds-[16] leading-[110%] px-5 py-4 sm:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40"
+                                        className="h-[49px] sm:h-ds-[49] bg-[#1111110a] border-0 font-medium shadow-none rounded-[10px] sm:!rounded-ds-[10] text-base sm:text-ds-[16] leading-[110%] px-5 sm:px-ds-[20] md:py-[16] placeholder:text-[#111111]/40 text-[#111111]/40"
                                         placeholder={input.placeholder}
                                         type={input.type}
                                         {...field}

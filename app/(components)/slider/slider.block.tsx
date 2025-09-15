@@ -27,9 +27,8 @@ const BSlider = ({ index }: { index: number }) => {
                 pointerEvents: 'auto'
             } : {}}
             transition={{
-                duration: .5,
-                delay: .2,
-                ease: 'linear'
+                duration: .8,
+                ease: 'easeIn'
             }}
             id="slider"
             className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-[100vh] overflow-hidden flex items-end"
@@ -42,14 +41,14 @@ const BSlider = ({ index }: { index: number }) => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: 'max-w-9/10 md:max-w-8/10 lg:max-w-[50vw] 2xl:max-w-ds-[880] mx-auto lg:mt-auto',
+                    imageSize: 'mt-auto ml-auto max-w-[50vw]',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_2.png",
                     imageMobile: "/slide_2_mobile.png",
-                    imageSize: 'max-w-9/10 md:max-w-8/10 lg:max-w-[50vw] 2xl:max-w-ds-[880] ml-auto lg:mt-auto',
+                    imageSize: 'mt-auto ml-auto max-w-[55vw]',
                     button: {
                         title: 'Request a demo',
                         onClick: () => setProgress(sections - 1)

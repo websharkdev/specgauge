@@ -60,7 +60,6 @@ const ProgressBar = ({
 }) => {
     const { setSlide } = useCSlider()
     const [badge, setBadge] = useState<number>(0)
-    const [hovered, setHovered] = useState<boolean>(false)
     const [hoverItem, setHoverItem] = useState<number | undefined>(undefined)
     const { setProgress } = useProgressStore()
     const indicator = useMemo(() => {
@@ -86,12 +85,12 @@ const ProgressBar = ({
         }
     }, []);
 
-    return <HoverCard onOpenChange={setHovered}>
-        <HoverCardTrigger className={`p-0 w-[120px] sm:w-ds-[120]`}><Badge ref={badgeREF} className={`w-full transition-all duration-700 cursor-pointer h-8 sm:h-ds-[32] rounded-full px-3.5 sm:px-ds-[14] border-none bg-[#F1F1F1]`}>
+    return <HoverCard>
+        <HoverCardTrigger className={`p-0 w-[120px] sm:w-ds-[120]`}><Badge ref={badgeREF} className={`w-full transition-all cursor-pointer h-8 sm:h-ds-[32] rounded-full px-3.5 sm:px-ds-[14] border-none bg-[#F1F1F1]`}>
             <Progress value={progress} indicatorClassName={indicator} />
             <span className="text-sm sm:text-ds-[14] font-medium leading-[90%] text-[#111111]">{progress}%</span>
         </Badge></HoverCardTrigger>
-        <HoverCardContent align="end" side="top" sideOffset={-badge} className={`static z-[100] shadow-none rounded-xl border-none bg-[#F1f1f1] ${hovered ? '!w-[180px] sm:!w-ds-[180] h-max py-[14px] sm:py-ds-[14]' : ''}`}>
+        <HoverCardContent align="end" side="top" sideOffset={-badge} className={`z-[100] shadow-none rounded-xl border-none bg-[#F1f1f1] !w-[180px] sm:!w-ds-[180] h-max py-[14px] sm:py-ds-[14]`}>
             <div
                 className="flex flex-col gap-4 sm:gap-ds-[16]">
                 <div className="flex flex-row flex-nowrap gap-2.5 sm:gap-ds-[10] justify-between w-full items-center hover:bg-transparent">

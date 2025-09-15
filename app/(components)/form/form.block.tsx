@@ -24,9 +24,8 @@ const BForm = ({ index }: { index: number }) => {
                 pointerEvents: 'auto'
             } : {}}
             transition={{
-                duration: .5,
-                delay: .2,
-                ease: 'linear'
+                duration: .8,
+                ease: 'easeIn'
             }}
             id="request_demo"
             className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start transition-all duration-700 w-full flex items-center h-[100vh] flex-col pb-[25px] md:pb-ds-[40] pt-20 md:pt-0 justify-center overflow-hidden"
