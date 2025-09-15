@@ -27,6 +27,7 @@ const renderCustomizedLabel = (props: unknown) => {
 const ChartCustom = ({ data, isInView }: {
     data: {
         id: number;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         icon: any;
         index: number;
         color: string;
