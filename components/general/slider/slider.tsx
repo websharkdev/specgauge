@@ -116,7 +116,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                                 className={`md:hidden block w-full ${s.imageSize}`}
                             />
                         </div>
-                        <div className={`md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative md:flex hidden justify-center items-center`}>
+                        <div className={`md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative md:flex hidden justify-center items-center h-[100vh]`}>
                             <Image
                                 src={s.image}
                                 alt="Slide Image"

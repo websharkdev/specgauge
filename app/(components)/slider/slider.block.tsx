@@ -41,14 +41,14 @@ const BSlider = ({ index }: { index: number }) => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: 'mt-auto ml-auto max-w-[50vw]',
+                    imageSize: 'mx-auto max-w-9/10 sm:max-w-8/10 md:mt-auto md:ml-auto md:max-w-[50vw]',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_2.png",
                     imageMobile: "/slide_2_mobile.png",
-                    imageSize: 'mt-auto ml-auto max-w-[55vw]',
+                    imageSize: 'max-w-8/10 md:mt-auto ml-auto md:max-w-[55vw]',
                     button: {
                         title: 'Request a demo',
                         onClick: () => setProgress(sections - 1)

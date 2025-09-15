@@ -94,7 +94,7 @@ const ChartCustom = ({ data, isInView }: {
                                     ease: 'easeIn'
                                 }}
                             >
-                                <Icon size={14} className={`chart-icon__special text-[${card.color}]`} />
+                                <Icon className={`${card.color}`} size={16} />
                             </motion.g>
 
                             <motion.text
