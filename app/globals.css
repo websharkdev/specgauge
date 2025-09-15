@@ -207,6 +207,10 @@
   border-radius: calc(var(--index) * --value([number]) / 25);
 }
 
+@utility bottom-ds-* {
+  bottom: calc(var(--index) * --value([number]) / 25);
+}
+
 html {
   scroll-snap-type: y mandatory;
 }

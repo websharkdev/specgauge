@@ -32,8 +32,8 @@ const BHero = ({ index }: { index: number }) => {
                 duration: .8,
                 ease: 'easeIn'
             }}
-            className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-[100vh] flex justify-between items-center overflow-hidden">
-            <div className="md:w-1/2 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 sm:p-ds-[45] pt-[60px] md:pt-0 px-0 py-ds-[40]" style={{
+            className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-max md:h-[100vh] flex justify-between items-center overflow-hidden">
+            <div className="md:w-1/2 w-full h-full flex relative flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:pb-ds-[40] md:pt-ds-[40] pt-10 pb-14 md:px-ds-[45] px-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
@@ -53,13 +53,13 @@ const BHero = ({ index }: { index: number }) => {
                         delay: .1,
                         ease: 'easeIn'
                     }}
-                    className="md:hidden xs:flex">
+                    className="md:hidden xs:flex h-max">
                     <Image
                         src='/main-devices.png'
                         alt='Main Devices'
-                        width={405}
-                        height={383}
-                        className="object-contain max-w-[77%] aspect-[329/368]"
+                        width={800}
+                        height={800}
+                        className="object-contain max-w-9/10 md:aspect-[329/368] h-max"
                         priority
                     />
                 </motion.div>

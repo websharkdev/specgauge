@@ -129,7 +129,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination flex flex-nowrap w-full sm:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 static sm:relative lg:fixed md:!left-[45px] md:!bottom-10" />
+            <div className="swiper-pagination flex flex-nowrap w-full sm:!w-ds-[400] justify-between gap-3.5 px-3.5 pb-11 md:p-0 static sm:fixed md:!left-[45px] !bottom-10" />
         </Swiper>
     );
 };
