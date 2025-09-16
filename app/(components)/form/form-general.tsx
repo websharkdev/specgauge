@@ -40,7 +40,7 @@ const inputs = [
 
 ]
 
-type names = "name" | "email" | "message" | "company_name"
+type names = "name" | "email" | "message" | "companyName"
 
 const GForm = () => {
     const form = useForm<TFormSchema>({
@@ -48,29 +48,28 @@ const GForm = () => {
         defaultValues: {
             name: "",
             email: "",
-            company_name: "",
+            companyName: "",
             message: "",
         },
     })
 
-
     const onSubmit = async (values: TFormSchema) => {
-
         try {
             return await axios({
                 url: process.env.NEXT_PUBLIC_FORM_URL as string,
                 data: values,
                 method: 'POST',
-                withCredentials: false,
                 headers: {
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
+                    "ApiKey": process.env.NEXT_PUBLIC_API_KEY
                 },
-            }).then(() => toast("Success!")).catch(() => toast('Oooops! Some things went wrong'))
+            }).then((res) => toast(res.data.message)).catch(() => toast('Oooops! Some things went wrong'))
         } catch (error) {
             console.log('ERROR:', error)
         }
     };
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-full max-w-sm md:max-w-none flex flex-col items-center gap-[15px] md:gap-y-ds-[15]">
