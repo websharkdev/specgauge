@@ -14,6 +14,7 @@ import { formSchema, TFormSchema } from "@/schemas/form.schema"
 import { Textarea } from "@/components/ui/textarea"
 import axios from 'axios'
 import { toast } from "sonner"
+import { handleSubmit } from "./(actions)/server.actions"
 
 const inputs = [
     {
@@ -29,7 +30,7 @@ const inputs = [
     },
     {
         placeholder: 'Company Name',
-        name: 'company_name',
+        name: 'companyName',
         type: 'text'
     },
     {
@@ -54,20 +55,7 @@ const GForm = () => {
     })
 
     const onSubmit = async (values: TFormSchema) => {
-        try {
-            return await axios({
-                url: process.env.NEXT_PUBLIC_FORM_URL as string,
-                data: values,
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    "Access-Control-Allow-Origin": "*",
-                    "ApiKey": process.env.NEXT_PUBLIC_API_KEY
-                },
-            }).then((res) => toast(res.data.message)).catch(() => toast('Oooops! Some things went wrong'))
-        } catch (error) {
-            console.log('ERROR:', error)
-        }
+        return await handleSubmit(values).then((res) => toast(res.Message)).then(() => form.reset()).catch((error) => toast('OOOPS! Some things went wrong'))
     };
 
     return (
