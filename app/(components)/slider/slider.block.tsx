@@ -1,4 +1,4 @@
-'use client'
+ 'use client'
 
 import { Slider } from "@/components/general/slider";
 import { useProgressStore } from "@/stores/general.store";
@@ -18,14 +18,20 @@ const BSlider = ({ index }: { index: number }) => {
     return (
         <motion.div
             ref={ref}
-            initial={{
-                opacity: small ? 1 : 0,
-                pointerEvents: 'none'
+            variants={{
+                active: {
+                    opacity: 1,
+                    pointerEvents: 'auto',
+                    visibility: 'visible'
+                },
+                hidden: {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    visibility: 'hidden'
+                }
             }}
-            animate={isInView && (progress === index || small) ? {
-                opacity: 1,
-                pointerEvents: 'auto'
-            } : {}}
+            initial="hidden"
+            animate={(progress === index || small) ? 'active' : 'hidden'}
             transition={{
                 duration: .8,
                 ease: 'easeIn'

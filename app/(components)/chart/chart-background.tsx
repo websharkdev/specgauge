@@ -44,12 +44,12 @@ const info_data = [
 
 
 const ChartBG = ({
-    isInView
+    active
 }: {
-    isInView: boolean
+    active: boolean
 }) => {
     return (
-        <ChartCustom data={info_data} isInView={isInView} />
+        <ChartCustom data={info_data} active={active} />
     )
 }
 

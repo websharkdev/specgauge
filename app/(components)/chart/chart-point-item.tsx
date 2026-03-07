@@ -24,20 +24,19 @@ const ChartPointItem = ({
 }: Props) => {
     const ref = useRef(null)
     const small = useMediaQuery('(max-width: 768px)')
-    const isInView = useInView(ref, {
-        once: small
-    })
+    const premiumEasing = [0.16, 1, 0.3, 1];
+
     return (
         <motion.div
             ref={ref}
-            initial={{ opacity: 0, }}
-            animate={isInView ? {
-                opacity: 1,
-            } : {}}
+            variants={{
+                active: { opacity: 1, x: 0, scale: 1 },
+                hidden: { opacity: 0, x: direction === 'left' ? -20 : 20, scale: 0.95 }
+            }}
             transition={{
-                duration: .5,
-                delay: .2 + index * .5 + .5,
-                ease: 'linear'
+                duration: 0.8,
+                delay: 0.5 + index * 0.1,
+                ease: premiumEasing
             }} className="flex flex-nowrap items-start gap-3">
             {direction === 'left' ? <div className={`flex flex-nowrap items-center min-w-10 gap-0 mt-1`}>
                 <div className='flex-1 h-0.5' style={{

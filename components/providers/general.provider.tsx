@@ -26,20 +26,26 @@ const GProvider = ({ children }: Readonly<{
 
         const handleScroll = (e: WheelEvent) => {
             const scrollCurrent = performance.now();
-            const scrollDelay = Math.abs(e.deltaY) > 100 ? 800 : 2000;
+            const scrollDelay = 800; // Consistent delay for smoother experience
 
-            if (scrollCurrent < scrollStart + scrollDelay) {
+            if (scrollCurrent < scrollStart + scrollDelay || Math.abs(e.deltaY) < 10) {
                 return;
             }
 
+            const isMovingUp = e.deltaY < 0;
+            const isMovingDown = e.deltaY > 0;
+
+            // Boundary check to prevent jitter when scrolling at the ends
+            if (isMovingUp && progress === 0) return;
+            if (isMovingDown && progress === sections - 1) return;
+
             scrollStart = performance.now();
 
-            if (e.deltaY < 0) {
-                scrollTo(progress - 1 > 0 ? progress - 1 : 0);
+            if (isMovingUp) {
+                scrollTo(progress - 1);
             } else {
-                scrollTo(progress + 1 < sections - 1 ? progress + 1 : sections - 1);
+                scrollTo(progress + 1);
             }
-
         };
 
 

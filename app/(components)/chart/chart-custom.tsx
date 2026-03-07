@@ -24,7 +24,7 @@ const renderCustomizedLabel = (props: unknown) => {
     );
 };
 
-const ChartCustom = ({ data, isInView }: {
+const ChartCustom = ({ data, active }: {
     data: {
         id: number;
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -34,7 +34,7 @@ const ChartCustom = ({ data, isInView }: {
         text: string[];
         padding_y: number;
     }[],
-    isInView: boolean;
+    active: boolean;
 }) => {
     const extra = useMediaQuery('(min-width: 1529px)')
     const large = useMediaQuery('(max-width: 1528px)')
@@ -74,10 +74,10 @@ const ChartCustom = ({ data, isInView }: {
                                 strokeOpacity={0.2}
                                 z={-1}
                                 initial={{ opacity: 0, y: height }}
-                                animate={isInView ? {
+                                animate={active ? {
                                     opacity: 1,
                                     y: 0,
-                                } : {}}
+                                } : { opacity: 0 }}
                                 transition={{
                                     duration: .5,
                                     delay: 0.8 + card.index * 0.002,
@@ -88,7 +88,7 @@ const ChartCustom = ({ data, isInView }: {
                             {/* Вставка SVG-иконки */}
                             <motion.g transform={`translate(${centerX + 12}, ${topY - height - card.padding_y - addH})`}
                                 initial={{ opacity: 0, }}
-                                animate={isInView ? { opacity: 1, } : {}}
+                                animate={active ? { opacity: 1, } : { opacity: 0 }}
                                 transition={{
                                     duration: .5,
                                     delay: 0.5 + card.index * 0.025,
@@ -103,10 +103,10 @@ const ChartCustom = ({ data, isInView }: {
                                 y={topY - card.padding_y + 32 - addH}
                                 className="text-base leading-[90%] font-medium sm:text-ds-[16]"
                                 initial={{ opacity: 0, y: height }}
-                                animate={isInView ? {
+                                animate={active ? {
                                     opacity: 1,
                                     y: 0,
-                                } : {}}
+                                } : { opacity: 0 }}
                                 transition={{
                                     duration: .5,
                                     delay: .5 + card.index * 0.025,

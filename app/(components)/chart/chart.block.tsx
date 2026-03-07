@@ -11,30 +11,37 @@ import { useProgressStore } from "@/stores/general.store"
 const BChart = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef(null)
-    const isInView = useInView(ref)
     const small = useMediaQuery('(max-width: 768px)')
+
+    const active = progress === index || small;
 
     return (
         <motion.div
-            initial={{
-                opacity: small ? 1 : 0,
-                pointerEvents: 'none'
+            variants={{
+                active: {
+                    opacity: 1,
+                    pointerEvents: 'auto',
+                    visibility: 'visible'
+                },
+                hidden: {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    visibility: 'hidden'
+                }
             }}
-            animate={isInView && (progress === index || small) ? {
-                opacity: 1,
-                pointerEvents: 'auto'
-            } : {}}
+            initial="hidden"
+            animate={active ? 'active' : 'hidden'}
             transition={{
                 duration: .8,
                 ease: 'easeIn'
             }}
-            className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden"
+            className="static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden"
             id="pain_point" ref={ref}>
             <CMonthly index={small ? 1 : index} />
             <CEfficient index={small ? 2 : index} />
 
 
-            {small ? null : <ChartBG isInView={isInView} />}
+            {small ? null : <ChartBG active={active} />}
         </motion.div>
     )
 }

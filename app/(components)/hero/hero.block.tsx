@@ -14,25 +14,37 @@ const BHero = ({ index }: { index: number }) => {
     const { setProgress, sections, progress } = useProgressStore()
     const ref = useRef(null)
     const small = useMediaQuery('(max-width: 768px)')
-    const isInView = useInView(ref, {
-        once: small
-    })
+
+    const active = progress === index || small;
+
+    const premiumEasing = [0.16, 1, 0.3, 1];
+
+    const childVariants = {
+        active: { opacity: 1, y: 0, scale: 1 },
+        hidden: { opacity: 0, y: 40, scale: 1.05 },
+    }
 
     return (
         <motion.div ref={ref}
-            initial={{
-                opacity: small ? 1 : 0,
-                pointerEvents: 'none'
+            variants={{
+                active: {
+                    opacity: 1,
+                    pointerEvents: 'auto',
+                    visibility: 'visible'
+                },
+                hidden: {
+                    opacity: 0,
+                    pointerEvents: 'none',
+                    visibility: 'hidden'
+                }
             }}
-            animate={isInView && (progress === index || small) ? {
-                opacity: 1,
-                pointerEvents: 'auto'
-            } : {}}
+            initial="hidden"
+            animate={active ? 'active' : 'hidden'}
             transition={{
-                duration: .8,
-                ease: 'easeIn'
+                duration: 1,
+                ease: premiumEasing
             }}
-            className="static sm:relative lg:fixed lg:inset-0 transition-all duration-700 bg-white snap-normal md:snap-start w-full h-max md:h-[100vh] flex justify-between items-center overflow-hidden">
+            className="static sm:relative lg:fixed lg:inset-0 bg-white snap-normal md:snap-start w-full h-max md:h-[100vh] flex justify-between items-center overflow-hidden">
             <div className="md:w-1/2 w-full h-full flex relative z-10 flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:pb-ds-[40] md:pt-ds-[40] pt-10 pb-14 md:px-ds-[45] px-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
@@ -40,18 +52,11 @@ const BHero = ({ index }: { index: number }) => {
                 backgroundRepeat: 'no-repeat',
             }}>
                 <motion.div
-                    initial={{
-                        opacity: 0,
-                        y: 50
-                    }}
-                    animate={{
-                        opacity: 1,
-                        y: 0,
-                    }}
+                    variants={childVariants}
                     transition={{
-                        duration: .5,
+                        duration: 0.8,
                         delay: .1,
-                        ease: 'easeIn'
+                        ease: premiumEasing
                     }}
                     className="md:hidden xs:flex h-max">
                     <Image
@@ -65,15 +70,11 @@ const BHero = ({ index }: { index: number }) => {
                 </motion.div>
                 <div className="pb-ds-[42] px-3.5 md:px-0 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 sm:gap-ds-[32]">
                     <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={isInView ? {
-                            opacity: 1,
-                            y: 0,
-                        } : {}}
+                        variants={childVariants}
                         transition={{
-                            duration: .6,
-                            delay: 0.1,
-                            ease: 'easeIn'
+                            duration: 0.8,
+                            delay: 0.2,
+                            ease: premiumEasing
                         }}
                         className="hidden md:flex"
                     >
@@ -86,50 +87,56 @@ const BHero = ({ index }: { index: number }) => {
                     <h1 className="inline xl:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] sm:text-ds-[30] text-[40px]"
                     >
                         <motion.span
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={isInView ? {
-                                opacity: 1,
-                                y: 0,
-                            } : {}}
+                            variants={childVariants}
                             transition={{
-                                duration: .8,
-                                delay: 0.2,
-                                ease: 'easeIn'
+                                duration: 1,
+                                delay: 0.3,
+                                ease: premiumEasing
                             }}
                             className="text-white">Know before they’re low,</motion.span>
                         <motion.span
-                            initial={{ opacity: 0, y: 50 }}
-                            animate={isInView ? {
-                                opacity: 1,
-                                y: 0,
-                            } : {}}
+                            variants={childVariants}
                             transition={{
-                                duration: 1,
-                                delay: .3,
-                                ease: 'easeIn'
+                                duration: 1.1,
+                                delay: .4,
+                                ease: premiumEasing
                             }}
                             className="text-white/60">{small ? ' ' : ''}stay ahead every time</motion.span>
                     </h1>
                     <motion.p
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={isInView ? {
-                            opacity: 1,
-                            y: 0,
-                        } : {}}
+                        variants={childVariants}
                         transition={{
-                            duration: 1.3,
-                            delay: .4,
-                            ease: 'easeIn'
+                            duration: 1.2,
+                            delay: .5,
+                            ease: premiumEasing
                         }} className="text-white/50 leading-snug font-normal sm:whitespace-pre-wrap text-base sm:text-ds-[14]"
                     >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
                     <div className="flex justify-between items-center w-full mt-2.5">
-                        <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
-                            <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
-                        </Button>
+                        <motion.div
+                            variants={childVariants}
+                            transition={{
+                                duration: 1.3,
+                                delay: .6,
+                                ease: premiumEasing
+                            }}
+                        >
+                            <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
+                                <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
+                            </Button>
+                        </motion.div>
 
-                        <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
-                            <ArrowDownIcon className="size-[19px] sm:!size-ds-[19]" />
-                        </Button>
+                        <motion.div
+                            variants={childVariants}
+                            transition={{
+                                duration: 1.3,
+                                delay: .7,
+                                ease: premiumEasing
+                            }}
+                        >
+                            <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
+                                <ArrowDownIcon className="size-[19px] sm:!size-ds-[19]" />
+                            </Button>
+                        </motion.div>
                     </div>
                 </div>
             </div>

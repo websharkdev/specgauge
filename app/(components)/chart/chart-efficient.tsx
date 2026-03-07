@@ -12,50 +12,44 @@ const CEfficient = ({ index }: { index: number }) => {
     const ref = useRef(null)
     const small = useMediaQuery('(max-width: 768px)')
 
-    const isInView = useInView(ref, {
-        once: small
-    })
+    const active = progress === index || small;
+    const premiumEasing = [0.16, 1, 0.3, 1];
+
+    const childVariants = {
+        active: { opacity: 1, y: 0, scale: 1 },
+        hidden: { opacity: 0, y: 40, scale: 1.05 },
+    }
 
     return (
         <motion.div
-            initial={{
-                opacity: small ? 1 : 0,
-                pointerEvents: 'none'
+            variants={{
+                active: { opacity: 1, pointerEvents: 'auto' },
+                hidden: { opacity: 0, pointerEvents: 'none' }
             }}
-            animate={isInView && (progress === index || small) ? {
-                opacity: 1,
-                pointerEvents: 'auto'
-            } : {}}
+            initial="hidden"
+            animate={active ? 'active' : 'hidden'}
             transition={{
-                duration: .5,
+                duration: 1,
                 delay: .2,
-                ease: 'linear'
+                ease: premiumEasing
             }}
             className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
             ref={ref}
         >
             <motion.h6
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView && (progress === index || small) ? {
-                    opacity: 1,
-                    y: 0,
-                } : {}}
+                variants={childVariants}
                 transition={{
-                    duration: .6,
-                    delay: small ? 0.3 : 1.3,
-                    ease: 'easeIn',
+                    duration: 0.8,
+                    delay: small ? 0.3 : 0.8,
+                    ease: premiumEasing,
                 }}
                 className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm sm:text-ds-[14]">With SpecGauge</motion.h6>
             <motion.h2
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView && (progress === index || small) ? {
-                    opacity: 1,
-                    y: 0,
-                } : {}}
+                variants={childVariants}
                 transition={{
                     duration: 1,
-                    delay: small ? 0.5 : 1.5,
-                    ease: 'easeIn',
+                    delay: small ? 0.5 : 1,
+                    ease: premiumEasing,
                 }}
                 className="md:px-0 px-3.5 z-10 text-[32px] sm:text-ds-[32] font-medium text-[#111111] leading-[95%] sm:mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</motion.h2>
 
