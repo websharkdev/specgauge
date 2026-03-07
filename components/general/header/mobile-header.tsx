@@ -10,10 +10,9 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { scrollToSection } from "@/hooks/useScrollToSection"
-import { useCSlider, useProgressStore } from "@/stores/general.store"
-import { Menu, X } from "lucide-react"
+import { useCSlider } from "@/stores/general.store"
+import { X } from "lucide-react"
 import Image from "next/image"
-import Link from "next/link"
 import { useState } from "react"
 
 
@@ -59,7 +58,7 @@ const MobileHeader = () => {
             <DialogTrigger className="cursor-pointer size-10 flex justify-center items-center rounded-full bg-[#11111110] hover:bg-[#11111120]">
                 <Image src='/icons/burger.svg' alt="burger-menu" width={20} height={20} />
             </DialogTrigger>
-            <DialogContent className="h-dvh w-dvw bg-transparent !text-white z-[150]" style={{
+            <DialogContent className="h-dvh w-dvw bg-transparent text-white! z-150" style={{
                 background: 'rgba(255, 255, 255, 0.2)',
                 backdropFilter: 'blur(60px)'
             }}>

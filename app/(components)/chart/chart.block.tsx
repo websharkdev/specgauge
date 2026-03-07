@@ -1,48 +1,37 @@
 'use client'
 
-import { motion, useInView } from "motion/react"
+import { useProgressStore } from "@/stores/general.store"
+import { useGSAP } from "@gsap/react"
 import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import ChartBG from "./chart-background"
 import CEfficient from "./chart-efficient"
 import CMonthly from "./chart-monthly"
-import { useProgressStore } from "@/stores/general.store"
+import { useSectionTransition } from "@/hooks/use-section-transition"
 
 const BChart = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
     const small = useMediaQuery('(max-width: 768px)')
 
     const active = progress === index || small;
 
+    useSectionTransition(ref, active);
+
+    useGSAP(() => {
+        // Since BChart is a container for the two sides (CMonthly and CEfficient), 
+        // the main animations happen inside those children with their own useGSAP hooks.
+    }, { dependencies: [active], scope: ref })
+
     return (
-        <motion.div
-            variants={{
-                active: {
-                    opacity: 1,
-                    pointerEvents: 'auto',
-                    visibility: 'visible'
-                },
-                hidden: {
-                    opacity: 0,
-                    pointerEvents: 'none',
-                    visibility: 'hidden'
-                }
-            }}
-            initial="hidden"
-            animate={active ? 'active' : 'hidden'}
-            transition={{
-                duration: .8,
-                ease: 'easeIn'
-            }}
-            className="static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden"
+        <div
+            className={`static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden`}
             id="pain_point" ref={ref}>
             <CMonthly index={small ? 1 : index} />
             <CEfficient index={small ? 2 : index} />
 
-
             {small ? null : <ChartBG active={active} />}
-        </motion.div>
+        </div>
     )
 }
 

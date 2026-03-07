@@ -1,57 +1,61 @@
 'use client'
 
 import { useProgressStore } from "@/stores/general.store"
+import { useGSAP } from "@gsap/react"
+import gsap from "gsap"
+import SplitType from "split-type"
 import { BadgeCheck, ClockPlus, Radio } from "lucide-react"
-import { motion, useInView } from "motion/react"
 import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
+import { useSectionTransition } from "@/hooks/use-section-transition"
 import ChartPointItem from "./chart-point-item"
 
 const CEfficient = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
     const small = useMediaQuery('(max-width: 768px)')
 
     const active = progress === index || small;
-    const premiumEasing: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
-    const childVariants = {
-        active: { opacity: 1, y: 0, scale: 1 },
-        hidden: { opacity: 0, y: 40, scale: 1.05 },
-    }
+    useSectionTransition(ref, active);
+
+    useGSAP(() => {
+        if (!active || !ref.current) return;
+        
+        const titleElements = [ref.current?.querySelector('.efficient-badge'), ref.current?.querySelector('.efficient-title')].filter(Boolean);
+        const points = ref.current?.querySelectorAll('.chart-point-item') || [];
+
+        gsap.set(titleElements, { y: 30, opacity: 0 });
+        if(points.length > 0) gsap.set(points, { y: 20, opacity: 0 });
+
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+        tl.to(titleElements, {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.1,
+            delay: small ? 0.3 : 0.8
+        });
+
+        if(points.length > 0) {
+            tl.to(points, {
+                y: 0,
+                opacity: 1,
+                duration: 0.8,
+                stagger: 0.1,
+            }, "-=0.5");
+        }
+
+    }, { dependencies: [active], scope: ref })
 
     return (
-        <motion.div
-            variants={{
-                active: { opacity: 1, pointerEvents: 'auto' },
-                hidden: { opacity: 0, pointerEvents: 'none' }
-            }}
-            initial="hidden"
-            animate={active ? 'active' : 'hidden'}
-            transition={{
-                duration: 1,
-                delay: .2,
-                ease: premiumEasing
-            }}
-            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4  overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
+        <div
+            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
             ref={ref}
         >
-            <motion.h6
-                variants={childVariants}
-                transition={{
-                    duration: 0.8,
-                    delay: small ? 0.3 : 0.8,
-                    ease: premiumEasing,
-                }}
-                className="md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm sm:text-ds-[14]">With SpecGauge</motion.h6>
-            <motion.h2
-                variants={childVariants}
-                transition={{
-                    duration: 1,
-                    delay: small ? 0.5 : 1,
-                    ease: premiumEasing,
-                }}
-                className="md:px-0 px-3.5 z-10 text-[32px] sm:text-ds-[32] font-medium text-[#111111] leading-[95%] sm:mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</motion.h2>
+            <h6 className="efficient-badge opacity-0 md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm sm:text-ds-[14]">With SpecGauge</h6>
+            <h2 className="efficient-title opacity-0 md:px-0 px-3.5 z-10 text-[32px] sm:text-ds-[32] font-medium text-[#111111] leading-[95%] sm:mb-ds-[40] md:whitespace-pre-wrap">{'Efficient refills only when\nthey’re needed'}</h2>
 
             <svg className="flex-1 absolute hidden md:flex" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 610 900">
                 <g filter="url(#filter0_f_1_1182)" opacity="0.15">
@@ -86,29 +90,36 @@ const CEfficient = ({ index }: { index: number }) => {
                 </defs>
             </svg>
 
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>                <ChartPointItem
-                color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
-                direction="right"
-                icon={<Radio size={18} color="#0B9C36" />}
-                title={"Real-time visibility\nof every tank"}
-                index={0}
-            />
-                <ChartPointItem
-                    color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
-                    direction="right"
-                    icon={<ClockPlus size={18} color="#0B9C36" />}
-                    title={"Smart scheduling and combined\ndelivery runs"}
-                    index={1}
-                />
-                <ChartPointItem
-                    color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
-                    direction="right"
-                    icon={<BadgeCheck size={18} color="#0B9C36" />}
-                    title={"No more surprises\nat critical sites"}
-                    index={2}
-                />
+            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>
+                <div className="chart-point-item opacity-0">
+                    <ChartPointItem
+                        color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                        direction="right"
+                        icon={<Radio size={18} color="#0B9C36" />}
+                        title={"Real-time visibility\nof every tank"}
+                        index={0}
+                    />
+                </div>
+                <div className="chart-point-item opacity-0">
+                    <ChartPointItem
+                        color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                        direction="right"
+                        icon={<ClockPlus size={18} color="#0B9C36" />}
+                        title={"Smart scheduling and combined\ndelivery runs"}
+                        index={1}
+                    />
+                </div>
+                <div className="chart-point-item opacity-0">
+                    <ChartPointItem
+                        color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
+                        direction="right"
+                        icon={<BadgeCheck size={18} color="#0B9C36" />}
+                        title={"No more surprises\nat critical sites"}
+                        index={2}
+                    />
+                </div>
             </div>
-        </motion.div>
+        </div>
     )
 }
 

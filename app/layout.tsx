@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Mona_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import GProvider from "@/components/providers/general.provider";
+import SmoothScrollProvider from "@/components/providers/smooth-scroll.provider";
 import { siteConfig } from "@/lib/config";
 
 const monaSans = Mona_Sans({
@@ -33,7 +34,9 @@ export default function RootLayout({
         suppressContentEditableWarning
       >
         <GProvider>
-          {children}
+          <SmoothScrollProvider>
+            {children}
+          </SmoothScrollProvider>
         </GProvider>
       </body>
     </html>

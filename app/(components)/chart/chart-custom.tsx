@@ -2,10 +2,10 @@
 
 import { type ChartConfig, ChartContainer } from "@/components/ui/chart";
 import { motion } from "motion/react";
-import { Bar, BarChart, Customized, LabelList, ResponsiveContainer, YAxis } from "recharts";
-import { chartData } from "./chart-data";
-import { useMediaQuery } from "usehooks-ts";
 import { useMemo } from "react";
+import { Bar, BarChart, Customized, LabelList, ResponsiveContainer } from "recharts";
+import { useMediaQuery } from "usehooks-ts";
+import { chartData } from "./chart-data";
 
 const renderCustomizedLabel = (props: unknown) => {
     const { x, y, width, fill } = props as { x: number; y: number; width: number; fill: string; };

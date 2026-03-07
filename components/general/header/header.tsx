@@ -8,7 +8,7 @@ import { useMediaQuery } from 'usehooks-ts';
 import MobileHeader from "./mobile-header";
 import ProgressBar from "./progress";
 import { useProgressStore } from "@/stores/general.store";
-
+import MagneticButton from "@/components/ui/magnetic-button";
 
 const Header = () => {
     const { sections, progress, setProgress } = useProgressStore()
@@ -33,7 +33,10 @@ const Header = () => {
             <div className="flex items-center gap-4">
                 {small ? null : progressBAR}
 
-                <Button onClick={() => setProgress(sections - 1)} className="cursor-pointer w-[102px] sm:w-ds-[102] h-[38px] sm:h-ds-[38] text-sm sm:text-ds-[14] font-medium leading-[90%]">Contact</Button>
+                <MagneticButton className="hidden sm:block">
+                    <Button onClick={() => setProgress(sections - 1)} className="cursor-pointer w-[102px] sm:w-ds-[102] h-[38px] sm:h-ds-[38] text-sm sm:text-ds-[14] font-medium leading-[90%]">Contact</Button>
+                </MagneticButton>
+                <Button onClick={() => setProgress(sections - 1)} className="sm:hidden cursor-pointer w-[102px] h-[38px] text-sm font-medium leading-[90%]">Contact</Button>
 
                 {small ? <MobileHeader /> : null}
             </div>

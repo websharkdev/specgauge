@@ -1,64 +1,86 @@
-'use client'
-
-import { motion, useInView } from "motion/react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import SplitType from "split-type";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { useProgressStore } from "@/stores/general.store";
 import { ArrowDownIcon, BadgeCheck } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
-import { useProgressStore } from "@/stores/general.store";
+import MagneticButton from "@/components/ui/magnetic-button";
 import { useMediaQuery } from "usehooks-ts";
-
+import { useSectionTransition } from "@/hooks/use-section-transition";
 
 const BHero = ({ index }: { index: number }) => {
     const { setProgress, sections, progress } = useProgressStore()
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
+    const titleRef = useRef<HTMLHeadingElement>(null)
+    const contentRef = useRef<HTMLDivElement>(null)
+    const imgRef = useRef<HTMLImageElement>(null)
+    
     const small = useMediaQuery('(max-width: 768px)')
-
     const active = progress === index || small;
 
-    const premiumEasing: [number, number, number, number] = [0.16, 1, 0.3, 1];
+    useSectionTransition(ref, active, 0.7);
 
-    const childVariants = {
-        active: { opacity: 1, y: 0, scale: 1 },
-        hidden: { opacity: 0, y: 40, scale: 1.05 },
-    }
+    useGSAP(() => {
+        if (!active || !ref.current || !titleRef.current) return;
+
+        // Split text for Awwwards-level staggered reveal
+        const splitText = new SplitType(titleRef.current, { types: 'words,chars' });
+        
+        // Setup initial states
+        gsap.set(splitText.chars, { y: 100, opacity: 0 });
+        gsap.set(contentRef.current?.children || [], { y: 30, opacity: 0 });
+        gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
+
+        // Create main timeline
+        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+
+        tl.to(splitText.chars, {
+            y: 0,
+            opacity: 1,
+            duration: 1.2,
+            stagger: 0.02,
+        })
+        .to(contentRef.current?.children || [], {
+            y: 0,
+            opacity: 1,
+            duration: 1,
+            stagger: 0.1,
+        }, "-=0.8")
+        .to(imgRef.current, {
+            scale: 1,
+            opacity: 1,
+            duration: 1.5,
+            ease: "expo.out"
+        }, "-=1.2");
+
+        // Optional: subtle continuous floating animation for the device image
+        gsap.to(imgRef.current, {
+            y: -15,
+            duration: 4,
+            ease: "sine.inOut",
+            yoyo: true,
+            repeat: -1,
+            delay: 1
+        });
+
+        return () => {
+            splitText.revert();
+        };
+    }, { dependencies: [active], scope: ref });
 
     return (
-        <motion.div ref={ref}
-            variants={{
-                active: {
-                    opacity: 1,
-                    pointerEvents: 'auto',
-                    visibility: 'visible'
-                },
-                hidden: {
-                    opacity: 0,
-                    pointerEvents: 'none',
-                    visibility: 'hidden'
-                }
-            }}
-            initial="hidden"
-            animate={active ? 'active' : 'hidden'}
-            transition={{
-                duration: 1,
-                ease: premiumEasing
-            }}
-            className="static sm:relative lg:fixed lg:inset-0 bg-white snap-normal md:snap-start w-full h-max md:h-[100vh] flex justify-between items-center overflow-hidden">
+        <div ref={ref}
+            className={`static sm:relative lg:fixed lg:inset-0 bg-white snap-normal md:snap-start w-full h-max md:h-[100vh] flex justify-between items-center overflow-hidden`}>
             <div className="md:w-1/2 w-full h-full flex relative z-10 flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:pb-ds-[40] md:pt-ds-[40] pt-10 pb-14 md:px-ds-[45] px-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
             }}>
-                <motion.div
-                    variants={childVariants}
-                    transition={{
-                        duration: 0.8,
-                        delay: .1,
-                        ease: premiumEasing
-                    }}
-                    className="md:hidden xs:flex h-max">
+                <div className="md:hidden xs:flex h-max opacity-0 translate-y-10">
                     <Image
                         src='/main-devices.png'
                         alt='Main Devices'
@@ -67,76 +89,36 @@ const BHero = ({ index }: { index: number }) => {
                         className="object-contain max-w-9/10 md:aspect-[329/368] h-max"
                         priority
                     />
-                </motion.div>
-                <div className="pb-ds-[42] px-3.5 md:px-0 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 sm:gap-ds-[32]">
-                    <motion.div
-                        variants={childVariants}
-                        transition={{
-                            duration: 0.8,
-                            delay: 0.2,
-                            ease: premiumEasing
-                        }}
-                        className="hidden md:flex"
-                    >
-
+                </div>
+                <div ref={contentRef} className="pb-ds-[42] px-3.5 md:px-0 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 sm:gap-ds-[32]">
+                    <div className="hidden md:flex opacity-0">
                         <Badge variant='outline' className="rounded-full flex items-center gap-2 sm:gap-ds-[4] p-2 sm:py-ds-[10] sm:px-ds-[15] mb-ds-[20] text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
                             <BadgeCheck className="size-[13px] sm:!size-ds-[13]" />
                             <span className="text-xs sm:text-ds-[12] leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
-                    </motion.div>
-                    <h1 className="inline xl:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] sm:text-ds-[30] text-[40px]"
+                    </div>
+                    <h1 ref={titleRef} className="inline xl:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] sm:text-ds-[30] text-[40px] text-white"
+                        style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}
                     >
-                        <motion.span
-                            variants={childVariants}
-                            transition={{
-                                duration: 1,
-                                delay: 0.3,
-                                ease: premiumEasing
-                            }}
-                            className="text-white">Know before they’re low,</motion.span>
-                        <motion.span
-                            variants={childVariants}
-                            transition={{
-                                duration: 1.1,
-                                delay: .4,
-                                ease: premiumEasing
-                            }}
-                            className="text-white/60">{small ? ' ' : ''}stay ahead every time</motion.span>
+                        <span>Know before they’re low,</span>
+                        <span className="text-white/60">{small ? ' ' : ''}stay ahead every time</span>
                     </h1>
-                    <motion.p
-                        variants={childVariants}
-                        transition={{
-                            duration: 1.2,
-                            delay: .5,
-                            ease: premiumEasing
-                        }} className="text-white/50 leading-snug font-normal sm:whitespace-pre-wrap text-base sm:text-ds-[14]"
-                    >{'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}</motion.p>
-                    <div className="flex justify-between items-center w-full mt-2.5">
-                        <motion.div
-                            variants={childVariants}
-                            transition={{
-                                duration: 1.3,
-                                delay: .6,
-                                ease: premiumEasing
-                            }}
-                        >
-                            <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
-                                <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
-                            </Button>
-                        </motion.div>
-
-                        <motion.div
-                            variants={childVariants}
-                            transition={{
-                                duration: 1.3,
-                                delay: .7,
-                                ease: premiumEasing
-                            }}
-                        >
+                    <p className="opacity-0 text-white/50 leading-snug font-normal sm:whitespace-pre-wrap text-base sm:text-ds-[14]">
+                        {'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}
+                    </p>
+                    <div className="opacity-0 flex justify-between items-center w-full mt-2.5">
+                        <div>
+                            <MagneticButton>
+                                <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
+                                    <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
+                                </Button>
+                            </MagneticButton>
+                        </div>
+                        <div>
                             <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
                                 <ArrowDownIcon className="size-[19px] sm:!size-ds-[19]" />
                             </Button>
-                        </motion.div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -144,6 +126,7 @@ const BHero = ({ index }: { index: number }) => {
                 <div className="absolute inset-0 z-[5] h-full w-full bg-[#E5E8EF] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_6%,transparent_110%)]"></div>
                 <div className="absolute inset-0 z-10 h-full w-full bg-[#E5E8EF] bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:55px_55px]"></div>
                 <Image
+                    ref={imgRef}
                     src='/main-devices.png'
                     alt='Main Devices'
                     width={926}
@@ -153,7 +136,7 @@ const BHero = ({ index }: { index: number }) => {
                 />
                 <div className="flex-1" />
             </div>
-        </motion.div>
+        </div>
     )
 }
 

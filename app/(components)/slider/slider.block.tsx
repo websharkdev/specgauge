@@ -2,42 +2,24 @@
 
 import { Slider } from "@/components/general/slider";
 import { useProgressStore } from "@/stores/general.store";
-import { motion, useInView } from "motion/react";
 import { useRef } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { useSectionTransition } from "@/hooks/use-section-transition";
 
 
 const BSlider = ({ index }: { index: number }) => {
     const { progress, sections, setProgress } = useProgressStore()
-    const ref = useRef(null)
+    const ref = useRef<HTMLDivElement>(null)
     const small = useMediaQuery('(max-width: 768px)')
-    const isInView = useInView(ref, {
-        once: small
-    })
+    const active = progress === index || small;
+
+    useSectionTransition(ref, active);
 
     return (
-        <motion.div
+        <div
             ref={ref}
-            variants={{
-                active: {
-                    opacity: 1,
-                    pointerEvents: 'auto',
-                    visibility: 'visible'
-                },
-                hidden: {
-                    opacity: 0,
-                    pointerEvents: 'none',
-                    visibility: 'hidden'
-                }
-            }}
-            initial="hidden"
-            animate={(progress === index || small) ? 'active' : 'hidden'}
-            transition={{
-                duration: .8,
-                ease: 'easeIn'
-            }}
             id="slider"
-            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-[100vh] min-h-[950px] overflow-hidden flex items-end"
+            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-screen min-h-[950px] overflow-hidden flex items-end"
             style={{
                 background: small ? `url('/backgrounds/slider-bg_mobile.svg') center center / cover no-repeat` : `url('/backgrounds/slider-bg.svg') center center / cover no-repeat`,
             }}>
@@ -66,7 +48,7 @@ const BSlider = ({ index }: { index: number }) => {
             ]}
                 pageIndex={index}
             />
-        </motion.div>
+        </div>
     )
 }
 

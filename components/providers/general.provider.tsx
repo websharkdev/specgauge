@@ -26,7 +26,7 @@ const GProvider = ({ children }: Readonly<{
 
         const handleScroll = (e: WheelEvent) => {
             const scrollCurrent = performance.now();
-            const scrollDelay = 800; // Consistent delay for smoother experience
+            const scrollDelay = 1200; // In sync with 1.1s entry animation + buffer
 
             if (scrollCurrent < scrollStart + scrollDelay || Math.abs(e.deltaY) < 10) {
                 return;

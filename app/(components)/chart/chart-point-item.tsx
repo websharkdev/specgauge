@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useInView } from 'motion/react'
+import { motion } from 'motion/react'
 import { useRef } from 'react'
 import { useMediaQuery } from 'usehooks-ts'
 
