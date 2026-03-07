@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 // TODO: update site config
 
 export const siteConfig = {
-    name: 'SybilFi - Your Crypto Management Solution',
+    name: 'SpecGauge',
     url:
         process.env.NODE_ENV === 'development'
             ? 'http://localhost:3000/'

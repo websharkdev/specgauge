@@ -17,7 +17,7 @@ const BHero = ({ index }: { index: number }) => {
 
     const active = progress === index || small;
 
-    const premiumEasing = [0.16, 1, 0.3, 1];
+    const premiumEasing: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
     const childVariants = {
         active: { opacity: 1, y: 0, scale: 1 },

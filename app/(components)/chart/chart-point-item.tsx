@@ -24,7 +24,7 @@ const ChartPointItem = ({
 }: Props) => {
     const ref = useRef(null)
     const small = useMediaQuery('(max-width: 768px)')
-    const premiumEasing = [0.16, 1, 0.3, 1];
+    const premiumEasing: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
     return (
         <motion.div
