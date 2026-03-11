@@ -3,12 +3,14 @@
 import { LogoIcon } from "@/components/general/logo";
 import { Button } from "@/components/ui/button";
 import { ChevronUp } from "lucide-react";
+import dynamic from "next/dynamic";
 import { useMemo, useEffect, useState } from "react";
 import { useMediaQuery } from 'usehooks-ts';
-import MobileHeader from "./mobile-header";
-import ProgressBar from "./progress";
 import { useProgressStore } from "@/stores/general.store";
 import MagneticButton from "@/components/ui/magnetic-button";
+
+const MobileHeader = dynamic(() => import("./mobile-header"));
+const ProgressBar = dynamic(() => import("./progress"));
 
 const Header = () => {
     const { sections, progress, setProgress } = useProgressStore()

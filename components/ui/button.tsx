@@ -59,9 +59,10 @@ function Button({
 
   return (
     <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      onClick={href ? () => redirect(href) : props.onClick}
+        data-slot="button"
+        data-variant={variant}
+        className={cn(buttonVariants({ variant, size, className }))}
+        onClick={href ? () => redirect(href) : props.onClick}
       {...props}
     />
   )

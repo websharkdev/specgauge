@@ -1,14 +1,19 @@
 "use client"
 
+import dynamic from "next/dynamic";
 import { useMemo } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { BChart, BForm, BHero, BSlider, BWhyUs } from "./(components)";
-import { CEfficient, CMonthly } from "./(components)/chart";
+
+const CMonthly = dynamic(() => import("./(components)/chart").then((mod) => ({ default: mod.CMonthly })));
+const CEfficient = dynamic(() => import("./(components)/chart").then((mod) => ({ default: mod.CEfficient })));
 
 
 export default function Home() {
-  const small = useMediaQuery('(max-width: 768px)')
-
+  const small = useMediaQuery('(max-width: 768px)', {
+    defaultValue: false,
+    initializeWithValue: false,
+  })
 
   const sections = useMemo(() => {
     if (small) {

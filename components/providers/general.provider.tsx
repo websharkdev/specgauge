@@ -1,7 +1,7 @@
 'use client'
 
 import { useProgressStore } from "@/stores/general.store";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 const GProvider = ({ children }: Readonly<{
@@ -10,16 +10,28 @@ const GProvider = ({ children }: Readonly<{
     const { progress, setProgress, sections, updateSections } = useProgressStore();
     const small = useMediaQuery('(max-width: 768px)')
     const [mounted, setMounted] = useState(false);
+    const progressRef = useRef(progress);
+    const sectionsRef = useRef(sections);
+
+    const scrollTo = useCallback((nextProgress: number) => {
+        setProgress(nextProgress);
+    }, [setProgress])
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     useEffect(() => {
+        progressRef.current = progress;
+        sectionsRef.current = sections;
+    }, [progress, sections]);
+
+    useEffect(() => {
         if (!mounted) return;
 
         if (small) {
-            return updateSections()
+            updateSections()
+            return;
         }
 
         let scrollStart = performance.now();
@@ -35,6 +47,8 @@ const GProvider = ({ children }: Readonly<{
         const handleScroll = (e: WheelEvent) => {
             const scrollCurrent = performance.now();
             const scrollDelay = sectionTransitionDelay;
+            const currentProgress = progressRef.current;
+            const currentSections = sectionsRef.current;
 
             if (scrollCurrent < scrollStart + scrollDelay || Math.abs(e.deltaY) < 10) {
                 return;
@@ -43,19 +57,17 @@ const GProvider = ({ children }: Readonly<{
             const isMovingUp = e.deltaY < 0;
             const isMovingDown = e.deltaY > 0;
 
-            // Boundary check to prevent jitter when scrolling at the ends
-            if (isMovingUp && progress === 0) return;
-            if (isMovingDown && progress === sections - 1) return;
+            if (isMovingUp && currentProgress === 0) return;
+            if (isMovingDown && currentProgress === currentSections - 1) return;
 
             scrollStart = performance.now();
 
             if (isMovingUp) {
-                scrollTo(progress - 1);
+                scrollTo(currentProgress - 1);
             } else {
-                scrollTo(progress + 1);
+                scrollTo(currentProgress + 1);
             }
         };
-
 
         const handleTouchStart = (e: TouchEvent) => {
             touchStart = {
@@ -68,7 +80,9 @@ const GProvider = ({ children }: Readonly<{
             if (!touchStart) return;
 
             const scrollCurrent = performance.now();
-            const scrollDelay = progress === 0 ? 0 : sectionTransitionDelay - 250;
+            const currentProgress = progressRef.current;
+            const currentSections = sectionsRef.current;
+            const scrollDelay = currentProgress === 0 ? 0 : sectionTransitionDelay - 250;
 
 
             if (scrollCurrent < scrollStart + scrollDelay) {
@@ -88,17 +102,16 @@ const GProvider = ({ children }: Readonly<{
             }
 
             if (touchMove.clientY < touchStart.clientY) {
-                scrollTo(progress + 1 < sections - 1 ? progress + 1 : sections - 1);
+                scrollTo(currentProgress + 1 < currentSections - 1 ? currentProgress + 1 : currentSections - 1);
             } else {
-                scrollTo(progress - 1 > 0 ? progress - 1 : 0);
+                scrollTo(currentProgress - 1 > 0 ? currentProgress - 1 : 0);
             }
 
         };
 
-
-        window.addEventListener('wheel', handleScroll);
-        window.addEventListener('touchstart', handleTouchStart);
-        window.addEventListener('touchmove', handleTouchMove);
+        window.addEventListener('wheel', handleScroll, { passive: true });
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
 
         return () => {
             window.removeEventListener('wheel', handleScroll);
@@ -106,15 +119,11 @@ const GProvider = ({ children }: Readonly<{
             window.removeEventListener('touchmove', handleTouchMove);
         };
     }, [
-        progress,
         small,
-        sections,
-        mounted
+        mounted,
+        scrollTo,
+        updateSections
     ]);
-
-    const scrollTo = useCallback((progress: number) => {
-        setProgress(progress);
-    }, [])
 
     return children
 }

@@ -193,6 +193,7 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                     alt="Slide Image"
                     width={800}
                     height={800}
+                    sizes="100vw"
                     className={`md:hidden block w-full ${s.imageSize} translate-y-10 transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : ''}`}
                 />
             </div>
@@ -203,6 +204,7 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                     alt="Slide Image"
                     width={1200}
                     height={1200}
+                    sizes="(max-width: 1280px) 55vw, 50vw"
                     className={s.imageSize}
                 />
             </div>

@@ -1,21 +1,24 @@
 import { Metadata } from 'next';
 
-// TODO: update site config
-
 export const siteConfig = {
     name: 'SpecGauge',
     url:
         process.env.NODE_ENV === 'development'
-            ? 'http://localhost:3000/'
-            : 'https://sybilfi.vercel.app/',
-    ogImage: '',
+            ? 'http://localhost:3000'
+            : 'https://specgauge.com',
+    ogImage: '/main-devices.png',
     description:
-        'sybilfi is a project designed to simplify the lives of sibyls by helping them manage multiple accounts, track tasks, and maintain daily activities efficiently.',
-    links: {},
+        'SpecGauge helps oil distributors monitor tank levels in real time, reduce emergency deliveries, and plan more profitable refill routes.',
 };
 
 const metadataKeyWords = [
-    'Crypto',
+    'SpecGauge',
+    'oil tank monitoring',
+    'fuel delivery optimization',
+    'real-time tank telemetry',
+    'oil distribution software',
+    'pressure sensor',
+    'delivery route planning',
 ];
 
 export const defaultMetadata: Metadata = {
@@ -32,6 +35,10 @@ export const defaultMetadata: Metadata = {
         },
     ],
     creator: 'webshark.dev',
+    metadataBase: new URL(siteConfig.url),
+    alternates: {
+        canonical: '/',
+    },
     openGraph: {
         type: 'website',
         locale: 'en_US',
@@ -50,8 +57,9 @@ export const defaultMetadata: Metadata = {
     },
     icons: {
         icon: '/favicon.ico',
-        shortcut: '/favicon-16x16.png',
-        apple: '/apple-touch-icon.png',
     },
-    manifest: `${siteConfig.url}manifest.webmanifest`,
+    robots: {
+        index: true,
+        follow: true,
+    },
 };

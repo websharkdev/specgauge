@@ -127,11 +127,15 @@ const BWhyUs = ({ index }: { index: number }) => {
                     <WhyUsItem index={4} icon={<Image src='/icons/bar-line-chart.svg' alt='icon' width={24} className="size-5 sm:w-ds-[20] sm:h-ds-[20]" height={24} />} iconBG="linear-gradient(205.6deg, #F3F9EB 11.6%, #F9F0F0 83.8%)" title={"Predict with confidence,\n\stay ahead always"} subtitle="Move from reactive to proactive planning by knowing tank levels before customers even call, ensuring your business is always one step ahead of demand" />
                 </div>
             </div>
-            <div className="why-us-image col-span-5 lg:flex hidden flex-col gap-4 relative overflow-hidden h-full"
-                style={{
-                    background: 'url("/why_us.png") center center / cover no-repeat',
-                }}
-            />
+            <div className="why-us-image col-span-5 lg:flex hidden flex-col gap-4 relative overflow-hidden h-full">
+                <Image
+                    src="/why_us.png"
+                    alt="SpecGauge dashboard and operations preview"
+                    fill
+                    sizes="50vw"
+                    className="object-cover"
+                />
+            </div>
         </div>
     )
 }

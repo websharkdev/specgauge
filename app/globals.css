@@ -225,6 +225,14 @@ html {
   scroll-snap-type: y mandatory;
 }
 
+.app-html {
+  perspective: 1200px;
+}
+
+.app-body {
+  transform-style: preserve-3d;
+}
+
 /* width */
 ::-webkit-scrollbar {
   display: none;

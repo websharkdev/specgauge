@@ -1,12 +1,11 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import SplitType from "split-type";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useProgressStore } from "@/stores/general.store";
 import { ArrowDownIcon, BadgeCheck } from "lucide-react";
 import Image from "next/image";
-import { useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { useMediaQuery } from "usehooks-ts";
 import { useSectionTransition } from "@/hooks/use-section-transition";
@@ -17,49 +16,75 @@ const BHero = ({ index }: { index: number }) => {
     const titleRef = useRef<HTMLHeadingElement>(null)
     const contentRef = useRef<HTMLDivElement>(null)
     const imgRef = useRef<HTMLImageElement>(null)
+    const hasBeenInactiveRef = useRef(false)
+    const [canAnimate, setCanAnimate] = useState(false)
     
     const small = useMediaQuery('(max-width: 768px)')
     const active = progress === index || small;
 
-    useSectionTransition(ref, active, 0.7);
+    useSectionTransition(ref, active, 0);
+
+    useLayoutEffect(() => {
+        if (!ref.current) return;
+
+        if (active) {
+            gsap.set(contentRef.current?.children || [], { y: 0, opacity: 1 });
+            gsap.set(imgRef.current, { scale: 1, opacity: 1 });
+            return;
+        }
+
+        hasBeenInactiveRef.current = true;
+        setCanAnimate(true);
+    }, [active]);
 
     useGSAP(() => {
         if (!active || !ref.current || !titleRef.current) return;
 
-        // Split text for Awwwards-level staggered reveal
-        const splitText = new SplitType(titleRef.current, { types: 'words,chars' });
-        
-        // Setup initial states
-        gsap.set(splitText.chars, { y: 100, opacity: 0 });
-        gsap.set(contentRef.current?.children || [], { y: 30, opacity: 0 });
-        gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
+        if (!hasBeenInactiveRef.current || !canAnimate) {
+            return;
+        }
 
-        // Create main timeline
-        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+        let splitText: { chars: HTMLElement[] | null; revert: () => void } | null = null;
+        let timeline: gsap.core.Timeline | null = null;
+        let cancelled = false;
 
-        tl.to(splitText.chars, {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.02,
-        })
-        .to(contentRef.current?.children || [], {
-            y: 0,
-            opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-        }, "-=0.8")
-        .to(imgRef.current, {
-            scale: 1,
-            opacity: 1,
-            duration: 1.5,
-            ease: "expo.out"
-        }, "-=1.2");
+        void import("split-type").then(({ default: SplitType }) => {
+            if (cancelled || !titleRef.current) return;
+
+            splitText = new SplitType(titleRef.current, { types: "words,chars" });
+            const chars = splitText.chars ?? [];
+
+            gsap.set(chars, { y: 100, opacity: 0 });
+            gsap.set(contentRef.current?.children || [], { y: 30, opacity: 0 });
+            gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
+
+            timeline = gsap.timeline({ defaults: { ease: "sine.inOut" } });
+
+            timeline.to(chars, {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.02,
+            })
+                .to(contentRef.current?.children || [], {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                })
+                .to(imgRef.current, {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.05,
+                    ease: "sine.inOut"
+                });
+        });
 
         return () => {
-            splitText.revert();
+            cancelled = true;
+            timeline?.kill();
+            splitText?.revert();
         };
-    }, { dependencies: [active], scope: ref });
+    }, { dependencies: [active, canAnimate], scope: ref });
 
     return (
         <div ref={ref}
@@ -69,41 +94,36 @@ const BHero = ({ index }: { index: number }) => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
-                opacity: active ? 1 : 0,
-                pointerEvents: active ? 'auto' : 'none',
             }}>
-                <div className="md:hidden xs:flex h-max opacity-0 translate-y-10">
+                <div className={`md:hidden xs:flex h-max ${canAnimate ? "opacity-0 translate-y-10" : "opacity-100 translate-y-0"}`}>
                     <Image
                         src='/main-devices.png'
                         alt='Main Devices'
                         width={800}
                         height={800}
+                        sizes="(max-width: 768px) 90vw, 800px"
                         className="object-contain max-w-9/10 md:aspect-[329/368] h-max"
                         priority
                     />
                 </div>
                 <div ref={contentRef} className="pb-ds-[42] px-3.5 md:px-0 pt-0 w-full h-max md:h-full flex relative flex-col justify-end gap-6 sm:gap-ds-[32]">
-                    <div className="hidden md:flex opacity-0">
+                    <div className={`hidden md:flex ${canAnimate ? "opacity-0" : "opacity-100"}`}>
                         <Badge variant='outline' className="rounded-full flex items-center gap-2 sm:gap-ds-[4] p-2 sm:py-ds-[10] sm:px-ds-[15] mb-ds-[20] text-white/70 bg-white/5 border-white/10 bg-opacity-40 backdrop-blur-xl bg-blend-multiply">
                             <BadgeCheck className="size-[13px] sm:!size-ds-[13]" />
                             <span className="text-xs sm:text-ds-[12] leading-[90%] font-poppins">Beta version is Live!</span>
                         </Badge>
                     </div>
-                    <h1 ref={titleRef} className="inline xl:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] sm:text-ds-[30] text-[40px] text-white"
-                        style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}
-                    >
+                    <h1 ref={titleRef} className="inline xl:flex flex-col leading-[95%] font-medium font-mona_sans 2xl:text-ds-[52] xl:text-ds-[46] lg:text-ds-[42] sm:text-ds-[30] text-[40px] text-white">
                         <span>Know before they’re low,</span>
                         <span className="text-white/60">{small ? ' ' : ''}stay ahead every time</span>
                     </h1>
-                    <p className="opacity-0 text-white/50 leading-snug font-normal sm:whitespace-pre-wrap text-base sm:text-ds-[14]">
+                    <p className={`${canAnimate ? "opacity-0" : "opacity-100"} text-white/50 leading-snug font-normal sm:whitespace-pre-wrap text-base sm:text-ds-[14]`}>
                         {'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}
                     </p>
-                    <div className="opacity-0 flex justify-between items-center w-full mt-2.5">
-                        <div>
+                    <div className={`${canAnimate ? "opacity-0" : "opacity-100"} flex justify-between items-center w-full mt-2.5`}>
                             <MagneticButton className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
                                 <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
                             </MagneticButton>
-                        </div>
                         <div>
                             <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
                                 <ArrowDownIcon className="size-[19px] sm:!size-ds-[19]" />
@@ -121,6 +141,7 @@ const BHero = ({ index }: { index: number }) => {
                     alt='Main Devices'
                     width={926}
                     height={521}
+                    sizes="(max-width: 1024px) 0px, 45vw"
                     className="object-contain max-w-8/10 sm:max-w-ds-[800] w-full z-20 relative md:absolute right-20"
                     priority
                 />

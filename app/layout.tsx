@@ -3,7 +3,7 @@ import { Mona_Sans, Poppins } from "next/font/google";
 import "./globals.css";
 import GProvider from "@/components/providers/general.provider";
 import SmoothScrollProvider from "@/components/providers/smooth-scroll.provider";
-import { siteConfig } from "@/lib/config";
+import { defaultMetadata } from "@/lib/config";
 
 const monaSans = Mona_Sans({
   variable: "--font-mona",
@@ -17,7 +17,7 @@ const poppins = Poppins({
   weight: ['400', "500", "700"], // Add desired weights
 });
 
-export const metadata: Metadata = siteConfig
+export const metadata: Metadata = defaultMetadata
 
 export default function RootLayout({
   children,
@@ -25,15 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en"
-      suppressHydrationWarning
-      suppressContentEditableWarning
-      style={{ perspective: "1200px" }}>
+    <html lang="en" className="app-html">
       <body
-        className={`${monaSans.variable} ${poppins.className} antialiased lg:overflow-hidden`}
-        style={{ transformStyle: "preserve-3d" }}
-        suppressHydrationWarning
-        suppressContentEditableWarning
+        className={`${monaSans.variable} ${poppins.className} app-body antialiased lg:overflow-hidden`}
       >
         <GProvider>
           <SmoothScrollProvider>

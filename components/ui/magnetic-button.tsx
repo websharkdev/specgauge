@@ -2,7 +2,7 @@
 
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Button, ButtonProps } from './button';
 
 interface MagneticButtonProps extends ButtonProps{
@@ -15,10 +15,12 @@ export default function MagneticButton({
 }: MagneticButtonProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const textRef = useRef<HTMLSpanElement>(null);
-    const [isHovered, setIsHovered] = useState(false);
 
     useGSAP(() => {
         if (!buttonRef.current || !textRef.current) return;
+
+        const mediaQuery = window.matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)');
+        if (!mediaQuery.matches) return;
 
         const button = buttonRef.current;
         const text = textRef.current;
@@ -50,12 +52,7 @@ export default function MagneticButton({
             });
         };
 
-        const handleMouseEnter = () => {
-            setIsHovered(true);
-        };
-
         const handleMouseLeave = () => {
-            setIsHovered(false);
             gsap.to([button, text], {
                 x: 0,
                 y: 0,
@@ -65,12 +62,10 @@ export default function MagneticButton({
         };
 
         button.addEventListener('mousemove', handleMouseMove);
-        button.addEventListener('mouseenter', handleMouseEnter);
         button.addEventListener('mouseleave', handleMouseLeave);
 
         return () => {
             button.removeEventListener('mousemove', handleMouseMove);
-            button.removeEventListener('mouseenter', handleMouseEnter);
             button.removeEventListener('mouseleave', handleMouseLeave);
         };
     }, { scope: buttonRef });
