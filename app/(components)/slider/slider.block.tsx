@@ -22,7 +22,8 @@ const BSlider = ({ index }: { index: number }) => {
             className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-screen min-h-[950px] overflow-hidden flex items-end"
             style={{
                 background: small ? `url('/backgrounds/slider-bg_mobile.svg') center center / cover no-repeat` : `url('/backgrounds/slider-bg.svg') center center / cover no-repeat`,
-                visibility: active ? "visible" : "hidden"
+                opacity: active ? 1 : 0,
+                pointerEvents: active ? 'auto' : 'none',
             }}>
             <Slider slides={[
                 {
@@ -30,7 +31,7 @@ const BSlider = ({ index }: { index: number }) => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: 'mx-auto max-w-9/10 sm:max-w-8/10 sm:mt-auto sm:mr-0 sm:ml-auto md:max-w-9/10 xl:max-w-[50vw]',
+                    imageSize: 'mx-auto max-w-9/10 sm:max-w-8/10 sm:mt-auto sm:mr-0 sm:ml-auto md:max-w-9/10 xl:max-w-[50vw] md:mr-10',
                 },
                 {
                     title: "Two parts. \n\One smart solution.",

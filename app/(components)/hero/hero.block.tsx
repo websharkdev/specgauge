@@ -69,7 +69,8 @@ const BHero = ({ index }: { index: number }) => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
-                visibility: active ? "visible" : "hidden"
+                opacity: active ? 1 : 0,
+                pointerEvents: active ? 'auto' : 'none',
             }}>
                 <div className="md:hidden xs:flex h-max opacity-0 translate-y-10">
                     <Image

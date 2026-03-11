@@ -26,6 +26,10 @@ const BChart = ({ index }: { index: number }) => {
     return (
         <div
             className={`static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden`}
+            style={{
+                opacity: active ? 1 : 0,
+                pointerEvents: active ? 'auto' : 'none',
+            }}
             id="pain_point" ref={ref}>
             <CMonthly index={small ? 1 : index} />
             <CEfficient index={small ? 2 : index} />

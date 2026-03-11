@@ -1,19 +1,21 @@
 'use client';
 
-import { motion } from 'motion/react';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 import { Button } from '@/components/ui/button';
-import Image from 'next/image';
-import { useEffect, useRef } from 'react';
-import { Pagination } from 'swiper/modules';
-import { PaginationOptions } from 'swiper/types';
 import { useCSlider, useProgressStore } from '@/stores/general.store';
-import { useMediaQuery } from 'usehooks-ts';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import Image from 'next/image';
+import { useEffect, useRef } from 'react';
 import SplitType from 'split-type';
+import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
+import { PaginationOptions } from 'swiper/types';
+import { useMediaQuery } from 'usehooks-ts';
+
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
+
+import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
 type Props = {
     slides: {
@@ -55,18 +57,25 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
         if (!swiper) return;
 
         if (swiper.params.loop) {
-            swiper.slideToLoop(slide, 0, false); // для loop
+            swiper.slideToLoop(slide, 1400, false);
         } else {
-            swiper.slideTo(slide, 0, false);
+            swiper.slideTo(slide, 1400, false);
         }
     }, [slide]);
 
     return (
         <Swiper
             loop
-            autoplay={{ delay: 10000 }}
+            effect={'fade'}
+            speed={2500}
+            fadeEffect={{ crossFade: true }}
+            autoplay={{
+                delay: 15000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: false,
+            }}
             pagination={pagination}
-            modules={[Pagination]}
+            modules={[Pagination, EffectFade, Autoplay]}
             ref={swiperRef}
             className="relative"
             onSwiper={(swiper) => {
@@ -120,28 +129,28 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
         gsap.set(contentRef.current.children, { y: 30, opacity: 0 });
         if(imgRef.current) gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
 
-        const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
         tl.to(splitText.chars, {
             y: 0,
             opacity: 1,
-            duration: 1.2,
-            stagger: 0.02,
+            duration: 1.35,
+            stagger: 0.018,
         })
         .to(contentRef.current.children, {
             y: 0,
             opacity: 1,
-            duration: 1,
-            stagger: 0.1,
-        }, "-=0.8")
+            duration: 1.2,
+            stagger: 0.12,
+        }, "-=1.0")
 
         if (imgRef.current) {
             tl.to(imgRef.current, {
                 scale: 1,
                 opacity: 1,
-                duration: 1.5,
-                ease: "expo.out"
-            }, "-=1.2");
+                duration: 1.8,
+                ease: "power2.out"
+            }, "-=1.25");
         }
 
         return () => {
@@ -150,7 +159,11 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
     }, { dependencies: [shouldAnimate], scope: containerRef });
 
     return (
-        <div ref={containerRef} className={`flex flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full transition-opacity duration-700 ${shouldAnimate ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <div
+            ref={containerRef}
+            className={`flex flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
+            style={{ pointerEvents: shouldAnimate ? "auto" : "none" }}
+        >
             <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-0">
                 <h2
                     ref={titleRef}
@@ -164,7 +177,7 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                         {s.description}
                     </p>
                     {s.button && (
-                        <div className="opacity-0">
+                        <div className="opacity-0 mt-[18px] sm:mt-ds-[32]">
                             <Button
                                 variant="blue"
                                 onClick={s.button.onClick}

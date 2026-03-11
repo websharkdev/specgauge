@@ -23,6 +23,7 @@ const GProvider = ({ children }: Readonly<{
         }
 
         let scrollStart = performance.now();
+        const sectionTransitionDelay = 1850;
         let touchStart: {
             clientX: number,
             clientY: number
@@ -33,7 +34,7 @@ const GProvider = ({ children }: Readonly<{
 
         const handleScroll = (e: WheelEvent) => {
             const scrollCurrent = performance.now();
-            const scrollDelay = 1200; // In sync with 1.1s entry animation + buffer
+            const scrollDelay = sectionTransitionDelay;
 
             if (scrollCurrent < scrollStart + scrollDelay || Math.abs(e.deltaY) < 10) {
                 return;
@@ -67,7 +68,7 @@ const GProvider = ({ children }: Readonly<{
             if (!touchStart) return;
 
             const scrollCurrent = performance.now();
-            const scrollDelay = progress === 0 ? 0 : 800;
+            const scrollDelay = progress === 0 ? 0 : sectionTransitionDelay - 250;
 
 
             if (scrollCurrent < scrollStart + scrollDelay) {

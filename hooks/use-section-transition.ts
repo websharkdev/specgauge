@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { RefObject } from "react";
+import { RefObject, useLayoutEffect, useRef } from "react";
 
 /**
  * Ultra-smooth section transition.
@@ -14,38 +14,83 @@ export const useSectionTransition = (
     active: boolean,
     entryDuration: number = 2
 ) => {
+    const previousActive = useRef<boolean | null>(null);
+
+    useLayoutEffect(() => {
+        if (!ref.current || previousActive.current !== null) return;
+
+        const section = ref.current;
+        if (active) {
+            gsap.set(section, {
+                opacity: 1,
+                visibility: "visible",
+                pointerEvents: "auto",
+                filter: "blur(0px)",
+            });
+        } else {
+            gsap.set(section, {
+                opacity: 0,
+                visibility: "hidden",
+                pointerEvents: "none",
+                filter: "blur(0px)",
+            });
+        }
+
+        previousActive.current = active;
+    }, [active, ref]);
+
     useGSAP(() => {
         if (!ref.current) return;
 
+        const section = ref.current;
+        gsap.killTweensOf(section);
+
+        if (previousActive.current === active) {
+            return;
+        }
+
         if (active) {
-            gsap.set(ref.current, { visibility: "visible", pointerEvents: "auto" });
+            gsap.set(section, {
+                visibility: "visible",
+                pointerEvents: "auto",
+                willChange: "transform, opacity, filter",
+            });
 
             gsap.fromTo(
-                ref.current,
-                { opacity: 0, y: 24 },
+                section,
+                {
+                    opacity: 0,
+                    filter: "blur(3px)",
+                    transformOrigin: "50% 50%",
+                },
                 {
                     opacity: 1,
-                    y: 0,
-                    duration: entryDuration,
-                    // Custom cubic-bezier: starts very slow, accelerates mid-way,
-                    // glides to rest — the "floating in" feel
-                    ease: "power4.inOut",
+                    filter: "blur(0px)",
+                    duration: Math.max(entryDuration, 1.75),
+                    ease: "power3.out",
                     overwrite: "auto",
                 }
             );
         } else {
-            gsap.to(ref.current, {
+            gsap.to(section, {
                 opacity: 0,
-                y: -16,
-                duration: 1,
-                ease: "power4.inOut",
+                filter: "blur(3px)",
+                duration: 1.4,
+                ease: "power3.out",
                 overwrite: "auto",
                 onComplete: () => {
                     if (ref.current) {
-                        gsap.set(ref.current, { visibility: "hidden", pointerEvents: "none", y: 0 });
+                        gsap.set(ref.current, {
+                            opacity: 0,
+                            pointerEvents: "none",
+                            filter: "blur(0px)",
+                            willChange: "auto",
+                        });
                     }
                 },
             });
         }
+
+        previousActive.current = active;
     }, { dependencies: [active] });
 };

@@ -123,8 +123,18 @@
     @apply border-border outline-ring/50;
   }
 
+  html,
+  body {
+    scroll-behavior: smooth;
+  }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  [style*="visibility"] {
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
 }
 

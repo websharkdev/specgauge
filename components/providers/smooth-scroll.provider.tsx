@@ -16,8 +16,8 @@ export default function SmoothScrollProvider({
     return (
         <ReactLenis root
             options={{
-                lerp: 0.08, 
-                duration: 1.2, 
+                lerp: 0.05,
+                duration: 1.8,
                 syncTouch: true
             }}
         >
