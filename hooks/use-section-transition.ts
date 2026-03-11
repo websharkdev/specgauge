@@ -67,7 +67,7 @@ export const useSectionTransition = (
                     opacity: 1,
                     filter: "blur(0px)",
                     duration: Math.max(entryDuration, 1.75),
-                    ease: "power3.out",
+                    ease: "sine.inOut",
                     overwrite: "auto",
                 }
             );
@@ -76,7 +76,7 @@ export const useSectionTransition = (
                 opacity: 0,
                 filter: "blur(3px)",
                 duration: 1.4,
-                ease: "power3.out",
+                ease: "sine.inOut",
                 overwrite: "auto",
                 onComplete: () => {
                     if (ref.current) {
