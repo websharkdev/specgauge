@@ -27,9 +27,11 @@ export default function RootLayout({
   return (
     <html lang="en"
       suppressHydrationWarning
-      suppressContentEditableWarning>
+      suppressContentEditableWarning
+      style={{ perspective: "1200px" }}>
       <body
         className={`${monaSans.variable} ${poppins.className} antialiased lg:overflow-hidden`}
+        style={{ transformStyle: "preserve-3d" }}
         suppressHydrationWarning
         suppressContentEditableWarning
       >

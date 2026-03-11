@@ -3,7 +3,7 @@
 import { LogoIcon } from "@/components/general/logo";
 import { Button } from "@/components/ui/button";
 import { ChevronUp } from "lucide-react";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { useMediaQuery } from 'usehooks-ts';
 import MobileHeader from "./mobile-header";
 import ProgressBar from "./progress";
@@ -13,6 +13,14 @@ import MagneticButton from "@/components/ui/magnetic-button";
 const Header = () => {
     const { sections, progress, setProgress } = useProgressStore()
     const small = useMediaQuery('(max-width: 768px)')
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    // Use actual small value only after mount to prevent hydration mismatch
+    const isMobile = mounted ? small : false;
 
     const progressBAR = useMemo(() => {
         const current = (progress / (sections - 1)) * 100
@@ -31,14 +39,14 @@ const Header = () => {
         <header className="px-5 py-3.5 flex justify-between items-center sticky md:fixed top-0 left-0 right-0 z-[100] bg-[#fffff20] md:bg-transparent backdrop-blur-xl md:backdrop-blur-none bg-blend-multiply md:bg-blend-normal translate-z-0">
             <LogoIcon />
             <div className="flex items-center gap-4">
-                {small ? null : progressBAR}
+                {isMobile ? null : progressBAR}
 
-                <MagneticButton className="hidden sm:block">
-                    <Button onClick={() => setProgress(sections - 1)} className="cursor-pointer w-[102px] sm:w-ds-[102] h-[38px] sm:h-ds-[38] text-sm sm:text-ds-[14] font-medium leading-[90%]">Contact</Button>
+                <MagneticButton onClick={() => setProgress(sections - 1)} className="cursor-pointer w-[102px] sm:w-ds-[102] h-[38px] sm:h-ds-[38] text-sm sm:text-ds-[14] font-medium leading-[90%]">
+                    Contact
                 </MagneticButton>
                 <Button onClick={() => setProgress(sections - 1)} className="sm:hidden cursor-pointer w-[102px] h-[38px] text-sm font-medium leading-[90%]">Contact</Button>
 
-                {small ? <MobileHeader /> : null}
+                {isMobile ? <MobileHeader /> : null}
             </div>
         </header>
     )

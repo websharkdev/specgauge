@@ -103,6 +103,9 @@ const BWhyUs = ({ index }: { index: number }) => {
         <div
             id="advantages"
             ref={containerRef}
+            style={{
+                visibility: active ? "visible" : "hidden"
+            }}
             className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full grid grid-cols-10 items-center min-h-dvh justify-end">
             <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between py-14 sm:pt-ds-[65] sm:pb-ds-[25] sm:px-ds-[80] px-3.5 gap-[25px] sm:gap-ds-[40]">
                 <div className="flex flex-col gap-3.5 sm:gap-ds-[14]">

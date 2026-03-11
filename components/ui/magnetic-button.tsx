@@ -1,21 +1,17 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useRef, useState } from 'react';
+import { Button, ButtonProps } from './button';
 
-interface MagneticButtonProps {
-    children: React.ReactNode;
-    className?: string;
-    onClick?: () => void;
+interface MagneticButtonProps extends ButtonProps{
     strength?: number;
 }
 
 export default function MagneticButton({
-    children,
-    className = '',
-    onClick,
-    strength = 30
+    strength = 30,
+    ...props
 }: MagneticButtonProps) {
     const buttonRef = useRef<HTMLButtonElement>(null);
     const textRef = useRef<HTMLSpanElement>(null);
@@ -80,14 +76,13 @@ export default function MagneticButton({
     }, { scope: buttonRef });
 
     return (
-        <button
+        <Button
             ref={buttonRef}
-            className={`cursor-pointer ${className}`}
-            onClick={onClick}
+            {...props}
         >
             <span ref={textRef} className="block pointer-events-none">
-                {children}
+                {props.children}
             </span>
-        </button>
+        </Button>
     );
 }

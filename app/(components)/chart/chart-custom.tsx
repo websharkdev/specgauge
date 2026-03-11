@@ -95,7 +95,7 @@ const ChartCustom = ({ data, active }: {
                                     ease: 'easeIn'
                                 }}
                             >
-                                <Icon className={`${card.color}`} size={16} />
+                                <Icon className={`${card.color} icon-ds-[16]`} />
                             </motion.g>
 
                             <motion.text

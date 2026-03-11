@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import SplitType from "split-type"
 import { BadgeCheck, ClockPlus, Radio } from "lucide-react"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import { useSectionTransition } from "@/hooks/use-section-transition"
 import ChartPointItem from "./chart-point-item"
@@ -14,8 +14,14 @@ const CEfficient = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
     const small = useMediaQuery('(max-width: 768px)')
+    const [mounted, setMounted] = useState(false);
 
-    const active = progress === index || small;
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const isMobile = mounted ? small : false;
+    const active = progress === index;
 
     useSectionTransition(ref, active);
 
@@ -35,7 +41,7 @@ const CEfficient = ({ index }: { index: number }) => {
             opacity: 1,
             duration: 1,
             stagger: 0.1,
-            delay: small ? 0.3 : 0.8
+            delay: isMobile ? 0.3 : 0.8
         });
 
         if(points.length > 0) {
@@ -47,11 +53,12 @@ const CEfficient = ({ index }: { index: number }) => {
             }, "-=0.5");
         }
 
-    }, { dependencies: [active], scope: ref })
+    }, { dependencies: [active, isMobile], scope: ref })
 
     return (
         <div
-            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
+            className={`relative inset-0 snap-normal md:snap-start ${isMobile ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
+            style={{ visibility: active ? "visible" : "hidden" }}
             ref={ref}
         >
             <h6 className="efficient-badge opacity-0 md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm sm:text-ds-[14]">With SpecGauge</h6>
@@ -90,12 +97,12 @@ const CEfficient = ({ index }: { index: number }) => {
                 </defs>
             </svg>
 
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>
+            <div className={`col-span-full ${isMobile ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>
                 <div className="chart-point-item opacity-0">
                     <ChartPointItem
                         color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                         direction="right"
-                        icon={<Radio size={18} color="#0B9C36" />}
+                        icon={<Radio className="icon-ds-[18]" color="#0B9C36" />}
                         title={"Real-time visibility\nof every tank"}
                         index={0}
                     />
@@ -104,7 +111,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     <ChartPointItem
                         color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                         direction="right"
-                        icon={<ClockPlus size={18} color="#0B9C36" />}
+                        icon={<ClockPlus className="icon-ds-[18]" color="#0B9C36" />}
                         title={"Smart scheduling and combined\ndelivery runs"}
                         index={1}
                     />
@@ -113,7 +120,7 @@ const CEfficient = ({ index }: { index: number }) => {
                     <ChartPointItem
                         color={{ line: ['#0B9C36', '#175F49'], point: '#0B9C36' }}
                         direction="right"
-                        icon={<BadgeCheck size={18} color="#0B9C36" />}
+                        icon={<BadgeCheck className="icon-ds-[18]" color="#0B9C36" />}
                         title={"No more surprises\nat critical sites"}
                         index={2}
                     />

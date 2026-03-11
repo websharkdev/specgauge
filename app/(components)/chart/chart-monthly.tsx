@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
 import SplitType from "split-type"
 import { Bus, PhoneCall, TriangleAlert } from "lucide-react"
-import { useRef } from "react"
+import { useRef, useState, useEffect } from "react"
 import { useMediaQuery } from "usehooks-ts"
 import { useSectionTransition } from "@/hooks/use-section-transition"
 import ChartPointItem from "./chart-point-item"
@@ -14,7 +14,14 @@ const CMonthly = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
     const small = useMediaQuery('(max-width: 768px)')
-    const active = progress === index || small;
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    const isMobile = mounted ? small : false;
+    const active = progress === index;
 
     useSectionTransition(ref, active);
 
@@ -34,7 +41,7 @@ const CMonthly = ({ index }: { index: number }) => {
             opacity: 1,
             duration: 1,
             stagger: 0.1,
-            delay: small ? 0.3 : 0.5
+            delay: isMobile ? 0.3 : 0.5
         });
 
         if(points.length > 0) {
@@ -46,12 +53,13 @@ const CMonthly = ({ index }: { index: number }) => {
             }, "-=0.5");
         }
 
-    }, { dependencies: [active], scope: ref })
+    }, { dependencies: [active, isMobile], scope: ref })
 
     return (
         <div ref={ref}
             id="pain_point_1"
-            className={`relative inset-0 snap-normal md:snap-start ${small ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
+            style={{ visibility: active ? "visible" : "hidden" }}
+            className={`relative inset-0 snap-normal md:snap-start ${isMobile ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <h6 className="monthly-badge opacity-0 md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm sm:text-ds-[14]">tanks often 80% full</h6>
             <h2 className="monthly-title opacity-0 md:px-0 px-3.5 z-10 text-[32px] sm:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-10 sm:mb-ds-[40] md:whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</h2>
 
@@ -125,12 +133,12 @@ const CMonthly = ({ index }: { index: number }) => {
                     </clipPath>
                 </defs>
             </svg>
-            <div className={`col-span-full ${small ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>
+            <div className={`col-span-full ${isMobile ? 'flex' : 'hidden'} flex-col gap-[30px] sm:gap-ds-[32] relative z-10 mt-10 sm:mt-ds-[40]`}>
                 <div className="chart-point-item opacity-0">
                     <ChartPointItem
                         color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
                         direction="left"
-                        icon={<PhoneCall size={18} color="#F14616" />}
+                        icon={<PhoneCall className="icon-ds-[18]" color="#F14616" />}
                         title={"Emergency calls\nfrom customers\nin winter"}
                         index={0}
                     />
@@ -139,7 +147,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     <ChartPointItem
                         color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
                         direction="left"
-                        icon={<Bus size={18} color="#F14616" />}
+                        icon={<Bus className="icon-ds-[18]" color="#F14616" />}
                         title={"One-off deliveries\nthat waste time\nand fuel"}
                         index={1}
                     />
@@ -148,7 +156,7 @@ const CMonthly = ({ index }: { index: number }) => {
                     <ChartPointItem
                         color={{ line: ['#F14616', '#860000'], point: '#F14616' }}
                         direction="left"
-                        icon={<TriangleAlert size={18} color="#F14616" />}
+                        icon={<TriangleAlert className="icon-ds-[18]" color="#F14616" />}
                         title={"Hospitals\nand care homes\nat constant risk"}
                         index={2}
                     />

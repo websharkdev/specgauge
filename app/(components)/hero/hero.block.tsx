@@ -56,16 +56,6 @@ const BHero = ({ index }: { index: number }) => {
             ease: "expo.out"
         }, "-=1.2");
 
-        // Optional: subtle continuous floating animation for the device image
-        gsap.to(imgRef.current, {
-            y: -15,
-            duration: 4,
-            ease: "sine.inOut",
-            yoyo: true,
-            repeat: -1,
-            delay: 1
-        });
-
         return () => {
             splitText.revert();
         };
@@ -79,6 +69,7 @@ const BHero = ({ index }: { index: number }) => {
                 backgroundSize: 'cover',
                 backgroundPosition: 'top center',
                 backgroundRepeat: 'no-repeat',
+                visibility: active ? "visible" : "hidden"
             }}>
                 <div className="md:hidden xs:flex h-max opacity-0 translate-y-10">
                     <Image
@@ -108,10 +99,8 @@ const BHero = ({ index }: { index: number }) => {
                     </p>
                     <div className="opacity-0 flex justify-between items-center w-full mt-2.5">
                         <div>
-                            <MagneticButton>
-                                <Button className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
-                                    <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
-                                </Button>
+                            <MagneticButton className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
+                                <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
                             </MagneticButton>
                         </div>
                         <div>

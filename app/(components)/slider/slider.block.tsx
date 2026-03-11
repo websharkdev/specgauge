@@ -22,6 +22,7 @@ const BSlider = ({ index }: { index: number }) => {
             className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-screen min-h-[950px] overflow-hidden flex items-end"
             style={{
                 background: small ? `url('/backgrounds/slider-bg_mobile.svg') center center / cover no-repeat` : `url('/backgrounds/slider-bg.svg') center center / cover no-repeat`,
+                visibility: active ? "visible" : "hidden"
             }}>
             <Slider slides={[
                 {

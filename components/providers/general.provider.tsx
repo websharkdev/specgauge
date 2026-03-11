@@ -1,7 +1,7 @@
 'use client'
 
 import { useProgressStore } from "@/stores/general.store";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 
 const GProvider = ({ children }: Readonly<{
@@ -9,8 +9,15 @@ const GProvider = ({ children }: Readonly<{
 }>) => {
     const { progress, setProgress, sections, updateSections } = useProgressStore();
     const small = useMediaQuery('(max-width: 768px)')
+    const [mounted, setMounted] = useState(false);
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
+        if (!mounted) return;
+
         if (small) {
             return updateSections()
         }
@@ -100,7 +107,8 @@ const GProvider = ({ children }: Readonly<{
     }, [
         progress,
         small,
-        sections
+        sections,
+        mounted
     ]);
 
     const scrollTo = useCallback((progress: number) => {

@@ -2,7 +2,6 @@
 
 import { motion } from 'motion/react'
 import { useRef } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
 
 type Props = {
     color: {
@@ -23,7 +22,6 @@ const ChartPointItem = ({
     index
 }: Props) => {
     const ref = useRef(null)
-    const small = useMediaQuery('(max-width: 768px)')
     const premiumEasing: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
     return (
