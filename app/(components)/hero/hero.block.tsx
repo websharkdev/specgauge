@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { useMediaQuery } from "usehooks-ts";
+import { scrollToSection } from "@/hooks/useScrollToSection";
 
 const BHero = ({ index }: { index: number }) => {
     const { setProgress, sections, progress } = useProgressStore()
@@ -18,11 +19,19 @@ const BHero = ({ index }: { index: number }) => {
     const hasBeenInactiveRef = useRef(false)
     const [canAnimate, setCanAnimate] = useState(false)
     
-    const small = useMediaQuery('(max-width: 768px)', {
+    const small = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     })
     const active = progress === index || small;
+
+    const navigateTo = (idx: number, id: string) => {
+        if (small) {
+            scrollToSection(id)
+        } else {
+            setProgress(idx)
+        }
+    }
 
     useLayoutEffect(() => {
         if (!ref.current) return;
@@ -88,7 +97,8 @@ const BHero = ({ index }: { index: number }) => {
 
     return (
         <div ref={ref}
-            className={`static sm:relative lg:fixed lg:inset-0 bg-white snap-normal md:snap-start w-full h-max md:h-[100vh] flex justify-between items-center overflow-hidden`}>
+            id="hero"
+            className="static sm:relative lg:fixed lg:inset-0 bg-white snap-normal md:snap-start w-full h-auto lg:h-[100vh] flex justify-between items-center lg:overflow-hidden">
             <div className="md:w-1/2 w-full h-full flex relative z-10 flex-col justify-end gap-7 xl:gap-5 lg:gap-4 xs:gap-0 md:pb-ds-[40] md:pt-ds-[40] pt-10 pb-14 md:px-ds-[45] px-0" style={{
                 background: 'url("/main-header.svg")',
                 backgroundSize: 'cover',
@@ -121,11 +131,11 @@ const BHero = ({ index }: { index: number }) => {
                         {'SpecGauge turns every tank into a connected\ndata source – helping you deliver smarter,\nfaster, and more profitably.'}
                     </p>
                     <div className={`${canAnimate ? "opacity-0" : "opacity-100"} flex justify-between items-center w-full mt-2.5`}>
-                            <MagneticButton className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => setProgress(sections - 1)}>
+                            <MagneticButton className="cursor-pointer w-[177px] sm:w-ds-[177] h-10 sm:h-ds-[39]" variant='secondary' onClick={() => navigateTo(sections - 1, 'request_demo')}>
                                 <span className="font-medium leading-[90%] text-base sm:text-ds-[16]">Request a Demo</span>
                             </MagneticButton>
                         <div>
-                            <Button onClick={() => setProgress(sections - 1)} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
+                            <Button onClick={() => navigateTo(1, 'pain_point_1')} size='icon' variant='glass' className="size-10 sm:size-ds-[40] text-white rounded-full cursor-pointer border-white/10 bg-white/5">
                                 <ArrowDownIcon className="size-[19px] sm:!size-ds-[19]" />
                             </Button>
                         </div>

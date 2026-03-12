@@ -11,10 +11,11 @@ import MagneticButton from "@/components/ui/magnetic-button";
 
 const MobileHeader = dynamic(() => import("./mobile-header"));
 const ProgressBar = dynamic(() => import("./progress"));
+import { scrollToSection } from "@/hooks/useScrollToSection";
 
 const Header = () => {
     const { sections, progress, setProgress } = useProgressStore()
-    const small = useMediaQuery('(max-width: 768px)', {
+    const small = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     })
@@ -27,29 +28,37 @@ const Header = () => {
     // Use actual small value only after mount to prevent hydration mismatch
     const isMobile = mounted ? small : false;
 
+    const navigateTo = (idx: number, id: string) => {
+        if (isMobile) {
+            scrollToSection(id)
+        } else {
+            setProgress(idx)
+        }
+    }
+
     const progressBAR = useMemo(() => {
         const current = (progress / (sections - 1)) * 100
 
         if (current === 100) {
-            return <Button variant='secondary' className="w-32 sm:w-ds-[128] h-8 sm:h-ds-[32] cursor-pointer bg-[#11111106] text-[#11111150] text-sm sm:text-ds-[14]" onClick={() => setProgress(0)}>
+            return <Button variant='secondary' className="w-32 sm:w-ds-[128] h-8 sm:h-ds-[32] cursor-pointer bg-[#11111106] text-[#11111150] text-sm sm:text-ds-[14]" onClick={() => navigateTo(0, 'hero')}>
                 <span>Back to top</span>
                 <ChevronUp className="size-[13px] sm:!size-ds-[13]" />
             </Button>
         }
 
         return <ProgressBar progress={current} />
-    }, [progress])
+    }, [progress, isMobile, sections])
 
     return (
-        <header className="px-5 py-3.5 flex justify-between items-center sticky md:fixed top-0 left-0 right-0 z-[100] bg-[#fffff20] md:bg-transparent backdrop-blur-xl md:backdrop-blur-none bg-blend-multiply md:bg-blend-normal translate-z-0">
+        <header className="px-5 py-3.5 flex justify-between items-center sticky md:fixed top-0 left-0 right-0 z-[100] bg-white/20 md:bg-transparent backdrop-blur-xl md:backdrop-blur-none bg-blend-multiply md:bg-blend-normal translate-z-0">
             <LogoIcon />
             <div className="flex items-center gap-4">
                 {isMobile ? null : progressBAR}
 
-                <MagneticButton onClick={() => setProgress(sections - 1)} className="hidden sm:flex cursor-pointer w-[102px] sm:w-ds-[102] h-[38px] sm:h-ds-[38] text-sm sm:text-ds-[14] font-medium leading-[90%]">
+                <MagneticButton onClick={() => navigateTo(sections - 1, 'request_demo')} className="hidden sm:flex cursor-pointer w-[102px] sm:w-ds-[102] h-[38px] sm:h-ds-[38] text-sm sm:text-ds-[14] font-medium leading-[90%]">
                     Contact
                 </MagneticButton>
-                <Button onClick={() => setProgress(sections - 1)} className="sm:hidden cursor-pointer w-[102px] h-[38px] text-sm font-medium leading-[90%]">Contact</Button>
+                <Button onClick={() => navigateTo(sections - 1, 'request_demo')} className="sm:hidden cursor-pointer w-[102px] h-[38px] text-sm font-medium leading-[90%]">Contact</Button>
 
                 {isMobile ? <MobileHeader /> : null}
             </div>

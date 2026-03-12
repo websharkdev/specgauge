@@ -34,7 +34,7 @@ const menu = [
     },
     {
         title: 'Web Portal',
-        index: 2, // slide 2
+        index: 2,
         background: 'bg-[#FB941F]',
         link: '#slider',
         slide: 1,

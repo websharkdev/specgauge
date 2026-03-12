@@ -11,11 +11,11 @@ import ChartPointItem from "./chart-point-item"
 const CMonthly = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const isMobile = useMediaQuery('(max-width: 768px)', {
+    const isMobile = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     })
-    const active = progress === index;
+    const active = progress === index || isMobile;
 
 
     useGSAP(() => {
@@ -51,7 +51,7 @@ const CMonthly = ({ index }: { index: number }) => {
     return (
         <div ref={ref}
             id="pain_point_1"
-            className={`relative inset-0 snap-normal md:snap-start ${isMobile ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
+            className={`relative inset-0 snap-normal md:snap-start ${isMobile ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 lg:overflow-hidden h-auto lg:h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 border-r border-[#00000050] bg-[#E5E8EF]`}>
             <h6 className="monthly-badge opacity-0 md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#F14616] to-[#860000] text-sm sm:text-ds-[14]">tanks often 80% full</h6>
             <h2 className="monthly-title opacity-0 md:px-0 px-3.5 z-10 text-[32px] sm:text-ds-[32] font-medium text-[#111111] leading-[95%] mb-10 sm:mb-ds-[40] md:whitespace-pre-wrap">{`Monthly top-ups wasting\nresources`}</h2>
 

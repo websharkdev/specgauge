@@ -11,7 +11,7 @@ import CMonthly from "./chart-monthly"
 const BChart = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const small = useMediaQuery('(max-width: 768px)', {
+    const small = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     })
@@ -25,7 +25,7 @@ const BChart = ({ index }: { index: number }) => {
 
     return (
         <div
-            className={`static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden`}
+            className={`static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-auto lg:h-[100vh] justify-end overflow-hidden`}
             id="pain_point" ref={ref}>
             <CMonthly index={small ? 1 : index} />
             <CEfficient index={small ? 2 : index} />

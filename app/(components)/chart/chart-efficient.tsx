@@ -11,11 +11,11 @@ import ChartPointItem from "./chart-point-item"
 const CEfficient = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const isMobile = useMediaQuery('(max-width: 768px)', {
+    const isMobile = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     })
-    const active = progress === index;
+    const active = progress === index || isMobile;
 
     useGSAP(() => {
         if (!active || !ref.current) return;
@@ -49,7 +49,8 @@ const CEfficient = ({ index }: { index: number }) => {
 
     return (
         <div
-            className={`relative inset-0 snap-normal md:snap-start ${isMobile ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 overflow-hidden h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
+            id="pain_point_2"
+            className={`relative inset-0 snap-normal md:snap-start ${isMobile ? 'col-span-full' : 'col-span-1'} flex flex-col md:justify-start justify-center gap-4 lg:overflow-hidden h-auto lg:h-full 2xl:pt-ds-[128] sm:pt-ds-[80] py-[50px] sm:px-ds-[44] px-0 bg-white`}
             ref={ref}
         >
             <h6 className="efficient-badge opacity-0 md:px-0 px-3.5 z-10 uppercase text-transparent bg-clip-text font-medium bg-gradient-to-r from-[#0B9C36] to-[#175F49] text-sm sm:text-ds-[14]">With SpecGauge</h6>

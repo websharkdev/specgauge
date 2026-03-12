@@ -25,24 +25,24 @@ const menu = [
     {
         title: 'Pressure Sensor',
         link: 'slider',
-        index: 2,
+        index: 3,
         slide: 0,
     },
     {
         title: 'Web Portal',
         link: 'slider',
-        index: 2,
+        index: 3,
         slide: 1,
     },
     {
         title: 'Advantages',
         link: 'advantages',
-        index: 3,
+        index: 4,
     },
     {
         title: 'Request a Demo',
         link: 'request_demo',
-        index: 4,
+        index: 5,
     },
 ]
 

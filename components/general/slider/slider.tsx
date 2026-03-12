@@ -41,7 +41,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
     const { slide } = useCSlider();
     const { progress } = useProgressStore()
     const swiperRef = useRef<SwiperRef>(null);
-    const small = useMediaQuery('(max-width: 768px)', {
+    const small = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     });

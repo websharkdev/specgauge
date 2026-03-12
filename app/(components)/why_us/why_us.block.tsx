@@ -38,7 +38,7 @@ const BWhyUs = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const containerRef = useRef<HTMLDivElement>(null)
     const titleRef = useRef<HTMLHeadingElement>(null)
-    const small = useMediaQuery('(max-width: 768px)', {
+    const small = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     })

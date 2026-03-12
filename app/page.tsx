@@ -1,13 +1,13 @@
 "use client"
 
-import dynamic from "next/dynamic";
-import { useMemo, useRef, useState } from "react";
-import { useMediaQuery } from "usehooks-ts";
-import { BChart, BForm, BHero, BSlider, BWhyUs } from "./(components)";
+import { useProgressStore } from "@/stores/general.store";
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
-import { useGSAP } from "@gsap/react";
-import { useProgressStore } from "@/stores/general.store";
+import dynamic from "next/dynamic";
+import { useMemo, useRef } from "react";
+import { useMediaQuery } from "usehooks-ts";
+import { BChart, BForm, BHero, BSlider, BWhyUs } from "./(components)";
 
 const CMonthly = dynamic(() => import("./(components)/chart").then((mod) => ({ default: mod.CMonthly })));
 const CEfficient = dynamic(() => import("./(components)/chart").then((mod) => ({ default: mod.CEfficient })));
@@ -15,7 +15,7 @@ const CEfficient = dynamic(() => import("./(components)/chart").then((mod) => ({
 
 export default function Home() {
   const { progress, setProgress } = useProgressStore();
-  const small = useMediaQuery('(max-width: 768px)', {
+  const small = useMediaQuery('(max-width: 1023px)', {
     defaultValue: false,
     initializeWithValue: false,
   })
@@ -134,25 +134,36 @@ export default function Home() {
       type: "wheel",
       onDown: () => {
         if (!animatingRef.current && currentIndexRef.current < sectionsCount - 1) {
-          gotoSection(currentIndexRef.current + 1, 1);
+          setProgress(currentIndexRef.current + 1);
         }
       },
       onUp: () => {
         if (!animatingRef.current && currentIndexRef.current > 0) {
-          gotoSection(currentIndexRef.current - 1, -1);
+          setProgress(currentIndexRef.current - 1);
         }
       },
       tolerance: 10,
       preventDefault: true
     });
 
+    // Handle programmatic scroll from Header/Buttons
+    const unsubscribe = useProgressStore.subscribe((state, prevState) => {
+      if (state.progress !== prevState.progress && state.progress !== currentIndexRef.current) {
+        if (!animatingRef.current) {
+          const direction = state.progress > currentIndexRef.current ? 1 : -1;
+          gotoSection(state.progress, direction);
+        }
+      }
+    });
+
     return () => {
       observer.kill();
+      unsubscribe();
     }
   }, { scope: containerRef, dependencies: [sectionsCount, small] });
 
   return (
-    <div ref={containerRef} className="w-full h-screen lg:overflow-hidden relative">
+    <div ref={containerRef} className="w-full min-h-screen lg:h-screen lg:overflow-hidden relative">
       {sections.map((section, i) => (
         <div key={i} className="section-container">
           <div className="outer">
