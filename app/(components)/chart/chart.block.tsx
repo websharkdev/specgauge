@@ -7,16 +7,16 @@ import { useMediaQuery } from "usehooks-ts"
 import ChartBG from "./chart-background"
 import CEfficient from "./chart-efficient"
 import CMonthly from "./chart-monthly"
-import { useSectionTransition } from "@/hooks/use-section-transition"
 
 const BChart = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const small = useMediaQuery('(max-width: 768px)')
+    const small = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
 
     const active = progress === index || small;
-
-    useSectionTransition(ref, active);
 
     useGSAP(() => {
         // Since BChart is a container for the two sides (CMonthly and CEfficient), 
@@ -26,10 +26,6 @@ const BChart = ({ index }: { index: number }) => {
     return (
         <div
             className={`static sm:relative lg:fixed lg:inset-0 md:snap-start snap-none w-full grid grid-cols-2 items-center h-[100vh] justify-end overflow-hidden`}
-            style={{
-                opacity: active ? 1 : 0,
-                pointerEvents: active ? 'auto' : 'none',
-            }}
             id="pain_point" ref={ref}>
             <CMonthly index={small ? 1 : index} />
             <CEfficient index={small ? 2 : index} />

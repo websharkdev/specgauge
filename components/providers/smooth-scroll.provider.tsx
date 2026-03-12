@@ -25,9 +25,8 @@ export default function SmoothScrollProvider({
         return () => mediaQuery.removeEventListener('change', updateEnabled)
     }, [])
 
-    if (!enabled) {
-        return children
-    }
+    // Disable Lenis for now as GSAP Observer is handling scroll transitions
+    return children
 
     return (
         <ReactLenis root

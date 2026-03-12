@@ -160,7 +160,7 @@ const ChartCustom = ({ data, active }: {
 
     return (
         <ResponsiveContainer className="pointer-events-none absolute inset-0 mt-auto -bottom-2 max-h-[90vh]">
-            <ChartContainer config={{} satisfies ChartConfig} className="h-full mt-auto w-full relative">
+            <ChartContainer config={{} satisfies ChartConfig} className="h-full mt-auto w-full relative [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-transparent">
                 <BarChart data={memorized}>
                     <Bar dataKey="point" fill="var(--color-point)" radius={1} barSize={barSize}>
                         <LabelList dataKey="point" content={renderCustomizedLabel} />

@@ -136,6 +136,24 @@
     backface-visibility: hidden;
     transform: translateZ(0);
   }
+
+  @media (min-width: 1024px) {
+    .section-container {
+      height: 100vh;
+      width: 100%;
+      top: 0;
+      position: fixed;
+      visibility: hidden;
+      overflow: hidden;
+    }
+
+    .outer,
+    .inner {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  }
 }
 
 @utility mt-ds-* {
@@ -221,9 +239,9 @@
   bottom: calc(var(--index) * --value([number]) / 25);
 }
 
-html {
+/* html {
   scroll-snap-type: y mandatory;
-}
+} */
 
 .app-html {
   perspective: 1200px;

@@ -1,29 +1,27 @@
- 'use client'
+'use client'
 
 import { Slider } from "@/components/general/slider";
 import { useProgressStore } from "@/stores/general.store";
 import { useRef } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { useSectionTransition } from "@/hooks/use-section-transition";
 
 
 const BSlider = ({ index }: { index: number }) => {
     const { progress, sections, setProgress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const small = useMediaQuery('(max-width: 768px)')
+    const small = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
     const active = progress === index || small;
-
-    useSectionTransition(ref, active);
 
     return (
         <div
             ref={ref}
             id="slider"
-            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-screen min-h-[950px] overflow-hidden flex items-end"
+            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-dvh md:h-screen min-h-dvh md:min-h-[950px] overflow-hidden flex items-end"
             style={{
                 background: small ? `url('/backgrounds/slider-bg_mobile.svg') center center / cover no-repeat` : `url('/backgrounds/slider-bg.svg') center center / cover no-repeat`,
-                opacity: active ? 1 : 0,
-                pointerEvents: active ? 'auto' : 'none',
             }}>
             <Slider slides={[
                 {

@@ -3,27 +3,19 @@
 import { useProgressStore } from "@/stores/general.store"
 import { useGSAP } from "@gsap/react"
 import gsap from "gsap"
-import SplitType from "split-type"
 import { BadgeCheck, ClockPlus, Radio } from "lucide-react"
-import { useRef, useState, useEffect } from "react"
+import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import { useSectionTransition } from "@/hooks/use-section-transition"
 import ChartPointItem from "./chart-point-item"
 
 const CEfficient = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const small = useMediaQuery('(max-width: 768px)')
-    const [mounted, setMounted] = useState(false);
-
-    useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    const isMobile = mounted ? small : false;
+    const isMobile = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
     const active = progress === index;
-
-    useSectionTransition(ref, active);
 
     useGSAP(() => {
         if (!active || !ref.current) return;

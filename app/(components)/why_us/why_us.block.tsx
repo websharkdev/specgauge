@@ -7,7 +7,6 @@ import SplitType from "split-type"
 import Image from "next/image"
 import { useRef } from "react"
 import { useMediaQuery } from "usehooks-ts"
-import { useSectionTransition } from "@/hooks/use-section-transition"
 
 const WhyUsItem = ({
     icon,
@@ -25,9 +24,7 @@ const WhyUsItem = ({
     return <div className="why-us-item flex gap-3 md:gap-4 opacity-0 translate-y-10">
         <div
             className={`why-us-icon size-10 md:size-ds-[48] rounded-lg flex justify-center items-center`}
-            style={{
-                background: iconBG
-            }}>
+            >
             {icon}
         </div>
         <div className="flex flex-col gap-2.5 sm:gap-ds-[10] flex-1">
@@ -41,11 +38,12 @@ const BWhyUs = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const containerRef = useRef<HTMLDivElement>(null)
     const titleRef = useRef<HTMLHeadingElement>(null)
-    const small = useMediaQuery('(max-width: 768px)')
+    const small = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
 
     const active = progress === index || small;
-
-    useSectionTransition(containerRef, active);
 
     useGSAP(() => {
         if (!active || !containerRef.current || !titleRef.current) return;
@@ -104,10 +102,6 @@ const BWhyUs = ({ index }: { index: number }) => {
             id="advantages"
             ref={containerRef}
             className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full grid grid-cols-10 items-center min-h-dvh justify-end"
-            style={{
-                opacity: active ? 1 : 0,
-                pointerEvents: active ? 'auto' : 'none',
-            }}
             >
             <div className="lg:col-span-5 col-span-full flex flex-col relative overflow-hidden h-max justify-between py-14 sm:pt-ds-[65] sm:pb-ds-[25] sm:px-ds-[80] px-3.5 gap-[25px] sm:gap-ds-[40]">
                 <div className="flex flex-col gap-3.5 sm:gap-ds-[14]">

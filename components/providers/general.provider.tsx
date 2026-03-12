@@ -8,7 +8,10 @@ const GProvider = ({ children }: Readonly<{
     children: React.ReactNode;
 }>) => {
     const { progress, setProgress, sections, updateSections } = useProgressStore();
-    const small = useMediaQuery('(max-width: 768px)')
+    const small = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
     const [mounted, setMounted] = useState(false);
     const progressRef = useRef(progress);
     const sectionsRef = useRef(sections);

@@ -76,15 +76,15 @@ const MobileHeader = () => {
                 </DialogHeader>
 
                 <div className="flex flex-col gap-[35px] items-center">
-                    {menu.map((item, index) => <div key={`menu_item-mobile--${index}`} className="cursor-pointer text-2xl text-[#111111] font-medium leading-[90%]" onClick={() => {
-                        if (item.index === 2) {
+                    {menu.map((item, index) => <button key={`menu_item-mobile--${index}`} type="button" className="cursor-pointer text-2xl text-[#111111] font-medium leading-[90%]" onClick={() => {
+                        if (typeof item.slide === 'number') {
                             setSlide(item.slide || 0)
                         }
                         scrollToSection(item.link)
                         setState('closed')
                     }}>
                         {item.title}
-                    </div>)}
+                    </button>)}
                 </div>
                 <div className="flex-1" />
 

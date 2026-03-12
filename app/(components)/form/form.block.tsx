@@ -5,17 +5,17 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import { useMediaQuery } from "usehooks-ts";
-import { useSectionTransition } from "@/hooks/use-section-transition";
 import GForm from "./form-general";
 
 const BForm = ({ index }: { index: number }) => {
     const { progress } = useProgressStore()
     const ref = useRef<HTMLDivElement>(null)
-    const small = useMediaQuery('(max-width: 768px)')
+    const small = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
 
     const active = progress === index || small;
-
-    useSectionTransition(ref, active);
 
     useGSAP(() => {
         if (!active || !ref.current) return;
@@ -37,11 +37,9 @@ const BForm = ({ index }: { index: number }) => {
         <div
             ref={ref}
             id="request_demo"
-            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full flex items-center h-[100vh] min-h-[950px] md:min-h-auto flex-col pb-[25px] md:pb-ds-[40] pt-20 md:pt-0 justify-center overflow-hidden"
+            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full flex items-center min-h-dvh md:h-[100vh] md:min-h-auto flex-col pb-[25px] md:pb-ds-[40] pt-20 md:pt-0 justify-center overflow-hidden"
             style={{
                 background: small ? 'url("/backgrounds/form-bg_mobile.svg") bottom left / cover no-repeat' : 'url("/backgrounds/form-bg.svg") center center / cover no-repeat',
-                opacity: active ? 1 : 0,
-                pointerEvents: active ? 'auto' : 'none',
             }}
         >
             <div className="flex-1" />

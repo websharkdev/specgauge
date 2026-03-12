@@ -8,7 +8,6 @@ import Image from "next/image";
 import { useLayoutEffect, useRef, useState } from "react";
 import MagneticButton from "@/components/ui/magnetic-button";
 import { useMediaQuery } from "usehooks-ts";
-import { useSectionTransition } from "@/hooks/use-section-transition";
 
 const BHero = ({ index }: { index: number }) => {
     const { setProgress, sections, progress } = useProgressStore()
@@ -19,10 +18,11 @@ const BHero = ({ index }: { index: number }) => {
     const hasBeenInactiveRef = useRef(false)
     const [canAnimate, setCanAnimate] = useState(false)
     
-    const small = useMediaQuery('(max-width: 768px)')
+    const small = useMediaQuery('(max-width: 768px)', {
+        defaultValue: false,
+        initializeWithValue: false,
+    })
     const active = progress === index || small;
-
-    useSectionTransition(ref, active, 0);
 
     useLayoutEffect(() => {
         if (!ref.current) return;
