@@ -270,11 +270,41 @@
   font-size: 18px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   max-width: 100%;
-  overflow: hidden;
   box-sizing: border-box;
+}
+
+@media screen and (max-width: 1023px) {
+  /* Mobile: normal document flow — no absolute pagination/slides fighting the layout */
+  .swiper {
+    height: auto !important;
+    overflow: visible;
+  }
+
+  .swiper-wrapper {
+    height: auto !important;
+  }
+
+  .swiper-slide {
+    height: auto !important;
+    overflow: hidden;
+  }
+
+  .swiper-pagination {
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .swiper-slide {
+    height: 100%;
+    overflow: hidden;
+  }
 }
 
 .swiper-pagination-bullet {
