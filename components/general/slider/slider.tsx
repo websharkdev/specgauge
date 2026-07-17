@@ -106,7 +106,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination flex flex-nowrap w-full sm:w-ds-[400]! justify-between gap-3.5 px-3.5 pb-11 md:p-0 static sm:fixed md:left-[45px]! bottom-10!" />
+            <div className="swiper-pagination z-20 flex flex-nowrap w-full sm:w-ds-[400]! justify-between gap-3.5 px-3.5 pb-11 lg:pb-0 lg:p-0 absolute inset-x-0 bottom-0 lg:inset-x-auto lg:left-[45px]! lg:bottom-10!" />
         </Swiper>
     );
 };
@@ -164,18 +164,18 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
     return (
         <div
             ref={containerRef}
-            className={`flex w-full max-w-full flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
+            className={`flex w-full max-w-full min-h-0 flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full overflow-hidden transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
             style={{ pointerEvents: shouldAnimate ? "auto" : "none" }}
         >
-            <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex w-full max-w-full flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-0">
+            <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex w-full max-w-full min-h-0 h-full flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-[160px] lg:pb-0 overflow-hidden">
                 <h2
                     ref={titleRef}
-                    className="text-left whitespace-pre-wrap px-3.5 text-[32px] sm:text-ds-[32] leading-[95%] font-medium text-gray-900"
+                    className="shrink-0 text-left whitespace-pre-wrap px-3.5 text-[32px] sm:text-ds-[32] leading-[95%] font-medium text-gray-900"
                     style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}
                 >
                     {s.title}
                 </h2>
-                <div ref={contentRef} className="flex flex-col items-start w-full">
+                <div ref={contentRef} className="flex shrink-0 flex-col items-start w-full">
                     <p className="opacity-0 text-left max-w-sm sm:max-w-ds-[392] px-3.5 text-base sm:text-ds-[14] leading-tight">
                         {s.description}
                     </p>
@@ -191,14 +191,15 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                         </div>
                     )}
                 </div>
-                <Image
-                    src={s.imageMobile}
-                    alt="Slide Image"
-                    width={800}
-                    height={800}
-                    sizes="100vw"
-                    className={`lg:hidden block h-auto w-full max-w-full object-contain px-3.5 translate-y-10 transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : ''}`}
-                />
+                <div className="lg:hidden relative mt-auto min-h-0 w-full flex-1 overflow-hidden px-3.5">
+                    <Image
+                        src={s.imageMobile}
+                        alt="Slide Image"
+                        fill
+                        sizes="100vw"
+                        className={`object-contain object-bottom transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : 'translate-y-6'}`}
+                    />
+                </div>
             </div>
             <div className="md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative hidden lg:flex justify-center items-center h-screen overflow-hidden">
                 <Image
