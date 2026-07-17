@@ -80,7 +80,7 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
             pagination={pagination}
             modules={[Pagination, EffectFade, Autoplay]}
             ref={swiperRef}
-            className="relative"
+            className="relative w-full max-w-full overflow-hidden"
             onSwiper={(swiper) => {
                 // 👌 Гарантируем старт с нужного слайда
                 if (swiper.params.loop) {
@@ -164,10 +164,10 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
     return (
         <div
             ref={containerRef}
-            className={`flex flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
+            className={`flex w-full max-w-full flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
             style={{ pointerEvents: shouldAnimate ? "auto" : "none" }}
         >
-            <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-0">
+            <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex w-full max-w-full flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] h-max lg:h-full pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-0">
                 <h2
                     ref={titleRef}
                     className="text-left whitespace-pre-wrap px-3.5 text-[32px] sm:text-ds-[32] leading-[95%] font-medium text-gray-900"
@@ -197,10 +197,10 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                     width={800}
                     height={800}
                     sizes="100vw"
-                    className={`md:hidden block w-full ${s.imageSize} translate-y-10 transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : ''}`}
+                    className={`lg:hidden block h-auto w-full max-w-full object-contain px-3.5 translate-y-10 transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : ''}`}
                 />
             </div>
-            <div className={`md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative md:flex hidden justify-center items-center h-screen`}>
+            <div className="md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative hidden lg:flex justify-center items-center h-screen overflow-hidden">
                 <Image
                     ref={imgRef}
                     src={s.image}
@@ -208,7 +208,7 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                     width={1200}
                     height={1200}
                     sizes="(max-width: 1280px) 55vw, 50vw"
-                    className={s.imageSize}
+                    className={`h-auto w-full max-w-full object-contain ${s.imageSize ?? ''}`}
                 />
             </div>
         </div>

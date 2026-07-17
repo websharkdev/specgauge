@@ -28,7 +28,7 @@ const BSlider = ({ index }: { index: number }) => {
         <div
             ref={ref}
             id="slider"
-            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full h-dvh md:h-screen min-h-dvh md:min-h-[950px] overflow-hidden flex items-end"
+            className="static sm:relative lg:fixed lg:inset-0 snap-normal md:snap-start w-full max-w-full h-dvh md:h-screen min-h-dvh md:min-h-[950px] overflow-x-hidden overflow-y-hidden flex items-end"
             style={{
                 background: small ? `url('/backgrounds/slider-bg_mobile.svg') center center / cover no-repeat` : `url('/backgrounds/slider-bg.svg') center center / cover no-repeat`,
             }}>
@@ -38,14 +38,14 @@ const BSlider = ({ index }: { index: number }) => {
                     description: "SpecGauge combines rugged hardware and a powerful web portal to give you real-time visibility and smarter delivery planning",
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
-                    imageSize: 'mx-auto max-w-9/10 sm:max-w-8/10 sm:mt-auto lg:mr-0 lg:ml-auto md:max-w-9/10 xl:max-w-[50vw] lg:mr-10',
+                    imageSize: 'mx-auto max-w-9/10 sm:max-w-8/10 sm:mt-auto lg:mr-0 lg:ml-auto xl:max-w-[50vw] lg:mr-10',
                 },
                 {
                     title: "Advanced sensors,\n\effortless installation.",
                     description: "Our high-precision pressure sensors install in minutes without tank modifications, providing ±0.5% accuracy for any fuel type.",
                     image: "/slide_2.png",
                     imageMobile: "/slide_2_Mobile.png",
-                    imageSize: 'max-w-[96vw] md:mt-auto ml-auto md:max-w-[55vw] 2xl:max-w-full w-full',
+                    imageSize: 'mt-auto ml-auto max-w-[55vw] 2xl:max-w-full w-full',
                     button: {
                         title: 'Request a demo',
                         onClick: () => navigateTo(sections - 1, 'request_demo')
