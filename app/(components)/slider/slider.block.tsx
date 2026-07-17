@@ -38,6 +38,7 @@ const BSlider = ({ index }: { index: number }) => {
                     image: "/slide_1.png",
                     imageMobile: "/slide_1_Mobile.png",
                     imageAspect: "1800/2044",
+                    imageMobileClassName: "px-3.5",
                     imageSize: 'mx-auto max-w-9/10 sm:max-w-8/10 sm:mt-auto lg:mr-0 lg:ml-auto xl:max-w-[50vw] lg:mr-10',
                 },
                 {
@@ -46,6 +47,7 @@ const BSlider = ({ index }: { index: number }) => {
                     image: "/slide_2.png",
                     imageMobile: "/slide_2_Mobile.png",
                     imageAspect: "2090/1824",
+                    imageMobileClassName: "pl-3.5 pr-0",
                     imageSize: 'mt-auto ml-auto max-w-[55vw] 2xl:max-w-full w-full',
                     button: {
                         title: 'Request a demo',

@@ -24,6 +24,8 @@ type Slide = {
     imageMobile: string;
     /** CSS aspect-ratio for the mobile image, e.g. "1800/2044" */
     imageAspect: string;
+    /** Extra classes for the mobile image (e.g. horizontal padding) */
+    imageMobileClassName?: string;
     imageSize?: string;
     button?: {
         title: string;
@@ -226,7 +228,7 @@ const SliderSlideContent = ({
                     width={aspectW}
                     height={aspectH}
                     sizes="100vw"
-                    className={`lg:hidden mt-2 block h-auto w-full max-w-full object-contain transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : 'translate-y-6'}`}
+                    className={`lg:hidden mt-2 block h-auto w-full max-w-full object-contain transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : 'translate-y-6'} ${s.imageMobileClassName ?? ''}`}
                     style={{ aspectRatio: s.imageAspect }}
                     onLoad={() => {
                         const root = containerRef.current?.closest('.swiper') as
