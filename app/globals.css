@@ -273,19 +273,37 @@
   align-items: stretch;
   width: 100%;
   max-width: 100%;
-  height: 100%;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
 @media screen and (max-width: 1023px) {
-  /* Keep pagination overlaid but leave room in slide content via padding */
+  /* Mobile: normal document flow — no absolute pagination/slides fighting the layout */
+  .swiper {
+    height: auto !important;
+    overflow: visible;
+  }
+
+  .swiper-wrapper {
+    height: auto !important;
+  }
+
+  .swiper-slide {
+    height: auto !important;
+    overflow: hidden;
+  }
+
   .swiper-pagination {
-    position: absolute !important;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
+    position: static !important;
+    inset: auto !important;
+    transform: none !important;
+    margin-top: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .swiper-slide {
+    height: 100%;
+    overflow: hidden;
   }
 }
 

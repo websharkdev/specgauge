@@ -17,42 +17,45 @@ import 'swiper/css/pagination';
 
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 
-type Props = {
-    slides: {
+type Slide = {
+    title: string;
+    description: string;
+    image: string;
+    imageMobile: string;
+    /** CSS aspect-ratio for the mobile image, e.g. "1800/2044" */
+    imageAspect: string;
+    imageSize?: string;
+    button?: {
         title: string;
-        description: string;
-        image: string;
-        imageMobile: string;
-        imageSize?: string;
-        button?: {
-            title: string;
-            onClick: () => void;
-        };
-        children?: React.ReactNode;
-    }[];
+        onClick: () => void;
+    };
+    children?: React.ReactNode;
+};
+
+type Props = {
+    slides: Slide[];
     scrollers: {
         id: number;
         title: string;
     }[];
-    pageIndex: number
+    pageIndex: number;
 };
 
 const Slider = ({ slides, scrollers, pageIndex }: Props) => {
     const { slide } = useCSlider();
-    const { progress } = useProgressStore()
+    const { progress } = useProgressStore();
     const swiperRef = useRef<SwiperRef>(null);
     const small = useMediaQuery('(max-width: 1023px)', {
         defaultValue: false,
         initializeWithValue: false,
     });
 
-
     const pagination = {
         el: '.swiper-pagination',
         type: 'bullets',
         clickable: true,
         renderBullet: (index: number, className: string) =>
-            `<div class="${className} w-1/2! whitespace-pre-wrap! leading-[110%] font-medium text-base sm:text-ds-[16]">${scrollers[index].title}<i><b></b></i></div>`
+            `<div class="${className} w-1/2! whitespace-pre-wrap! leading-[110%] font-medium text-base sm:text-ds-[16]">${scrollers[index].title}<i><b></b></i></div>`,
     } as PaginationOptions;
 
     useEffect(() => {
@@ -68,52 +71,70 @@ const Slider = ({ slides, scrollers, pageIndex }: Props) => {
 
     return (
         <Swiper
+            key={small ? 'slider-mobile' : 'slider-desktop'}
             loop
-            effect={'fade'}
-            speed={2500}
-            fadeEffect={{ crossFade: true }}
+            // Fade uses absolute slides — on mobile use normal flow + autoHeight instead
+            effect={small ? 'slide' : 'fade'}
+            autoHeight={small}
+            speed={small ? 600 : 2500}
+            fadeEffect={small ? undefined : { crossFade: true }}
             autoplay={{
                 delay: 15000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: false,
             }}
             pagination={pagination}
-            modules={[Pagination, EffectFade, Autoplay]}
+            modules={small ? [Pagination, Autoplay] : [Pagination, EffectFade, Autoplay]}
             ref={swiperRef}
             className="relative w-full max-w-full overflow-hidden"
             onSwiper={(swiper) => {
-                // 👌 Гарантируем старт с нужного слайда
                 if (swiper.params.loop) {
                     swiper.slideToLoop(slide, 0, false);
                 } else {
                     swiper.slideTo(slide, 0, false);
                 }
+                if (small) {
+                    requestAnimationFrame(() => swiper.updateAutoHeight(0));
+                }
+            }}
+            onSlideChange={(swiper) => {
+                if (small) swiper.updateAutoHeight(300);
             }}
         >
             {slides.map((s, index) => (
-                <SwiperSlide className="w-full h-full overflow-hidden" key={index}>
-                    {({ isActive }) => {
-                        return (
-                            <SliderSlideContent
-                                s={s}
-                                isActive={isActive}
-                                progress={progress}
-                                pageIndex={pageIndex}
-                                small={small}
-                            />
-                        )
-                    }}
+                <SwiperSlide className="w-full !h-auto lg:!h-full overflow-hidden" key={index}>
+                    {({ isActive }) => (
+                        <SliderSlideContent
+                            s={s}
+                            isActive={isActive}
+                            progress={progress}
+                            pageIndex={pageIndex}
+                            small={small}
+                        />
+                    )}
                 </SwiperSlide>
             ))}
 
-            <div className="swiper-pagination z-20 flex flex-nowrap w-full sm:w-ds-[400]! justify-between gap-3.5 px-3.5 pb-11 lg:pb-0 lg:p-0 absolute inset-x-0 bottom-0 lg:inset-x-auto lg:left-[45px]! lg:bottom-10!" />
+            <div className="swiper-pagination z-20 flex flex-nowrap w-full justify-between gap-3.5 px-3.5 pt-6 pb-11 lg:w-ds-[400]! lg:pt-0 lg:pb-0 lg:px-0 lg:absolute lg:left-[45px]! lg:bottom-10!" />
         </Swiper>
     );
 };
 
 export default Slider;
 
-const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) => {
+const SliderSlideContent = ({
+    s,
+    isActive,
+    progress,
+    pageIndex,
+    small,
+}: {
+    s: Slide;
+    isActive: boolean;
+    progress: number;
+    pageIndex: number;
+    small: boolean;
+}) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const titleRef = useRef<HTMLHeadingElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
@@ -126,34 +147,40 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
         if (!shouldAnimate || !containerRef.current || !titleRef.current || !contentRef.current) return;
 
         const splitText = new SplitType(titleRef.current, { types: 'words,chars' });
-        
-        // Setup initial states
+
         gsap.set(splitText.chars, { y: 100, opacity: 0 });
         gsap.set(contentRef.current.children, { y: 30, opacity: 0 });
-        if(imgRef.current) gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
+        if (imgRef.current) gsap.set(imgRef.current, { scale: 1.1, opacity: 0 });
 
-        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+        const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
 
         tl.to(splitText.chars, {
             y: 0,
             opacity: 1,
             duration: 1.35,
             stagger: 0.018,
-        })
-        .to(contentRef.current.children, {
-            y: 0,
-            opacity: 1,
-            duration: 1.2,
-            stagger: 0.12,
-        }, "-=1.0")
+        }).to(
+            contentRef.current.children,
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.12,
+            },
+            '-=1.0',
+        );
 
         if (imgRef.current) {
-            tl.to(imgRef.current, {
-                scale: 1,
-                opacity: 1,
-                duration: 1.8,
-                ease: "power2.out"
-            }, "-=1.25");
+            tl.to(
+                imgRef.current,
+                {
+                    scale: 1,
+                    opacity: 1,
+                    duration: 1.8,
+                    ease: 'power2.out',
+                },
+                '-=1.25',
+            );
         }
 
         return () => {
@@ -161,21 +188,23 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
         };
     }, { dependencies: [shouldAnimate], scope: containerRef });
 
+    const [aspectW, aspectH] = s.imageAspect.split('/').map(Number);
+
     return (
         <div
             ref={containerRef}
-            className={`flex w-full max-w-full min-h-0 flex-nowrap flex-col lg:grid lg:grid-cols-12 h-full overflow-hidden transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
-            style={{ pointerEvents: shouldAnimate ? "auto" : "none" }}
+            className={`flex w-full max-w-full flex-col lg:grid lg:grid-cols-12 lg:h-full transition-opacity duration-[1600ms] ease-out ${shouldAnimate ? 'opacity-100' : 'opacity-0'}`}
+            style={{ pointerEvents: shouldAnimate ? 'auto' : 'none' }}
         >
-            <div className="md:col-span-5 lg:col-span-4 2xl:col-span-5 col-span-full flex w-full max-w-full min-h-0 h-full flex-col items-start gap-[18px] sm:gap-ds-[32] lg:mt-ds-[80] pt-24 lg:pt-ds-[96] lg:pl-ds-[44] pb-[160px] lg:pb-0 overflow-hidden">
+            <div className="col-span-full flex w-full max-w-full flex-col items-start gap-[18px] sm:gap-ds-[32] pt-24 pb-0 md:col-span-5 lg:col-span-4 lg:mt-ds-[80] lg:h-full lg:pt-ds-[96] lg:pl-ds-[44] 2xl:col-span-5">
                 <h2
                     ref={titleRef}
-                    className="shrink-0 text-left whitespace-pre-wrap px-3.5 text-[32px] sm:text-ds-[32] leading-[95%] font-medium text-gray-900"
+                    className="w-full text-left whitespace-pre-wrap px-3.5 text-[32px] sm:text-ds-[32] leading-[95%] font-medium text-gray-900"
                     style={{ clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0% 100%)' }}
                 >
                     {s.title}
                 </h2>
-                <div ref={contentRef} className="flex shrink-0 flex-col items-start w-full">
+                <div ref={contentRef} className="flex w-full flex-col items-start">
                     <p className="opacity-0 text-left max-w-sm sm:max-w-ds-[392] px-3.5 text-base sm:text-ds-[14] leading-tight">
                         {s.description}
                     </p>
@@ -191,17 +220,23 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                         </div>
                     )}
                 </div>
-                <div className="lg:hidden relative mt-auto min-h-0 w-full flex-1 overflow-hidden px-3.5">
-                    <Image
-                        src={s.imageMobile}
-                        alt="Slide Image"
-                        fill
-                        sizes="100vw"
-                        className={`object-contain object-bottom transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : 'translate-y-6'}`}
-                    />
-                </div>
+                <Image
+                    src={s.imageMobile}
+                    alt="Slide Image"
+                    width={aspectW}
+                    height={aspectH}
+                    sizes="100vw"
+                    className={`lg:hidden mt-2 block h-auto w-full max-w-full object-contain transition-transform duration-1000 ${shouldAnimate ? 'translate-y-0' : 'translate-y-6'}`}
+                    style={{ aspectRatio: s.imageAspect }}
+                    onLoad={() => {
+                        const root = containerRef.current?.closest('.swiper') as
+                            | (HTMLElement & { swiper?: { updateAutoHeight: (speed?: number) => void } })
+                            | null;
+                        root?.swiper?.updateAutoHeight?.(0);
+                    }}
+                />
             </div>
-            <div className="md:col-span-7 lg:col-span-8 2xl:col-span-7 col-span-full relative hidden lg:flex justify-center items-center h-screen overflow-hidden">
+            <div className="col-span-full relative hidden h-screen items-center justify-center overflow-hidden md:col-span-7 lg:col-span-8 lg:flex 2xl:col-span-7">
                 <Image
                     ref={imgRef}
                     src={s.image}
@@ -213,5 +248,5 @@ const SliderSlideContent = ({ s, isActive, progress, pageIndex, small }: any) =>
                 />
             </div>
         </div>
-    )
-}
+    );
+};
